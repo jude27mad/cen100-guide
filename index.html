@@ -164,7 +164,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   </section>
 
   <section class="panel" id="p-you" role="tabpanel" aria-labelledby="t-you" hidden>
-    <p class="lead">Individual work makes up 48% of your grade. MATLAB assignments are another 10%, listed as pair work in the outline; we're confirming the group size. Together, the items below make up 58%.</p>
+    <p class="lead">Individual work makes up 48% of your grade. MATLAB assignments are another 10%, normally completed in pairs. Together, the items below make up 58%.</p>
     <ol class="tiles" id="youlist"></ol>
   </section>
 
@@ -183,7 +183,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
     </div>
   </section>
 
-  <footer><span>From the Fall 2026 CEN100 documents on D2L.</span><button class="reset" id="reset">Clear my ticks</button></footer>
+  <footer><span>From Fall 2026 CEN100 documents on D2L and confirmed course-team clarifications.</span><button class="reset" id="reset">Clear my ticks</button></footer>
 </div>
 
 <script>
@@ -208,7 +208,7 @@ const I={
  chat:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>',
  down:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>'
 };
-const WHO={team:["team","Full team"],sub:["sub","Sub-teams"],you:["you","Individual"],pair:["you","With partner"]};
+const WHO={team:["team","Full team"],sub:["sub","Sub-teams"],you:["you","Individual"],pair:["you","Pairs"]};
 
 const TEAM = [
  {id:"m1", date:"2026-09-23", name:"Team Contract + Task Outline", who:"team", pct:"2%",
@@ -286,9 +286,9 @@ const YOU = [
   facts:[["eye","Check D2L that each shows as submitted"]],
   groups:[["",["Personal introduction","Entry survey","Syllabus quiz","Email assignment"]]], traps:[]},
  {id:"y2", date:"2026-10-07", date2:"Nov 4", name:"MATLAB assignments", who:"pair", pct:"10%",
-  what:"Two assignments from the MATLAB labs, done with a partner.",
-  facts:[["cal","Oct 7 and Nov 4"],["warn","Check D2L: pairs or full team"]],
-  groups:[["",["Partner confirmed","Assignment 1 submitted","Assignment 2 submitted"]]], traps:[]},
+  what:"Two assignments from the MATLAB labs. Normally completed in pairs; if the class has an odd number of students, the unpaired student may work solo or join a group of 3.",
+  facts:[["cal","Oct 7 and Nov 4"],["warn","If the class size is odd, the unpaired student may work solo or join a group of 3."]],
+  groups:[["",["Working arrangement confirmed","Assignment 1 submitted","Assignment 2 submitted"]]], traps:[]},
  {id:"y3", date:"2026-10-14", name:"WHMIS certification", who:"you", pct:"2%",
   what:"Safety certificate. Required for the makerspace.",
   facts:[["cal","Due Wed Oct 14"],["warn","Missing it can make your whole course INCOMPLETE"]],
@@ -298,9 +298,9 @@ const YOU = [
   facts:[["cal","Due Oct 14, 3:00 PM"],["warn","Missing it can make your whole course INCOMPLETE"]],
   groups:[["",["Completed"]]], traps:[]},
  {id:"y5", date:"2026-10-28", date2:"Dec 2", name:"Personal Reflections", who:"you", pct:"4%",
-  what:"Your own writing about the project, two pieces.",
-  facts:[["cal","Oct 28 and Dec 2"],["warn","Check if D2L has a dropbox for them"]],
-  groups:[["",["Submission place confirmed","Reflection 1 submitted","Reflection 2 submitted"]]], traps:[]},
+  what:"Your own writing about the project, two pieces. Email each Personal Reflection directly to your assigned Project Manager. Group 9: send to Sayed Nuhan.",
+  facts:[["cal","Oct 28 and Dec 2"],["warn","Email directly to your Project Manager — no D2L submission box"]],
+  groups:[["",["Project Manager confirmed","Reflection 1 emailed to PM","Reflection 2 emailed to PM"]]], traps:[]},
  {id:"y7", date:"2026-12-02", big:"LAB", small:"Weekly", name:"Tutorial attendance quizzes", who:"you", pct:"5%",
   what:"A D2L quiz opens 5:45 to 6:00 PM in every Wednesday tutorial. One attempt, and you have to be in the room.",
   facts:[["pin","Every Wednesday, 5:45 to 6:00 PM"]],
@@ -326,7 +326,7 @@ const YOU = [
 const RULES=[
  ["red","warn","Attendance quizzes: Policy 60","Answering for another student, or having someone answer for you while absent, violates TMU Senate Policy 60: Academic Integrity. Zero for the entire 5% participation component; further penalties may apply. Taking a quiz while absent earns no credit for that quiz and may raise an academic integrity concern."],
  ["red","doc","Header on every team submission","Team name or number and section. No signature needed every time."],
- ["red","x","Late means zero","No late work without valid documentation. Submit on D2L, never by email."],
+ ["red","x","Late means zero","No late work without valid documentation. Use the submission method listed for each assignment."],
  ["red","book","One missing notebook entry costs the team","Every member needs a dated entry before each checkpoint."],
  ["","book","Write in the notebook as you go","Date it and put your name on it. It's your proof for the peer evaluation."],
  ["","eye","Real people, real data","Log people by role, never by name. AI can't make data or decisions for us."],
@@ -342,12 +342,12 @@ const CONFIRMED=[
  ["Citations","IEEE. Sayed is double-checking with the GA."],
  ["WHMIS","Due Oct 14. 80%+ on all 3 quizzes, then generate the certificate."],
  ["Academic Integrity Quiz","Due Oct 14, 3:00 PM."],
- ["Attendance quizzes","Every Wednesday tutorial, 5:45 to 6:00 PM, one attempt."]
+ ["Attendance quizzes","Every Wednesday tutorial, 5:45 to 6:00 PM, one attempt."],
+ ["Personal Reflections","No D2L submission box. Email directly to your assigned Project Manager. Group 9: Sayed Nuhan."],
+ ["MATLAB assignments","Normally pairs. If the class size is odd, the unpaired student may work solo or join a group of 3."]
 ];
 const OPEN=[
- ["FMEA \u201cEnvironmental\u201d","Real-world conditions, or impact on the environment? Asked the GA. Cover both for now."],
- ["Personal Reflections","The document says both email to the PM and the D2L folder. Asking Sayed."],
- ["MATLAB assignments","Nothing on D2L yet. Asking Sayed: pairs or full team?"]
+ ["FMEA \u201cEnvironmental\u201d","Real-world conditions, or impact on the environment? Escalated to the Head GA. Official clarification pending."]
 ];
 const EVENTS=[
  ["2026-10-02","Project Outline + User Research","team"],
