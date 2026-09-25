@@ -313,7 +313,7 @@ const YOU = [
   what:"A D2L quiz opens 5:45 to 6:00 PM in every Wednesday tutorial. One attempt, and you have to be in the room.",
   facts:[["pin","Every Wednesday, 5:45 to 6:00 PM"]],
   groups:[["",["I'm in tutorial every Wednesday before 5:45"]]],
-  traps:["Answering for someone else: zero for the whole 5%"]},
+  traps:["Answering for another student, or having someone answer for you while you are absent, violates TMU Senate Policy 60: Academic Integrity. Zero for the entire 5% participation component; further penalties may apply.","Taking a quiz while absent from your assigned tutorial earns no credit for that quiz and may raise an academic integrity concern."]},
  {id:"y8", date:"2026-12-02", name:"Exit survey", who:"you", pct:"2%",
   what:"A short Google Form in Week 13.", facts:[], groups:[["",["Submitted"]]], traps:[]},
  {id:"y9", date:"2026-12-09", big:"DEC", small:"Exam period", name:"Final exam", who:"you", pct:"24%",
@@ -324,6 +324,7 @@ const YOU = [
 ];
 
 const RULES=[
+ ["red","warn","Attendance quizzes: Policy 60","Answering for another student, or having someone answer for you while absent, violates TMU Senate Policy 60: Academic Integrity. Zero for the entire 5% participation component; further penalties may apply. Taking a quiz while absent earns no credit for that quiz and may raise an academic integrity concern."],
  ["red","doc","Header on every team submission","Team name or number and section. No signature needed every time."],
  ["red","x","Late means zero","No late work without valid documentation. Submit on D2L, never by email."],
  ["red","book","One missing notebook entry costs the team","Every member needs a dated entry before each checkpoint."],
@@ -346,7 +347,7 @@ const CONFIRMED=[
 const OPEN=[
  ["FMEA \u201cEnvironmental\u201d","Real-world conditions, or impact on the environment? Asked the GA. Cover both for now."],
  ["Personal Reflections","The document says both email to the PM and the D2L folder. Asking Sayed."],
- ["MATLAB assignments","Pairs or full team. Check D2L."]
+ ["MATLAB assignments","Nothing on D2L yet. Asking Sayed: pairs or full team?"]
 ];
 const EVENTS=[
  ["2026-10-02","Project Outline + User Research","team"],
