@@ -140,6 +140,16 @@ h2.sec{display:flex;align-items:center;gap:10px;font-weight:900;font-variation-s
 .people a{color:var(--team);font-weight:700;font-size:.95rem;word-break:break-all}
 footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.95rem;color:var(--ink2);font-weight:600}
 .reset{background:none;border:0;padding:0;text-decoration:underline;color:var(--ink2);cursor:pointer;font-weight:700}
+
+#contactlookup{grid-template-columns:repeat(2,minmax(0,1fr))}
+#contactlookup div{min-width:0}
+#contactlookup label{display:block;font-weight:800;font-size:1rem}
+#contactlookup select{display:block;width:100%;min-width:0;margin:10px 0 14px;padding:10px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:1rem;cursor:pointer}
+#contactlookup select:disabled{opacity:.65;cursor:default}
+#contactlookup p{margin:0;overflow-wrap:anywhere}
+#contactlookup p span{color:var(--ink2);font-weight:600}
+.contact-note{margin-top:12px}
+@media(max-width:440px){#contactlookup{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -177,10 +187,19 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
     <p class="lead">Until these are settled, use the earlier date or the safer choice.</p>
     <ul class="signs" id="open"></ul>
     <h2 class="sec"><span data-i="chat"></span>Who to ask</h2>
-    <div class="people">
-      <div><b>Sayed Nuhan</b><em>Project Manager</em><span style="font-weight:600;color:var(--ink2)">Email on D2L</span></div>
-      <div><b>Pouya Ranjbari</b><em>GA, Wed lab, KHS134</em><span style="font-weight:600;color:var(--ink2)">Email on D2L</span></div>
+    <div class="people" id="contactlookup">
+      <div>
+        <label for="contact-section">Your CEN100 section</label>
+        <select id="contact-section" aria-describedby="ga-result"><option value="">Choose your section</option></select>
+        <p id="ga-result" aria-live="polite" aria-atomic="true"><span>Choose your section to see your GA and lab/location.</span></p>
+      </div>
+      <div>
+        <label for="contact-group">Your Innovation Challenge group</label>
+        <select id="contact-group" aria-describedby="pm-result" disabled><option value="">Choose your section first</option></select>
+        <p id="pm-result" aria-live="polite" aria-atomic="true"><span>Choose your group to see your Project Manager.</span></p>
+      </div>
     </div>
+    <p class="lead contact-note">For contact details, check D2L or the official Section GAs and PMs document.</p>
   </section>
 
   <footer><span>From Fall 2026 CEN100 documents on D2L and confirmed course-team clarifications.</span><button class="reset" id="reset">Clear my ticks</button></footer>
@@ -437,6 +456,47 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("change",e=>{if(e.target.matches("input[data-k]")){const k=e.target.dataset.k;e.target.checked?ticks[k]=1:delete ticks[k];save();counts()}});
 document.getElementById("reset").addEventListener("click",()=>{if(!confirm("Clear all your ticks on this device?"))return;ticks={};save();document.querySelectorAll("input[data-k]").forEach(b=>b.checked=false);counts()});
+
+const STAFFING=[
+ {"sections":[1,14,27],"ga":"Mymonah Meraj","location":"KHE321B","groups":[[1,"Nitya Malik"],[2,"Kaung Min Khant"],[3,"Antonio Souza"],[4,"Doga Kaptanoglu"]]},
+ {"sections":[2,15,28],"ga":"Ryan McNeice","location":"KHE323","groups":[[5,"Ragave Sharma"],[6,"Cami Rabia"],[7,"Shreyas Suresh"],[8,"Prisha Thakkar"]]},
+ {"sections":[3,17,29],"ga":"Pouya Ranjbari","location":"KHS134","groups":[[9,"Sayed Nuhan"],[10,"David Onyia"],[11,"Rayyan Faisal"],[12,"Viktor Mitkovski"]]},
+ {"sections":[4,16,30],"ga":"Navid Zarrabi","location":"VIC110","groups":[[13,"Harbani Wadhwa"],[14,"Ritesh Nallapareddy"],[15,"Zach Ahmed"],[16,"Musfirah Samad"]]},
+ {"sections":[5,18,31],"ga":"Parham Jafary","location":"VIC206","groups":[[17,"Devanshi Rattan"],[18,"Hina Khan"],[19,"Thanesha Arulneswaran"],[20,"Samrudh Suryanarayan"]]},
+ {"sections":[6,19,32],"ga":"Lasya Kagolanu","location":"VIC210","groups":[[21,"Rida-E Fatima"],[22,"Ronia Matthews"],[23,"Barakah Ahmed"],[24,"Jerome Arul Raj"]]},
+ {"sections":[7,20,33],"ga":"Gelare Taherian","location":"VIC300","groups":[[25,"George Coppa"],[26,"Ayesha Irfana"],[27,"Anisha Das"],[28,"Matthew Antonio"]]},
+ {"sections":[8,21,34],"ga":"Ijaz Qureshi","location":"VIC306","groups":[[29,"Justin Pope"],[30,"Muadh Ghori"],[31,"Anthony De Gregorio"],[32,"Ahmed Elshahed"]]},
+ {"sections":[9,22,35],"ga":"Behzad Mahaseni","location":"VIC503","groups":[[33,"Hana Messih"],[34,"Samridhi Bhardwaj"],[35,"Tasnim Fatema"],[36,"Saad Khan"]]},
+ {"sections":[10,23,36],"ga":"Haniyeh Altafi","location":"ILC100","groups":[[37,"Cian Enright"],[38,"Sofie Khan"],[39,"Sanya Baghla"],[40,"Zara Umer"]]},
+ {"sections":[11,24,37],"ga":"Rana Danesh","location":"ILC102","groups":[[41,"Aashir Ahmed"],[42,"Amyn Jiwani"],[43,"Mahirah Mirza"],[44,"Ezel Toramanoglu"]]},
+ {"sections":[12,25,38],"ga":"Yasmin Ahmadiadli","location":"VIC106","groups":[[45,"Maria Habib"],[46,"Tamhid Rashid"],[47,"Ayesha Faisal"],[48,"Srivaishnavi Batchu"]]},
+ {"sections":[13,26,39],"ga":"Eslam Muhammed","location":"VIC200","groups":[[49,"Owen Webbe"],[50,"Amolika Srivastava"],[51,"Thirshan Varatharajah"],[52,"Hassan Iqbal"]]}
+];
+function setupContactLookup(){
+  const section=document.getElementById("contact-section"), group=document.getElementById("contact-group");
+  const gaResult=document.getElementById("ga-result"), pmResult=document.getElementById("pm-result");
+  const selectedStaff=()=>STAFFING.find(s=>s.sections.includes(Number(section.value)));
+  const option=(value,label)=>{const el=document.createElement("option");el.value=value;el.textContent=label;return el};
+  const prompt=(el,text)=>{const span=document.createElement("span");span.textContent=text;el.replaceChildren(span)};
+  const result=(el,name,role,location)=>{
+    const b=document.createElement("b"), em=document.createElement("em");b.textContent=name;em.textContent=role;el.replaceChildren(b,em);
+    if(location){const span=document.createElement("span");span.textContent="Lab/location: "+location;el.append(span)}
+  };
+  STAFFING.flatMap(s=>s.sections).sort((a,b)=>a-b).forEach(n=>section.append(option(n,"Section "+n)));
+  section.addEventListener("change",()=>{
+    const staff=selectedStaff();
+    group.replaceChildren(option("",staff?"Choose your group":"Choose your section first"));group.disabled=!staff;
+    prompt(pmResult,"Choose your group to see your Project Manager.");
+    if(!staff){prompt(gaResult,"Choose your section to see your GA and lab/location.");return}
+    result(gaResult,staff.ga,"Graduate Assistant (GA)",staff.location);
+    staff.groups.forEach(([number])=>group.append(option(number,"Group "+number)));
+  });
+  group.addEventListener("change",()=>{
+    const pm=selectedStaff()?.groups.find(([number])=>number===Number(group.value));
+    if(pm)result(pmResult,pm[1],"Project Manager");else prompt(pmResult,"Choose your group to see your Project Manager.");
+  });
+}
+setupContactLookup();
 </script>
 </body>
 </html>
