@@ -159,12 +159,12 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   </nav>
 
   <section class="panel" id="p-team" role="tabpanel" aria-labelledby="t-team">
-    <p class="lead">The team project is 41% of your grade. Tap a milestone to open it.</p>
+    <p class="lead">Team and sub-team work, including the shared notebook, makes up 42% of your grade. Tap a milestone to open it.</p>
     <ol class="tiles" id="teamlist"></ol>
   </section>
 
   <section class="panel" id="p-you" role="tabpanel" aria-labelledby="t-you" hidden>
-    <p class="lead">Each student does these on their own. They make up about 58% of your grade, and nobody else can lose these marks for you.</p>
+    <p class="lead">Individual work makes up 48% of your grade. MATLAB assignments are another 10%, listed as pair work in the outline; we're confirming the group size. Together, the items below make up 58%.</p>
     <ol class="tiles" id="youlist"></ol>
   </section>
 
@@ -245,6 +245,11 @@ const TEAM = [
    ["Every member",["Can explain the problem and the concept","Has a dated notebook entry and can talk about it","Notebook open on a device","Dressed professionally"]]
   ],
   traps:["Quietly skipping an unfinished piece: say it and give the plan","Starting with the solution instead of the problem","Running over time","Any member without a notebook entry: 20 points ride on this"]},
+ {id:"y6", date:"2026-11-04", date2:"Dec 2", name:"Team design notebook", who:"team", pct:"4%",
+  what:"One team notebook, but if even one member has no entry since the last checkpoint, the whole team loses marks.",
+  facts:[["cal","PDF export due Nov 4 and Dec 2, 3:00 PM"]],
+  groups:[["",["My entry before Nov 4","I can talk about my entry","My entry before Dec 2"]]],
+  traps:["Writing everything at the end instead of as you go"]},
  {id:"m5", date:"2026-11-25", name:"Low-Fidelity Prototype", who:"team", pct:"4%",
   what:"A rough version that tests the core idea: a physical item, 3D model, CAD model or simulation. It doesn't have to work perfectly.",
   facts:[["cal","Due Nov 25, 3:00 PM"],["pin","Plan Nov 11 lab, build Nov 18 lab"],["warn","WHMIS needed for the makerspace"]],
@@ -272,15 +277,7 @@ const TEAM = [
    ["MATLAB",["2+ analyses that each changed a decision","Only skills taught in CEN100","Figures in Section 6, referenced from 5 and 8","Code runs, submitted with a README"]],
    ["Finishing",["Figures inside the sections","IEEE citations throughout","Name the tool behind each decision","Header with team number and section"]]
   ],
-  traps:["MATLAB plots that don't decide anything","Code that doesn't run","\u201cOurs is better\u201d with no comparison","Hiding failed tests"]},
- {id:"m8", date:"2026-12-02", name:"Peer Evaluation", who:"you", pct:"3%",
-  what:"Everyone privately rates every member, including themselves. Nobody sees your answers.",
-  facts:[["up","D2L, private"]],
-  groups:[
-   ["You're rated on",["Attending meetings on time","Contributing to discussions","Finishing assigned tasks on time","Quality of work","Being cooperative","Contributing to the result"]],
-   ["To submit",["Score everyone 0 to 100 on all six","Work out the averages","Answer the 3 written questions","List your contributions, pointing to notebook entries","Sign and date"]]
-  ],
-  traps:["A vague list of contributions"]}
+  traps:["MATLAB plots that don't decide anything","Code that doesn't run","\u201cOurs is better\u201d with no comparison","Hiding failed tests"]}
 ];
 
 const YOU = [
@@ -304,11 +301,6 @@ const YOU = [
   what:"Your own writing about the project, two pieces.",
   facts:[["cal","Oct 28 and Dec 2"],["warn","Check if D2L has a dropbox for them"]],
   groups:[["",["Submission place confirmed","Reflection 1 submitted","Reflection 2 submitted"]]], traps:[]},
- {id:"y6", date:"2026-11-04", date2:"Dec 2", name:"Your notebook entries", who:"you", pct:"4%",
-  what:"One team notebook, but if even one member has no entry since the last checkpoint, the whole team loses marks.",
-  facts:[["cal","PDF export due Nov 4 and Dec 2, 3:00 PM"]],
-  groups:[["",["My entry before Nov 4","I can talk about my entry","My entry before Dec 2"]]],
-  traps:["Writing everything at the end instead of as you go"]},
  {id:"y7", date:"2026-12-02", big:"LAB", small:"Weekly", name:"Tutorial attendance quizzes", who:"you", pct:"5%",
   what:"A D2L quiz opens 5:45 to 6:00 PM in every Wednesday tutorial. One attempt, and you have to be in the room.",
   facts:[["pin","Every Wednesday, 5:45 to 6:00 PM"]],
@@ -316,6 +308,14 @@ const YOU = [
   traps:["Answering for another student, or having someone answer for you while you are absent, violates TMU Senate Policy 60: Academic Integrity. Zero for the entire 5% participation component; further penalties may apply.","Taking a quiz while absent from your assigned tutorial earns no credit for that quiz and may raise an academic integrity concern."]},
  {id:"y8", date:"2026-12-02", name:"Exit survey", who:"you", pct:"2%",
   what:"A short Google Form in Week 13.", facts:[], groups:[["",["Submitted"]]], traps:[]},
+ {id:"m8", date:"2026-12-02", name:"Peer Evaluation", who:"you", pct:"3%",
+  what:"Everyone privately rates every member, including themselves. Nobody sees your answers.",
+  facts:[["up","D2L, private"]],
+  groups:[
+   ["You're rated on",["Attending meetings on time","Contributing to discussions","Finishing assigned tasks on time","Quality of work","Being cooperative","Contributing to the result"]],
+   ["To submit",["Score everyone 0 to 100 on all six","Work out the averages","Answer the 3 written questions","List your contributions, pointing to notebook entries","Sign and date"]]
+  ],
+  traps:["A vague list of contributions"]},
  {id:"y9", date:"2026-12-09", big:"DEC", small:"Exam period", name:"Final exam", who:"you", pct:"24%",
   what:"2 hours, in person. The date comes from the Registrar.",
   facts:[["clock","2 hours, in person"]],
