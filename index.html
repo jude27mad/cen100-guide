@@ -150,6 +150,39 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 #contactlookup p span{color:var(--ink2);font-weight:600}
 .contact-note{margin-top:12px}
 @media(max-width:440px){#contactlookup{grid-template-columns:1fr}}
+.guide-tools{margin:0 0 12px;border:2px solid var(--line);border-radius:14px;background:var(--tile)}
+.guide-tools>summary{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;cursor:pointer;font-weight:800;list-style:none}
+.guide-tools>summary::-webkit-details-marker{display:none}
+.guide-tools>summary::after{content:"+";font-size:1.3rem}
+.guide-tools[open]>summary::after{content:"−"}
+.guide-tools summary small{font-size:.85rem;font-weight:600;color:var(--ink2);margin-left:auto}
+.tool-content{padding:0 14px 14px;border-top:1px solid var(--line)}
+.tool-content label:not(.tool-check){display:block;font-weight:750;margin:12px 0 6px;font-size:1rem}
+.tool-content input[type="search"],.tool-content select{width:100%;min-width:0;padding:10px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:1rem}
+.tool-content input[type="file"]{display:block;max-width:100%;font:inherit;font-size:.9rem;margin:12px 0}
+.tool-check{display:flex;align-items:center;gap:10px;margin:12px 0;font-weight:650;font-size:.95rem;cursor:pointer}
+.tool-check input{width:20px;height:20px;margin:0;accent-color:var(--you);flex:0 0 auto}
+.tool-btn{border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:.95rem;font-weight:750;padding:9px 12px;cursor:pointer;min-height:44px}
+.tool-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tool-note,.tool-status{font-size:.9rem;color:var(--ink2);line-height:1.45;margin:10px 0 0}
+.tool-status:empty{display:none}
+.tool-status{font-weight:650}
+.tool-section{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+.tool-section>summary{cursor:pointer;font-weight:800;min-height:30px}
+.search-results{list-style:none;margin:10px 0;padding:0;display:grid;gap:6px}
+.search-results button{display:block;width:100%;text-align:left;overflow-wrap:anywhere}
+.search-results small{display:block;margin-top:3px;font-weight:550;color:var(--ink2)}
+.tile-extras{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start;border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+.source-note{flex:1 1 190px;color:var(--ink2);font-size:.9rem}
+.source-note summary{cursor:pointer;font-weight:700;min-height:36px;padding-top:8px}
+.source-note p{margin:5px 0}
+.guide-empty{border:2px dashed var(--line);border-radius:12px;padding:14px;font-size:.95rem;color:var(--ink2)}
+.guide-jump{scroll-margin-top:110px}
+.tile[hidden],.guide-empty[hidden],.search-results[hidden]{display:none}
+.update-list{padding-left:20px;font-size:.95rem;color:var(--ink2)}
+.update-list li{margin:8px 0}
+.update-list b{color:var(--ink)}
+@media(max-width:400px){.guide-tools summary small{margin-left:0;flex-basis:75%}.tile-extras>.tool-btn{width:100%}}
 </style>
 </head>
 <body>
@@ -161,6 +194,51 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 
   <section id="nextsign" aria-label="Next deadline"></section>
   <section class="board" id="board" aria-label="After that"></section>
+
+  <details class="guide-tools" id="guide-tools">
+    <summary><span>Guide tools</span><small>Updated Sep 25, 2026</small></summary>
+    <div class="tool-content">
+      <label for="guide-search">Search the guide</label>
+      <input id="guide-search" type="search" placeholder="Try FMEA, citations or notebook" autocomplete="off" aria-controls="guide-search-results" aria-describedby="search-status">
+      <p class="tool-status" id="search-status" role="status"></p>
+      <ul class="search-results" id="guide-search-results" hidden></ul>
+      <label class="tool-check"><input type="checkbox" id="hide-completed">Hide fully checked items</label>
+      <p class="tool-status" id="filter-status" role="status"></p>
+
+      <details class="tool-section" id="calendar-tools">
+        <summary>Add deadlines to my calendar</summary>
+        <label for="calendar-item">Deadlines to include</label>
+        <select id="calendar-item"><option value="all">All confirmed deadlines</option></select>
+        <label class="tool-check"><input type="checkbox" id="calendar-upcoming" checked>Upcoming dates only</label>
+        <label for="calendar-reminder">Reminder</label>
+        <select id="calendar-reminder"><option value="1">1 day before</option><option value="2">2 days before</option><option value="0">No reminder</option></select>
+        <div class="tool-actions"><button class="tool-btn" id="calendar-download" type="button">Download calendar (.ics)</button></div>
+        <p class="tool-note">Open the .ics file in Apple Calendar, or import it into Google Calendar. Times use Toronto time. Dates without a confirmed time are all-day entries, with reminders at 9 AM. Approximate dates and the unscheduled final exam are excluded.</p>
+        <p class="tool-note">Calendar copies do not update automatically. Check D2L for changes and review your calendar's alert settings.</p>
+        <p class="tool-status" id="calendar-status" role="status"></p>
+      </details>
+
+      <details class="tool-section" id="backup-tools">
+        <summary>Move or back up my checklist ticks</summary>
+        <p class="tool-note">Export your ticks, then open this guide on your other device and import the file. Importing adds checked items and keeps your existing ticks. The file contains checklist progress only.</p>
+        <div class="tool-actions"><button class="tool-btn" id="backup-export" type="button">Export my ticks</button></div>
+        <label for="backup-import">Import a checklist backup (.json)</label>
+        <input type="file" id="backup-import" accept=".json,application/json">
+        <p class="tool-status" id="backup-status" role="status"></p>
+      </details>
+
+      <details class="tool-section" id="guide-updates">
+        <summary>What's changed?</summary>
+        <ul class="update-list">
+          <li><b>Sep 25, 2026:</b> Added remembered section/group choices, calendar export, checklist backups, search, source notes and the option to hide fully checked items. Removed the large attendance warning from Rules.</li>
+          <li><b>Sep 25, 2026:</b> Added the contact lookup for all 39 sections and 52 groups, showing names and lab locations.</li>
+          <li><b>Sep 25, 2026:</b> Confirmed reflection submissions by email to the assigned PM and the MATLAB group-size exception. The FMEA Environmental clarification remains pending.</li>
+        </ul>
+      </details>
+      <p class="tool-note">Your saved section, group and checklist settings stay on this device.</p>
+      <p class="tool-status" id="tools-status" role="status"></p>
+    </div>
+  </details>
 
   <nav class="tabs" role="tablist" aria-label="Sections">
     <button class="tab" role="tab" aria-selected="true" aria-controls="p-team" id="t-team"><span data-i="team"></span>Team</button>
@@ -343,7 +421,6 @@ const YOU = [
 ];
 
 const RULES=[
- ["red","warn","Attendance quizzes: Policy 60","Answering for another student, or having someone answer for you while absent, violates TMU Senate Policy 60: Academic Integrity. Zero for the entire 5% participation component; further penalties may apply. Taking a quiz while absent earns no credit for that quiz and may raise an academic integrity concern."],
  ["red","doc","Header on every team submission","Team name or number and section. No signature needed every time."],
  ["red","x","Late means zero","No late work without valid documentation. Use the submission method listed for each assignment."],
  ["red","book","One missing notebook entry costs the team","Every member needs a dated entry before each checkpoint."],
@@ -497,6 +574,212 @@ function setupContactLookup(){
   });
 }
 setupContactLookup();
+
+(() => {
+  const PROFILE_KEY="cen100-contact-choice-v1", FILTER_KEY="cen100-hide-completed-v1";
+  const allItems=[...TEAM,...YOU];
+  const byId=new Map(allItems.map(item=>[item.id,item]));
+  const CALENDAR_DATES=[
+    {id:"intro",item:"y1",date:"2026-09-16",title:"Personal Introduction due"},
+    {id:"entry",item:"y1",date:"2026-09-16",title:"Entry Survey due"},
+    {id:"syllabus",item:"y1",date:"2026-09-16",title:"Course Syllabus Quiz due"},
+    {id:"email",item:"y1",date:"2026-09-23",title:"Professional Email Assignment due"},
+    {id:"contract",item:"m1",date:"2026-09-23",title:"Team Contract + Task Outline due"},
+    {id:"outline",item:"m2",date:"2026-10-02",title:"Project Outline + User Research due",note:"Due by the end of the day. Check D2L for the exact submission time."},
+    {id:"matlab-1",item:"y2",date:"2026-10-07",title:"MATLAB Assignment 1 due"},
+    {id:"whmis",item:"y3",date:"2026-10-14",title:"WHMIS certification due"},
+    {id:"integrity",item:"y4",date:"2026-10-14",time:"15:00",title:"Academic Integrity Quiz due"},
+    {id:"failure",item:"m3",date:"2026-10-21",title:"Failure Analysis Labs: both parts due"},
+    {id:"reflection-1",item:"y5",date:"2026-10-28",title:"Personal Reflection 1 due",note:"Email directly to your assigned Project Manager; no D2L submission box."},
+    {id:"review",item:"m4",date:"2026-11-04",title:"Midterm Design Review",note:"In your assigned lab. Confirm your presentation time on D2L."},
+    {id:"notebook-1",item:"y6",date:"2026-11-04",time:"15:00",title:"Team design notebook PDF: checkpoint 1 due"},
+    {id:"matlab-2",item:"y2",date:"2026-11-04",title:"MATLAB Assignment 2 due"},
+    {id:"prototype",item:"m5",date:"2026-11-25",time:"15:00",title:"Low-Fidelity Prototype due"},
+    {id:"presentation-1",item:"m6",date:"2026-11-25",title:"First Final Presentation",note:"Confirm your assigned presentation time on D2L."},
+    {id:"presentation-2",item:"m6",date:"2026-12-02",title:"Final Presentation and Innovation Showcase",note:"Confirm your assigned presentation time on D2L."},
+    {id:"notebook-2",item:"y6",date:"2026-12-02",time:"15:00",title:"Team design notebook PDF: checkpoint 2 due"},
+    {id:"reflection-2",item:"y5",date:"2026-12-02",title:"Personal Reflection 2 due",note:"Email directly to your assigned Project Manager; no D2L submission box."},
+    {id:"exit",item:"y8",date:"2026-12-02",title:"Exit Survey due"},
+    {id:"peer",item:"m8",date:"2026-12-02",title:"Peer Evaluation due"},
+    {id:"report",item:"m7",date:"2026-12-02",time:"23:59",title:"Final Report due"}
+  ];
+  const SOURCE_INFO={
+    y1:["Course outline","Course outline, p. 9: assessment weights and individual September dates."],
+    y2:["Outline + clarification","Course outline, pp. 9–10: weight, dates and pair work. Confirmed clarification from Sayed Nuhan: the unpaired student in an odd-sized class may work solo or join a group of 3."],
+    y3:["Outline + clarification","Course outline, p. 9: weight, Oct 14 date and mandatory completion. Quiz requirements and certificate steps: course-team clarification recorded in this guide."],
+    y4:["Outline + clarification","Course outline, p. 9: weight, Oct 14 date and mandatory completion. The 3 PM deadline and attempt limit: course-team clarification recorded in this guide."],
+    y5:["Outline + clarification","Course outline, p. 9: weight and dates. Confirmed clarification from Sayed Nuhan: email your assigned Project Manager; there is no D2L submission box. Group 9 sends to Sayed Nuhan."],
+    y6:["Outline + guide summary","Course outline, pp. 9–11: weight, checkpoint dates and shared notebook requirements. The PDF format and 3 PM deadline are recorded in the guide's Confirmed section."],
+    y7:["Outline + clarification","Course outline, pp. 9–10: participation weight and in-person attendance. The Wednesday 5:45–6 PM quiz window and one attempt: course-team clarification for this guide's tutorial."],
+    y9:["Course outline","Course outline, pp. 9 and 12: weight, two-hour in-person format and Dec 9–20 exam period. The exact date is pending the Registrar's schedule."],
+    m3:["Outline + guide summary","Course outline, pp. 9–11: weight, date, two-part failure analysis and team sizes. Detailed checklist: this guide's summary of assignment requirements; check the assignment instructions on D2L."],
+    m6:["Outline + guide summary","Course outline, pp. 9 and 12: weight, presentation dates and Innovation Showcase. Detailed checklist: this guide's summary of assignment requirements; check the assignment instructions on D2L."],
+    m5:["Outline + guide summary","Course outline, p. 9: weight and Nov 25 / Dec 2 prototype activities. The Nov 25, 3 PM submission and detailed checklist are this guide's assignment summary; check the assignment instructions on D2L."]
+  };
+  const sourceFor=item=>SOURCE_INFO[item.id]||["Outline + guide summary","Course outline, p. 9: assessment weight and date. Detailed checklist: this guide's summary of assignment requirements; check the assignment instructions on D2L."];
+  const $=id=>document.getElementById(id);
+  function readSaved(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch(e){return fallback}}
+  function writeSaved(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch(e){$("tools-status").textContent="Your browser is blocking local saving. You can still export your ticks.";return false}}
+  function validProfile(value){
+    if(!value||typeof value!=="object")return null;
+    const section=Number(value.section),staff=STAFFING.find(s=>s.sections.includes(section));
+    if(!staff)return null;
+    const group=Number(value.group);
+    return {section,group:staff.groups.some(g=>g[0]===group)?group:null};
+  }
+  function rememberProfile(){writeSaved(PROFILE_KEY,validProfile({section:$("contact-section").value,group:$("contact-group").value}))}
+  function setupRememberedContacts(){
+    const saved=validProfile(readSaved(PROFILE_KEY,null));
+    if(saved){
+      $("contact-section").value=String(saved.section);$("contact-section").dispatchEvent(new Event("change",{bubbles:true}));
+      if(saved.group){$("contact-group").value=String(saved.group);$("contact-group").dispatchEvent(new Event("change",{bubbles:true}))}
+    }
+    $("contact-section").addEventListener("change",rememberProfile);
+    $("contact-group").addEventListener("change",rememberProfile);
+  }
+  function applyCompletedFilter(){
+    let hiddenCount=0;
+    for(const item of allItems){
+      const body=$("b-"+item.id),tile=body.closest(".tile"),boxes=[...body.querySelectorAll('input[type="checkbox"]')];
+      const hide=$("hide-completed").checked&&boxes.length>0&&boxes.every(box=>box.checked);
+      tile.hidden=hide;if(hide)hiddenCount++;
+    }
+    for(const listId of ["teamlist","youlist"]){
+      const empty=$(listId+"-empty");empty.hidden=[...$(listId).children].some(tile=>!tile.hidden);
+    }
+    $("filter-status").textContent=$("hide-completed").checked?`${hiddenCount} fully checked ${hiddenCount===1?"item":"items"} hidden. Uncheck the filter to show everything.`:"";
+  }
+  function setupCompletedFilter(){
+    for(const listId of ["teamlist","youlist"]){
+      const note=document.createElement("p");note.id=listId+"-empty";note.className="guide-empty";note.hidden=true;
+      note.textContent="All items in this tab are fully checked. Turn off ‘Hide fully checked items’ in Guide tools to see them.";
+      $(listId).after(note);
+    }
+    $("hide-completed").checked=readSaved(FILTER_KEY,false)===true;
+    $("hide-completed").addEventListener("change",()=>{writeSaved(FILTER_KEY,$("hide-completed").checked);applyCompletedFilter()});
+    document.addEventListener("change",e=>{if(e.target.matches("input[data-k]"))applyCompletedFilter()});
+    $("reset").addEventListener("click",applyCompletedFilter);
+    applyCompletedFilter();
+  }
+  const normalise=text=>String(text).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+  function findMatches(entries,query){const words=normalise(query).trim().split(/\s+/).filter(Boolean);return words.length?entries.filter(entry=>words.every(word=>normalise(entry.text).includes(word))):[]}
+  function setupSearch(){
+    const entries=allItems.map(item=>({title:item.name,tab:TEAM.includes(item)?"team":"you",target:"guide-item-"+item.id,item:item.id,text:[item.name,item.what,JSON.stringify(item.facts),JSON.stringify(item.groups),JSON.stringify(item.traps),...sourceFor(item)].join(" ")}));
+    for(const [listId,rows,offset] of [["rules",RULES,2],["confirmed",CONFIRMED,0],["open",OPEN,0]]){
+      [...$(listId).children].forEach((node,index)=>{
+        node.id=`guide-${listId}-${index}`;node.classList.add("guide-jump");
+        entries.push({title:rows[index][offset],tab:"rules",target:node.id,text:rows[index].slice(offset).join(" ")});
+      });
+    }
+    entries.push({title:"Who to ask: section and group lookup",tab:"rules",target:"contactlookup",text:"Who to ask contacts section group GA Graduate Assistant Project Manager lab room location "+STAFFING.map(s=>[s.ga,s.location,...s.groups.map(g=>g[1])].join(" ")).join(" ")});
+    $("contactlookup").classList.add("guide-jump");
+    const titles={team:"Team",you:"Individual",rules:"Rules"};
+    $("guide-search").addEventListener("input",()=>{
+      const query=$("guide-search").value.trim(),matches=findMatches(entries,query),list=$("guide-search-results");
+      list.replaceChildren();list.hidden=!query;
+      $("search-status").textContent=!query?"":matches.length?`${matches.length} ${matches.length===1?"result":"results"}${matches.length>12?"; showing the first 12. Refine your search for more.":"."}`:"No matches. Try a shorter term.";
+      for(const entry of matches.slice(0,12)){
+        const li=document.createElement("li"),button=document.createElement("button"),path=document.createElement("small");
+        button.type="button";button.className="tool-btn";button.textContent=entry.title;path.textContent=titles[entry.tab];button.append(path);
+        button.addEventListener("click",()=>{
+          if(entry.item&&$(entry.target).hidden){$("hide-completed").checked=false;writeSaved(FILTER_KEY,false);applyCompletedFilter()}
+          $("t-"+entry.tab).click();
+          const target=$(entry.target);
+          if(entry.item){const head=target.querySelector(".head");if(head.getAttribute("aria-expanded")!=="true")head.click();head.focus({preventScroll:true})}
+          else{target.tabIndex=-1;target.focus({preventScroll:true})}
+          target.scrollIntoView({block:"start",behavior:"auto"});
+        });
+        li.append(button);list.append(li);
+      }
+    });
+  }
+  function calendarDay(date){return date.replaceAll("-","")}
+  function shiftDay(date,days){const value=new Date(date+"T12:00:00Z");value.setUTCDate(value.getUTCDate()+days);return value.toISOString().slice(0,10)}
+  function torontoToday(){const parts=new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));return `${p.year}-${p.month}-${p.day}`}
+  function torontoUTC(date,time){
+    const [year,month,day]=date.split("-").map(Number),[hour,minute]=time.split(":").map(Number);
+    const target=Date.UTC(year,month-1,day,hour,minute);let value=target;
+    const fmt=new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"});
+    for(let i=0;i<2;i++){const p=Object.fromEntries(fmt.formatToParts(new Date(value)).map(x=>[x.type,x.value]));value+=target-Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute,+p.second)}
+    return new Date(value).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  }
+  const icsEscape=text=>String(text).replace(/\\/g,"\\\\").replace(/\r?\n/g,"\\n").replace(/;/g,"\\;").replace(/,/g,"\\,");
+  function foldLine(text){let line="",count=0,out=[];const encoder=new TextEncoder();for(const char of text){const size=encoder.encode(char).length;if(count+size>75){out.push(line);line=" ";count=1}line+=char;count+=size}out.push(line);return out.join("\r\n")}
+  function buildCalendar(events,reminderDays,stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"")){
+    const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//CEN100 Guide//Fall 2026//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:CEN100 Fall 2026","X-WR-TIMEZONE:America/Toronto"];
+    for(const event of events){
+      const item=byId.get(event.item),description=[event.note||"",event.time?"Deadline time is Toronto time.":"Date confirmed; exact time is not specified in this calendar. Check D2L.","Use the submission method listed for this assignment.","Source: CEN100 Fall 2026 course outline and the guide's assignment summaries / confirmed course-team clarifications.","Calendar copies do not update automatically. Check D2L for changes."].filter(Boolean).join("\n");
+      lines.push("BEGIN:VEVENT",`UID:cen100-f26-${event.id}-jude27mad-github-io`,`DTSTAMP:${stamp}`,`SUMMARY:${icsEscape("CEN100: "+event.title)}`);
+      if(event.time)lines.push(`DTSTART:${torontoUTC(event.date,event.time)}`);
+      else lines.push(`DTSTART;VALUE=DATE:${calendarDay(event.date)}`,`DTEND;VALUE=DATE:${calendarDay(shiftDay(event.date,1))}`);
+      lines.push(`DESCRIPTION:${icsEscape(description)}`,"URL:https://jude27mad.github.io/cen100-guide/","TRANSP:TRANSPARENT");
+      if(reminderDays>0){
+        lines.push("BEGIN:VALARM","ACTION:DISPLAY",`DESCRIPTION:${icsEscape("CEN100: "+event.title)}`);
+        lines.push(event.time?`TRIGGER:-P${reminderDays}D`:`TRIGGER;VALUE=DATE-TIME:${torontoUTC(shiftDay(event.date,-reminderDays),"09:00")}`);
+        lines.push("END:VALARM");
+      }
+      lines.push("END:VEVENT");
+    }
+    lines.push("END:VCALENDAR");return lines.map(foldLine).join("\r\n")+"\r\n";
+  }
+  function downloadFile(name,type,text){
+    const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+  }
+  function openCalendar(itemId){$("guide-tools").open=true;$("calendar-tools").open=true;$("calendar-item").value=itemId;$("calendar-status").textContent="";$("calendar-item").focus({preventScroll:true});$("calendar-tools").scrollIntoView({block:"start",behavior:"auto"})}
+  function setupCalendar(){
+    for(const item of allItems.filter(item=>CALENDAR_DATES.some(event=>event.item===item.id))){const option=document.createElement("option");option.value=item.id;option.textContent=item.name;$("calendar-item").append(option)}
+    $("calendar-download").addEventListener("click",()=>{
+      const id=$("calendar-item").value,upcoming=$("calendar-upcoming").checked;
+      const events=CALENDAR_DATES.filter(event=>(id==="all"||event.item===id)&&(!upcoming||event.date>=torontoToday())).slice().sort((a,b)=>(a.date+(a.time||"00:00")).localeCompare(b.date+(b.time||"00:00")));
+      if(!events.length){$("calendar-status").textContent="No upcoming dates in this selection. Uncheck ‘Upcoming dates only’ to include past deadlines.";return}
+      downloadFile(`cen100-${id==="all"?"deadlines":id}-2026.ics`,"text/calendar;charset=utf-8",buildCalendar(events,Number($("calendar-reminder").value)));
+      $("calendar-status").textContent=`Calendar file ready with ${events.length} ${events.length===1?"entry":"entries"}. Open or save the download, then add it to your calendar. Import once to avoid duplicates.`;
+    });
+  }
+  function setupSources(){
+    for(const item of allItems){
+      const body=$("b-"+item.id),tile=body.closest(".tile"),extras=document.createElement("div"),source=document.createElement("details"),summary=document.createElement("summary"),text=document.createElement("p");
+      tile.id="guide-item-"+item.id;tile.classList.add("guide-jump");extras.className="tile-extras";source.className="source-note";
+      const [label,note]=sourceFor(item);summary.textContent="Sources: "+label;text.textContent=note;source.append(summary,text);extras.append(source);
+      if(CALENDAR_DATES.some(event=>event.item===item.id)){const button=document.createElement("button");button.type="button";button.className="tool-btn";button.textContent="Add to calendar";button.addEventListener("click",()=>openCalendar(item.id));extras.append(button)}
+      body.append(extras);
+    }
+  }
+  function parseBackup(raw,validKeys){
+    if(typeof raw!=="string"||raw.length>250000)throw new Error("Choose a CEN100 checklist backup smaller than 250 KB.");
+    let data;try{data=JSON.parse(raw)}catch(e){throw new Error("This file is not valid JSON. Choose an exported CEN100 checklist backup.")}
+    if(!data||data.format!=="cen100-guide-backup"||data.version!==1||!data.ticks||typeof data.ticks!=="object"||Array.isArray(data.ticks))throw new Error("This is not a supported CEN100 checklist backup.");
+    const checked={},entries=Object.entries(data.ticks);let skipped=0;
+    for(const [key,value] of entries){
+      if(!validKeys.has(key)){skipped++;continue}
+      if(value!==true&&value!==false&&value!==1&&value!==0)throw new Error("The backup contains invalid checklist values.");
+      if(value===true||value===1)checked[key]=1;
+    }
+    if(entries.length&&skipped===entries.length)throw new Error("This backup has no checklist items matching the current guide.");
+    return {checked,skipped};
+  }
+  function setupBackups(){
+    const boxes=[...document.querySelectorAll("input[data-k]")],validKeys=new Set(boxes.map(box=>box.dataset.k));
+    $("backup-export").addEventListener("click",()=>{
+      const checked=Object.fromEntries(boxes.filter(box=>box.checked).map(box=>[box.dataset.k,1]));
+      const data={format:"cen100-guide-backup",version:1,exportedAt:new Date().toISOString(),ticks:checked};
+      downloadFile(`cen100-checklist-${torontoToday()}.json`,"application/json",JSON.stringify(data,null,2)+"\n");
+      $("backup-status").textContent=`Backup ready with ${Object.keys(checked).length} checked items. Save it to Files or send it to your other device.`;
+    });
+    $("backup-import").addEventListener("change",async e=>{
+      const file=e.target.files?.[0];if(!file)return;
+      try{
+        if(file.size>250000)throw new Error("Choose a CEN100 checklist backup smaller than 250 KB.");
+        const {checked,skipped}=parseBackup(await file.text(),validKeys);let added=0;
+        for(const box of boxes)if(checked[box.dataset.k]){if(!box.checked)added++;box.checked=true;ticks[box.dataset.k]=1}
+        save();counts();applyCompletedFilter();
+        $("backup-status").textContent=`Imported ${added} new checked ${added===1?"item":"items"}. Existing ticks kept.${skipped?` ${skipped} unrecognised items skipped.`:""}`;
+      }catch(error){$("backup-status").textContent=error.message}
+      e.target.value="";
+    });
+  }
+  setupRememberedContacts();setupSources();setupCompletedFilter();setupSearch();setupCalendar();setupBackups();
+})();
 </script>
 </body>
 </html>
