@@ -13,7 +13,7 @@ A student-created course companion for **CEN100: Introduction to Engineering**, 
 - Search across assignments, checklists, rules, clarifications, and contact names.
 - Calendar exports for one assignment or all confirmed deadlines, with optional reminders.
 - Checklist backup export and import for moving progress between browsers or devices.
-- A section/group contact lookup that remembers your selections on the current browser and updates the label at the top of the page. Before selection, the label reads **CEN100 · Fall 2026**.
+- A section/group picker at the top of the guide that remembers your choices, updates the page label, and supplies the matching **Who to ask** contact results. Before selection, the page label reads **CEN100 · Fall 2026**.
 - Source notes inside milestone cards, plus a last-updated date and **What's changed?** history.
 - Automatic light and dark appearance based on the device setting.
 - Separate **Confirmed** and **Still open** sections for course clarifications.
@@ -23,7 +23,7 @@ A student-created course companion for **CEN100: Introduction to Engineering**, 
 1. Open the guide and select **Team**, **Individual**, or **Rules**.
 2. Tap a milestone to review its requirements and tick completed items. Expand its source note to see where the information comes from.
 3. Open **Guide tools** for search, the completed-item filter, calendar exports, backups, and update history.
-4. Under **Rules → Who to ask**, choose your CEN100 section, then one of its applicable Innovation Challenge groups. The lookup shows your GA, lab/location, and Project Manager.
+4. Use **Choose your section & group** below the main heading to select your section, then an applicable Innovation Challenge group. Choices save immediately. **Done** collapses the picker; **View contacts** opens your GA, lab/location, and Project Manager under **Rules → Who to ask**. Returning visitors with a saved section and group see a compact **Change** control. The **Change section/group** button in Who to ask returns to the same picker. Selection is optional.
 5. Use **Clear my ticks** to reset checklist progress in the current browser.
 
 ### Saved choices and privacy
