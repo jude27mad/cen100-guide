@@ -20,7 +20,7 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 
 ## Getting started
 
-1. Optionally choose a section and Innovation Challenge group below the main heading. Group choices are filtered by section, and selections save immediately. Use **Done** to collapse the picker or **View contacts** to open Who to ask.
+1. Optionally choose a section and Innovation Challenge group below the main heading. Group choices are filtered by section, and selections save immediately. The selected section’s lab location appears beside the section and group at the top. Use **Done** to collapse the picker or **View contacts** to open Who to ask.
 2. Select **Team**, **Individual**, or **Rules**. Open an assignment card to review its requirements, checklist, source notes, and tools.
 3. Open **Guide tools** for search, Hide fully checked items, the work planner, calendar exports, backups, and What's changed.
 4. Returning visits restore the saved section/group selection. Use **Change** at the top or **Change section/group** in Who to ask to edit it.
