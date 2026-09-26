@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CEN100 Group 9: Don't Lose Marks</title>
+<title>CEN100: Don't Lose Marks</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
@@ -189,7 +189,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 <body>
 <div class="wrap">
   <header>
-    <p class="team">CEN100 Section 29, Group 9</p>
+    <p class="team" id="course-context">CEN100 · Fall 2026</p>
     <h1>Don't lose marks</h1>
   </header>
 
@@ -231,6 +231,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
       <details class="tool-section" id="guide-updates">
         <summary>What's changed?</summary>
         <ul class="update-list">
+          <li><b>Sep 25, 2026:</b> The page heading now follows your selected section and group, with a neutral course label before selection.</li>
           <li><b>Sep 25, 2026:</b> Added remembered section/group choices, calendar export, checklist backups, search, source notes and the option to hide fully checked items. Removed the large attendance warning from Rules.</li>
           <li><b>Sep 25, 2026:</b> Added the contact lookup for all 39 sections and 52 groups, showing names and lab locations.</li>
           <li><b>Sep 25, 2026:</b> Confirmed reflection submissions by email to the assigned PM and the MATLAB group-size exception. The FMEA Environmental clarification remains pending.</li>
@@ -628,7 +629,15 @@ setupContactLookup();
     const group=Number(value.group);
     return {section,group:staff.groups.some(g=>g[0]===group)?group:null};
   }
-  function rememberProfile(){writeSaved(PROFILE_KEY,validProfile({section:$("contact-section").value,group:$("contact-group").value}))}
+  function updateCourseContext(profile){
+    const label=profile?`CEN100 Section ${profile.section}${profile.group?`, Group ${profile.group}`:""}`:"CEN100 · Fall 2026";
+    $("course-context").textContent=label;
+    document.title=(profile?label:"CEN100")+": Don't Lose Marks";
+  }
+  function rememberProfile(){
+    const profile=validProfile({section:$("contact-section").value,group:$("contact-group").value});
+    updateCourseContext(profile);writeSaved(PROFILE_KEY,profile);
+  }
   function setupRememberedContacts(){
     const saved=validProfile(readSaved(PROFILE_KEY,null));
     if(saved){
@@ -637,6 +646,7 @@ setupContactLookup();
     }
     $("contact-section").addEventListener("change",rememberProfile);
     $("contact-group").addEventListener("change",rememberProfile);
+    updateCourseContext(saved);
   }
   function applyCompletedFilter(){
     let hiddenCount=0;
