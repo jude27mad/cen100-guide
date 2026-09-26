@@ -51,6 +51,9 @@ h1{margin:0;font-weight:900;font-variation-settings:"wdth" 68;font-size:clamp(2.
 .next .when{font-weight:700;font-size:1.05rem;text-align:right}
 .next .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .next .chip{background:rgba(16,27,40,.12);color:#101B28}
+.deadline-link{text-decoration:none;cursor:pointer}
+.next.deadline-link{display:block}
+.dep.deadline-link{color:inherit}
 
 .board{background:var(--navy);color:var(--navy-ink);border-radius:14px;margin:10px 0 22px;padding:4px 16px}
 .dep{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:13px 0;border-top:1px solid rgba(255,255,255,.14)}
@@ -93,6 +96,8 @@ h1{margin:0;font-weight:900;font-variation-settings:"wdth" 68;font-size:clamp(2.
 .badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .prog{font-weight:800;font-size:.95rem;color:var(--ink2)}
 .prog.full{color:var(--ok)}
+.record-status{font-weight:800;font-size:.85rem;color:var(--ink2)}
+.record-status.full{color:var(--ok)}
 .arrow{display:flex;align-items:center;padding:0 14px;color:var(--ink2)}
 .arrow svg{transition:transform .2s}
 .head[aria-expanded="true"] .arrow svg{transform:rotate(180deg)}
@@ -290,6 +295,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
       <details class="tool-section" id="guide-updates">
         <summary>What's changed?</summary>
         <ul class="update-list">
+          <li><b>Sep 26, 2026:</b> Tap upcoming deadlines to open their assignment. Next up skips dates you have marked submitted/completed, and closed cards show your separate completion records.</li>
           <li><b>Sep 26, 2026:</b> Your lab location now appears beside your section and group at the top of the guide and updates when you change sections.</li>
           <li><b>Sep 26, 2026:</b> Unified deadline tracking, kept repeated deadlines active, clarified date-passed labels, and scoped tutorial times to confirmed sections.</li>
           <li><b>Sep 26, 2026:</b> Added unfinished-work planning, separate submission/completion records, assignment links, private notes, personal target dates and an unread-update indicator. New backups include these records; older checklist backups still import.</li>
@@ -574,23 +580,30 @@ function dateMarkup(item,timing){
   return `<span class="m">${mon(timing.date)}</span><span class="dd">${D(timing.date).getUTCDate()}</span>${timing.next?`<span class="x">+ ${mon(timing.next)} ${D(timing.next).getUTCDate()}</span>`:""}`;
 }
 function deadlineBadge(item,timing){return timing.past?'<span class="donecheck">Date passed</span>':chip(item.who)}
-function renderTop(){
+function upcomingSchedule(completed={},selected=0,now=new Date()){
+  return SCHEDULE.filter(e=>{
+    if(eventPassed(e,now)||(e.section&&selected&&e.section!==selected)||completed[e.id])return false;
+    if(e.calendar===false){const records=itemDeadlines(e.item);if(records.length&&records.every(record=>completed[record.id]))return false}
+    return true;
+  }).slice().sort(sortEvents);
+}
+function renderTop(completed={}){
   const selected=Number(document.getElementById("contact-section").value);
-  const up=SCHEDULE.filter(e=>!eventPassed(e)&&(!e.section||!selected||e.section===selected)).slice().sort(sortEvents);
+  const up=upcomingSchedule(completed,selected);
   const ns=document.getElementById("nextsign"),bd=document.getElementById("board");
   const signature=up.slice(0,4).map(e=>e.id+":"+days(e.date)).join("|");
   if(ns.dataset.schedule===signature)return;ns.dataset.schedule=signature;
   if(!up.length){ns.innerHTML="";bd.hidden=true;return}
   bd.hidden=false;
   const event=up[0],d=event.date,item=[...TEAM,...YOU].find(s=>s.id===event.item),n=days(d);
-  ns.innerHTML=`<div class="next"><span class="lbl">${I.clock.replace('width="24" height="24"','width="18" height="18"')}Next up</span>
+  ns.innerHTML=`<a class="next deadline-link" href="#assignment-${event.item}" data-assignment="${event.item}" aria-label="Open ${esc(eventLabel(event))}"><span class="lbl">${I.clock.replace('width="24" height="24"','width="18" height="18"')}Next up</span>
    <div class="t">${esc(eventLabel(event))}</div>
    <div class="row"><div class="big">${cd(n)}</div><div class="when">${wk(d)} ${mon(d)} ${D(d).getUTCDate()}</div></div>
-   <div class="chips">${chip(event.who||item.who)}</div></div>`;
-  bd.innerHTML=up.slice(1,4).map(e=>`<div class="dep"><span class="d">${mon(e.date)} ${D(e.date).getUTCDate()}</span><span class="n">${esc(eventLabel(e))}</span><span class="c">${cd(days(e.date))}</span></div>`).join("");
+   <div class="chips">${chip(event.who||item.who)}</div></a>`;
+  bd.innerHTML=up.slice(1,4).map(e=>`<a class="dep deadline-link" href="#assignment-${e.item}" data-assignment="${e.item}" aria-label="Open ${esc(eventLabel(e))}"><span class="d">${mon(e.date)} ${D(e.date).getUTCDate()}</span><span class="n">${esc(eventLabel(e))}</span><span class="c">${cd(days(e.date))}</span></a>`).join("");
 }
-function refreshDateDisplays(){
-  renderTop();
+function refreshDateDisplays(completed={}){
+  renderTop(completed);
   for(const list of [TEAM,YOU]){
     let found=false;
     for(const item of list){
@@ -616,7 +629,7 @@ function renderList(list,elId){
      <button class="head" aria-expanded="false" aria-controls="b-${s.id}">
       <span class="date">${dateHTML}</span>
       <span class="info"><span class="title">${esc(s.name)}</span>
-       <span class="badges"><span class="deadline-state">${deadlineBadge(s,timing)}</span><span class="chip pct">${s.pct}</span><span class="prog" data-p="${s.id}"></span></span></span>
+       <span class="badges"><span class="deadline-state">${deadlineBadge(s,timing)}</span><span class="chip pct">${s.pct}</span><span class="prog" data-p="${s.id}"></span><span class="record-status" id="recorded-${s.id}" hidden></span></span></span>
       <span class="arrow">${I.down}</span>
      </button>
      <div class="body" id="b-${s.id}" hidden>
@@ -901,7 +914,7 @@ setupContactLookup();
     });
   }
 
-  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-26-room";
+  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-26-deadline-links";
   function recordsFor(item){const dates=itemDeadlines(item.id);return dates.length?dates:[{id:"item:"+item.id,item:item.id,title:item.name}]}
   const completionKeys=new Set(allItems.flatMap(item=>recordsFor(item).map(e=>e.id)));
   function validDate(value){return typeof value==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value}
@@ -928,12 +941,27 @@ setupContactLookup();
   }
   let personal=cleanPlan(readSaved(PLAN_KEY,{}));
   const fullyRecorded=item=>recordsFor(item).every(e=>personal.completed[e.id]);
+  function completionVerb(event){return event.id.startsWith("reflection-")?"Emailed":/^(intro|email|contract|outline|matlab-1|matlab-2|failure|notebook-1|notebook-2|report|peer|exit)$/.test(event.id)?"Submitted":"Completed"}
   function completionText(event){
-    const name=event.title.replace(/ due$/,""),verb=event.id.startsWith("reflection-")?"Emailed":/^(intro|email|contract|outline|matlab-1|matlab-2|failure|notebook-1|notebook-2|report|peer|exit)$/.test(event.id)?"Submitted":"Completed";
+    const name=event.title.replace(/ due$/,""),verb=completionVerb(event);
     return `${verb}: ${name}${event.date?` (${mon(event.date)} ${D(event.date).getUTCDate()}${event.time?`, ${clockLabel(event.time)} Toronto`:""})`:""}`;
   }
+  function completionSummary(item){
+    const records=recordsFor(item),done=records.filter(e=>personal.completed[e.id]).length,total=records.length;
+    const verbs=new Set(records.map(completionVerb));
+    return {done,total,label:!done?"":done<total?`${done} of ${total} recorded`:verbs.size===1?[...verbs][0]:"Completed"};
+  }
   function syncCompletionCounts(){
-    for(const item of allItems){const records=recordsFor(item),done=records.filter(e=>personal.completed[e.id]).length,node=$("completion-"+item.id);if(node)node.textContent=done?`${done}/${records.length} submission/completion records marked by you.`:"No submission/completion recorded yet."}
+    for(const item of allItems){
+      const {done,total,label}=completionSummary(item),node=$("completion-"+item.id),badge=$("recorded-"+item.id);
+      if(node)node.textContent=done?`${done}/${total} submission/completion records marked by you.`:"No submission/completion recorded yet.";
+      if(badge){
+        badge.hidden=!done;badge.textContent=label;badge.classList.toggle("full",done===total);
+        badge.title=done?`${done}/${total} submission/completion records marked by you; separate from checklist progress.`:"";
+        badge.setAttribute("aria-label",done?`${label}, marked by you`:"");
+      }
+    }
+    renderTop(personal.completed);
   }
   function openAssignment(id){
     const item=byId.get(id);if(!item)return;
@@ -1012,15 +1040,20 @@ setupContactLookup();
     attendance.querySelector(".fact span").textContent=section===29?"Section 29: Wednesday, 5:45 to 6:00 PM":"Check your assigned tutorial's quiz schedule on D2L";
     const staff=STAFFING.find(s=>s.sections.includes(section)),pm=staff?.groups.find(g=>g[0]===profile?.group);
     $("b-y5").querySelector(".what").textContent=pm?`Your own writing about the project, two pieces. Email each Personal Reflection directly to ${pm[1]}, your assigned Project Manager for Group ${pm[0]}. There is no D2L submission box.`:byId.get("y5").what;
-    refreshDateDisplays();
+    refreshDateDisplays(personal.completed);
   }
   function setupWorkAndUpdates(){
+    for(const id of ["nextsign","board"])$(id).addEventListener("click",e=>{
+      const link=e.target.closest("a[data-assignment]");
+      if(!link||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+      e.preventDefault();openAssignment(link.dataset.assignment);
+    });
     $("work-range").addEventListener("change",renderWork);
     document.addEventListener("change",e=>{if(e.target.matches("input[data-k]"))renderWork()});
     $("reset").addEventListener("click",renderWork);
     const badge=$("updates-badge"),history=$("guide-updates");badge.hidden=readSaved(SEEN_KEY,"")===GUIDE_VERSION;
     history.addEventListener("toggle",()=>{if(history.open){badge.hidden=true;writeSaved(SEEN_KEY,GUIDE_VERSION)}});
-    const refresh=()=>{refreshDateDisplays();renderWork()};
+    const refresh=()=>{refreshDateDisplays(personal.completed);renderWork()};
     document.addEventListener("visibilitychange",()=>{if(!document.hidden)refresh()});
     window.addEventListener("focus",refresh);setInterval(()=>{if(!document.hidden)refresh()},60000);
     renderWork();readAssignmentLink();
@@ -1031,4 +1064,5 @@ setupContactLookup();
 </script>
 </body>
 </html>
+
 
