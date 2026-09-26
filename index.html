@@ -143,9 +143,21 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 
 #contactlookup{grid-template-columns:repeat(2,minmax(0,1fr))}
 #contactlookup div{min-width:0}
-#contactlookup label{display:block;font-weight:800;font-size:1rem}
-#contactlookup select{display:block;width:100%;min-width:0;margin:10px 0 14px;padding:10px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:1rem;cursor:pointer}
-#contactlookup select:disabled{opacity:.65;cursor:default}
+.profile-picker,.profile-picker *{box-sizing:border-box}
+.profile-picker{margin:0 0 16px;border:2px solid var(--line);border-radius:14px;background:var(--tile);scroll-margin-top:12px}
+.profile-picker>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;font-weight:800;cursor:pointer;list-style:none;min-height:48px}
+.profile-picker>summary::-webkit-details-marker{display:none}
+#profile-label{min-width:0;overflow-wrap:anywhere}
+#profile-action{flex:0 0 auto;font-size:.9rem;color:var(--team);text-decoration:underline}
+.profile-content{padding:0 14px 14px;border-top:1px solid var(--line)}
+.profile-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.profile-fields>div{min-width:0;display:flex;flex-direction:column}
+.profile-picker label{display:block;font-weight:800;font-size:.95rem;margin:12px 0 6px}
+.profile-picker select{display:block;width:100%;min-width:0;margin-top:auto;padding:10px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:1rem;cursor:pointer}
+.profile-picker select:disabled{opacity:.65;cursor:default}
+.profile-picker .tool-actions{align-items:center}
+#profile-done{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+@media(max-width:440px){.profile-fields{grid-template-columns:1fr;gap:0}}
 #contactlookup p{margin:0;overflow-wrap:anywhere}
 #contactlookup p span{color:var(--ink2);font-weight:600}
 .contact-note{margin-top:12px}
@@ -193,6 +205,27 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
     <h1>Don't lose marks</h1>
   </header>
 
+  <details class="profile-picker" id="profile-picker" open>
+    <summary id="profile-summary"><span id="profile-label">Choose your section &amp; group</span><span id="profile-action" aria-hidden="true">Hide</span></summary>
+    <div class="profile-content">
+      <div class="profile-fields">
+        <div>
+          <label for="contact-section">Your CEN100 section</label>
+          <select id="contact-section" aria-describedby="profile-note"><option value="">Choose your section</option></select>
+        </div>
+        <div>
+          <label for="contact-group">Your Innovation Challenge group</label>
+          <select id="contact-group" aria-describedby="profile-note" disabled><option value="">Choose your section first</option></select>
+        </div>
+      </div>
+      <p class="tool-note" id="profile-note">Optional. Your choices are saved on this device and update Who to ask.</p>
+      <div class="tool-actions">
+        <button class="tool-btn" id="profile-done" type="button">Done</button>
+        <button class="tool-btn" id="profile-contacts" type="button">View contacts</button>
+      </div>
+    </div>
+  </details>
+
   <section id="nextsign" aria-label="Next deadline"></section>
   <section class="board" id="board" aria-label="After that"></section>
 
@@ -231,6 +264,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
       <details class="tool-section" id="guide-updates">
         <summary>What's changed?</summary>
         <ul class="update-list">
+          <li><b>Sep 25, 2026:</b> Moved section/group selection to the top of the guide. Who to ask now shows the matching contact results, with a shortcut to change your selection.</li>
           <li><b>Sep 25, 2026:</b> The page heading now follows your selected section and group, with a neutral course label before selection.</li>
           <li><b>Sep 25, 2026:</b> Added remembered section/group choices, calendar export, checklist backups, search, source notes and the option to hide fully checked items. Removed the large attendance warning from Rules.</li>
           <li><b>Sep 25, 2026:</b> Added the contact lookup for all 39 sections and 52 groups, showing names and lab locations.</li>
@@ -269,16 +303,13 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
     <h2 class="sec"><span data-i="chat"></span>Who to ask</h2>
     <div class="people" id="contactlookup">
       <div>
-        <label for="contact-section">Your CEN100 section</label>
-        <select id="contact-section" aria-describedby="ga-result"><option value="">Choose your section</option></select>
         <p id="ga-result" aria-live="polite" aria-atomic="true"><span>Choose your section to see your GA and lab/location.</span></p>
       </div>
       <div>
-        <label for="contact-group">Your Innovation Challenge group</label>
-        <select id="contact-group" aria-describedby="pm-result" disabled><option value="">Choose your section first</option></select>
         <p id="pm-result" aria-live="polite" aria-atomic="true"><span>Choose your group to see your Project Manager.</span></p>
       </div>
     </div>
+    <div class="tool-actions"><button class="tool-btn" id="change-profile" type="button">Change section/group</button></div>
     <p class="lead contact-note">For contact details, check D2L or the official Section GAs and PMs document.</p>
   </section>
 
@@ -629,10 +660,15 @@ setupContactLookup();
     const group=Number(value.group);
     return {section,group:staff.groups.some(g=>g[0]===group)?group:null};
   }
+  function updatePickerAction(){
+    $("profile-action").textContent=$("profile-picker").open?"Hide":$("contact-section").value?"Change":"Choose";
+  }
   function updateCourseContext(profile){
     const label=profile?`CEN100 Section ${profile.section}${profile.group?`, Group ${profile.group}`:""}`:"CEN100 · Fall 2026";
     $("course-context").textContent=label;
     document.title=(profile?label:"CEN100")+": Don't Lose Marks";
+    $("profile-label").textContent=profile?`Section ${profile.section}${profile.group?` · Group ${profile.group}`:" · Choose your group"}`:"Choose your section & group";
+    updatePickerAction();
   }
   function rememberProfile(){
     const profile=validProfile({section:$("contact-section").value,group:$("contact-group").value});
@@ -646,6 +682,19 @@ setupContactLookup();
     }
     $("contact-section").addEventListener("change",rememberProfile);
     $("contact-group").addEventListener("change",rememberProfile);
+    const picker=$("profile-picker");
+    picker.open=!saved?.group;
+    picker.addEventListener("toggle",updatePickerAction);
+    $("profile-done").addEventListener("click",()=>{
+      picker.open=false;updatePickerAction();$("profile-summary").focus({preventScroll:true});$("profile-summary").scrollIntoView({block:"nearest",behavior:"auto"});
+    });
+    $("change-profile").addEventListener("click",()=>{
+      picker.open=true;updatePickerAction();$("contact-section").focus({preventScroll:true});picker.scrollIntoView({block:"start",behavior:"auto"});
+    });
+    $("profile-contacts").addEventListener("click",()=>{
+      picker.open=false;updatePickerAction();$("t-rules").click();
+      const contacts=$("contactlookup");contacts.tabIndex=-1;contacts.focus({preventScroll:true});contacts.scrollIntoView({block:"start",behavior:"auto"});
+    });
     updateCourseContext(saved);
   }
   function applyCompletedFilter(){
