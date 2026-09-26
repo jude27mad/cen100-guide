@@ -197,6 +197,22 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 .update-list li{margin:8px 0}
 .update-list b{color:var(--ink)}
 @media(max-width:400px){.guide-tools summary small{margin-left:0;flex-basis:75%}.tile-extras>.tool-btn{width:100%}}
+.personal-tools,.personal-tools *{box-sizing:border-box}
+.personal-tools{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+.personal-tools>summary{font-weight:800;cursor:pointer;min-height:36px}
+.personal-tools label:not(.tool-check){display:block;font-weight:700;font-size:.95rem;margin:12px 0 6px}
+.personal-tools textarea,.personal-tools input[type="date"],.share-fallback{display:block;max-width:100%;width:100%;min-width:0;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:1rem;padding:10px}
+.personal-tools textarea{min-height:92px;resize:vertical}
+.personal-tools fieldset{border:0;margin:12px 0 0;padding:0;min-width:0}
+.personal-tools legend{font-weight:750;font-size:1rem;padding:0}
+.personal-tools .tool-check{align-items:flex-start;font-weight:550}
+.completion-count{font-weight:650;font-size:.9rem;color:var(--ink2);margin:10px 0 0}
+.work-list{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px}
+.work-list>li{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--bg)}
+.work-list .tool-btn{width:100%;text-align:left;overflow-wrap:anywhere;background:var(--tile)}
+.work-list p{font-size:.9rem;margin:7px 0 0;color:var(--ink2)}
+.updates-badge{display:inline-block;font-size:.72rem;font-weight:750;padding:3px 6px;border-radius:5px;background:var(--warn-bg);color:var(--ink);margin-left:6px;vertical-align:middle}
+.updates-badge[hidden],.share-fallback[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -231,7 +247,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <section class="board" id="board" aria-label="After that"></section>
 
   <details class="guide-tools" id="guide-tools">
-    <summary><span>Guide tools</span><small>Updated Sep 25, 2026</small></summary>
+    <summary><span>Guide tools <span class="updates-badge" id="updates-badge" hidden>New updates</span></span><small>Updated Sep 26, 2026</small></summary>
     <div class="tool-content">
       <label for="guide-search">Search the guide</label>
       <input id="guide-search" type="search" placeholder="Try FMEA, citations or notebook" autocomplete="off" aria-controls="guide-search-results" aria-describedby="search-status">
@@ -239,6 +255,15 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
       <ul class="search-results" id="guide-search-results" hidden></ul>
       <label class="tool-check"><input type="checkbox" id="hide-completed">Hide fully checked items</label>
       <p class="tool-status" id="filter-status" role="status"></p>
+
+      <details class="tool-section" id="work-tools">
+        <summary>What should I work on?</summary>
+        <label for="work-range">Show unfinished work</label>
+        <select id="work-range"><option value="week">Next 7 days</option><option value="all">All unfinished</option></select>
+        <p class="tool-note">Based on your own submission/completion records in each card, separately from checklist ticks. Personal target dates are your plans, not official deadlines.</p>
+        <p class="tool-status" id="work-status" role="status"></p>
+        <ul class="work-list" id="work-list"></ul>
+      </details>
 
       <details class="tool-section" id="calendar-tools">
         <summary>Add deadlines to my calendar</summary>
@@ -254,10 +279,10 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
       </details>
 
       <details class="tool-section" id="backup-tools">
-        <summary>Move or back up my checklist ticks</summary>
-        <p class="tool-note">Export your ticks, then open this guide on your other device and import the file. Importing adds checked items and keeps your existing ticks. The file contains checklist progress only.</p>
-        <div class="tool-actions"><button class="tool-btn" id="backup-export" type="button">Export my ticks</button></div>
-        <label for="backup-import">Import a checklist backup (.json)</label>
+        <summary>Move or back up my progress</summary>
+        <p class="tool-note">Export your progress, then import the file on another device. Backups include checklist ticks, completion records, private notes and personal target dates. Importing adds progress and fills empty notes/targets; existing conflicting notes/targets stay as they are. Older checklist backups still work.</p>
+        <div class="tool-actions"><button class="tool-btn" id="backup-export" type="button">Export my progress</button></div>
+        <label for="backup-import">Import a progress backup (.json)</label>
         <input type="file" id="backup-import" accept=".json,application/json">
         <p class="tool-status" id="backup-status" role="status"></p>
       </details>
@@ -265,6 +290,8 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
       <details class="tool-section" id="guide-updates">
         <summary>What's changed?</summary>
         <ul class="update-list">
+          <li><b>Sep 26, 2026:</b> Unified deadline tracking, kept repeated deadlines active, clarified date-passed labels, and scoped tutorial times to confirmed sections.</li>
+          <li><b>Sep 26, 2026:</b> Added unfinished-work planning, separate submission/completion records, assignment links, private notes, personal target dates and an unread-update indicator. New backups include these records; older checklist backups still import.</li>
           <li><b>Sep 25, 2026:</b> Moved section/group selection to the top of the guide. Who to ask now shows the matching contact results, with a shortcut to change your selection.</li>
           <li><b>Sep 25, 2026:</b> The page heading now follows your selected section and group, with a neutral course label before selection.</li>
           <li><b>Sep 25, 2026:</b> Added remembered section/group choices, calendar export, checklist backups, search, source notes and the option to hide fully checked items. Removed the large attendance warning from Rules.</li>
@@ -433,9 +460,9 @@ const YOU = [
   facts:[["cal","Oct 28 and Dec 2"],["warn","Email directly to your Project Manager — no D2L submission box"]],
   groups:[["",["Project Manager confirmed","Reflection 1 emailed to PM","Reflection 2 emailed to PM"]]], traps:[]},
  {id:"y7", date:"2026-12-02", big:"LAB", small:"Weekly", name:"Tutorial attendance quizzes", who:"you", pct:"5%",
-  what:"A D2L quiz opens 5:45 to 6:00 PM in every Wednesday tutorial. One attempt, and you have to be in the room.",
-  facts:[["pin","Every Wednesday, 5:45 to 6:00 PM"]],
-  groups:[["",["I'm in tutorial every Wednesday before 5:45"]]],
+  what:"Attendance quizzes take place during your assigned tutorial. Section 29: Wednesday, 5:45 to 6:00 PM, one attempt. Other sections: check D2L for your assigned tutorial schedule.",
+  facts:[["pin","Section 29: Wednesday, 5:45 to 6:00 PM; other sections: check D2L"]],
+  groups:[["",["I attend my assigned tutorial in person"]]],
   traps:["Answering for another student, or having someone answer for you while you are absent, violates TMU Senate Policy 60: Academic Integrity. Zero for the entire 5% participation component; further penalties may apply.","Taking a quiz while absent from your assigned tutorial earns no credit for that quiz and may raise an academic integrity concern."]},
  {id:"y8", date:"2026-12-02", name:"Exit survey", who:"you", pct:"2%",
   what:"A short Google Form in Week 13.", facts:[], groups:[["",["Submitted"]]], traps:[]},
@@ -472,60 +499,115 @@ const CONFIRMED=[
  ["Citations","IEEE. Sayed is double-checking with the GA."],
  ["WHMIS","Due Oct 14. 80%+ on all 3 quizzes, then generate the certificate."],
  ["Academic Integrity Quiz","Due Oct 14, 3:00 PM."],
- ["Attendance quizzes","Every Wednesday tutorial, 5:45 to 6:00 PM, one attempt."],
+ ["Attendance quizzes","Section 29: Wednesday, 5:45 to 6:00 PM, one attempt. Other sections: check your assigned tutorial on D2L."],
  ["Personal Reflections","No D2L submission box. Email directly to your assigned Project Manager. Group 9: Sayed Nuhan."],
  ["MATLAB assignments","Normally pairs. If the class size is odd, the unpaired student may work solo or join a group of 3."]
 ];
 const OPEN=[
  ["FMEA \u201cEnvironmental\u201d","Real-world conditions, or impact on the environment? Escalated to the Head GA. Official clarification pending."]
 ];
-const EVENTS=[
- ["2026-10-02","Project Outline + User Research","team"],
- ["2026-10-07","MATLAB assignment 1","pair"],
- ["2026-10-14","WHMIS certification","you"],
- ["2026-10-14","Academic Integrity Quiz, 3:00 PM","you"],
- ["2026-10-14","Failure Analysis Part 1 in lab","sub"],
- ["2026-10-21","Failure Analysis Labs due","team"],
- ["2026-10-28","Personal Reflection 1","you"],
- ["2026-11-04","Midterm Design Review + notebook PDF","team"],
- ["2026-11-18","Showcase sign-up (around now)","team"],
- ["2026-11-25","Prototype due + first presentation","team"],
- ["2026-12-02","Final report, presentation, peer evaluation","team"]
+const SCHEDULE=[
+    {id:"intro",item:"y1",date:"2026-09-16",title:"Personal Introduction due"},
+    {id:"entry",item:"y1",date:"2026-09-16",title:"Entry Survey due"},
+    {id:"syllabus",item:"y1",date:"2026-09-16",title:"Course Syllabus Quiz due"},
+    {id:"email",item:"y1",date:"2026-09-23",title:"Professional Email Assignment due"},
+    {id:"contract",item:"m1",date:"2026-09-23",title:"Team Contract + Task Outline due"},
+    {id:"outline",item:"m2",date:"2026-10-02",title:"Project Outline + User Research due",note:"Due by the end of the day. Check D2L for the exact submission time."},
+    {id:"matlab-1",item:"y2",date:"2026-10-07",title:"MATLAB Assignment 1 due"},
+    {id:"whmis",item:"y3",date:"2026-10-14",title:"WHMIS certification due"},
+    {id:"integrity",item:"y4",date:"2026-10-14",time:"15:00",title:"Academic Integrity Quiz due"},
+    {id:"failure",item:"m3",date:"2026-10-21",title:"Failure Analysis Labs: both parts due"},
+    {id:"reflection-1",item:"y5",date:"2026-10-28",title:"Personal Reflection 1 due",note:"Email directly to your assigned Project Manager; no D2L submission box."},
+    {id:"review",item:"m4",date:"2026-11-04",title:"Midterm Design Review",note:"In your assigned lab. Confirm your presentation time on D2L."},
+    {id:"notebook-1",item:"y6",date:"2026-11-04",time:"15:00",title:"Team design notebook PDF: checkpoint 1 due"},
+    {id:"matlab-2",item:"y2",date:"2026-11-04",title:"MATLAB Assignment 2 due"},
+    {id:"prototype",item:"m5",date:"2026-11-25",time:"15:00",title:"Low-Fidelity Prototype due"},
+    {id:"presentation-1",item:"m6",date:"2026-11-25",title:"First Final Presentation",note:"Confirm your assigned presentation time on D2L."},
+    {id:"presentation-2",item:"m6",date:"2026-12-02",title:"Final Presentation and Innovation Showcase",note:"Confirm your assigned presentation time on D2L."},
+    {id:"notebook-2",item:"y6",date:"2026-12-02",time:"15:00",title:"Team design notebook PDF: checkpoint 2 due"},
+    {id:"reflection-2",item:"y5",date:"2026-12-02",title:"Personal Reflection 2 due",note:"Email directly to your assigned Project Manager; no D2L submission box."},
+    {id:"exit",item:"y8",date:"2026-12-02",title:"Exit Survey due"},
+    {id:"peer",item:"m8",date:"2026-12-02",title:"Peer Evaluation due"},
+    {id:"report",item:"m7",date:"2026-12-02",time:"23:59",title:"Final Report due"},
+    {id:"failure-lab",item:"m3",date:"2026-10-14",title:"Failure Analysis Part 1 in lab (Section 29)",who:"sub",section:29,calendar:false},
+    {id:"showcase-signup",item:"m6",date:"2026-11-18",title:"Showcase sign-up (around now; check D2L)",calendar:false}
 ];
 
 const KEY="cen100-g9-ticks";
 let ticks={};try{ticks=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){ticks={}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ticks))}catch(e){}};
-const today=new Date();today.setHours(0,0,0,0);
-const D=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
-const days=s=>Math.round((D(s)-today)/864e5);
+const D=s=>new Date(s+"T12:00:00Z");
+const days=(s,reference=torontoToday())=>Math.round((D(s)-D(reference))/864e5);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const mon=s=>D(s).toLocaleDateString("en-CA",{month:"short"}).replace(".","");
-const wk=s=>D(s).toLocaleDateString("en-CA",{weekday:"short"}).replace(".","");
+const mon=s=>D(s).toLocaleDateString("en-CA",{month:"short",timeZone:"UTC"}).replace(".","");
+const wk=s=>D(s).toLocaleDateString("en-CA",{weekday:"short",timeZone:"UTC"}).replace(".","");
 const chip=w=>{const [c,l]=WHO[w];return `<span class="chip ${c}">${l}</span>`};
 const cd=n=>n===0?"Today":n===1?"1 day":n+" days";
 
 document.querySelectorAll("[data-i]").forEach(el=>el.innerHTML=I[el.dataset.i]);
 
+function torontoToday(now=new Date()){
+  const p=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(now).map(x=>[x.type,x.value]));
+  return `${p.year}-${p.month}-${p.day}`;
+}
+function torontoTimestamp(date,time){
+  const [year,month,day]=date.split("-").map(Number),[hour,minute]=time.split(":").map(Number);
+  const target=Date.UTC(year,month-1,day,hour,minute);let value=target;
+  const fmt=new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"});
+  for(let i=0;i<2;i++){const p=Object.fromEntries(fmt.formatToParts(new Date(value)).map(x=>[x.type,x.value]));value+=target-Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute,+p.second)}
+  return value;
+}
+function torontoUTC(date,time){return new Date(torontoTimestamp(date,time)).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"")}
+function eventPassed(event,now=new Date()){return event.time?torontoTimestamp(event.date,event.time)<now.getTime():event.date<torontoToday(now)}
+function sortEvents(a,b){return (a.date+(a.time||"23:59")).localeCompare(b.date+(b.time||"23:59"))||a.id.localeCompare(b.id)}
+function itemDeadlines(id){return SCHEDULE.filter(e=>e.item===id&&e.calendar!==false).slice().sort(sortEvents)}
+function clockLabel(time){const [h,m]=time.split(":").map(Number);return `${h%12||12}:${String(m).padStart(2,"0")} ${h<12?"AM":"PM"}`}
+function eventLabel(event){return event.title+(event.time?`, ${clockLabel(event.time)} Toronto time`:"")}
+function itemTiming(item,now=new Date()){
+  const events=itemDeadlines(item.id),pending=events.filter(e=>!eventPassed(e,now));
+  const current=pending[0]||events.at(-1),next=pending.find(e=>e.date!==current?.date);
+  return {past:events.length>0&&!pending.length,date:current?.date||item.date,next:next?.date||null,upcoming:pending.length>0};
+}
+function dateMarkup(item,timing){
+  if(item.big)return `<span class="dd" style="font-size:1.7rem">${esc(item.big)}</span><span class="x">${esc(item.small||"")}</span>`;
+  return `<span class="m">${mon(timing.date)}</span><span class="dd">${D(timing.date).getUTCDate()}</span>${timing.next?`<span class="x">+ ${mon(timing.next)} ${D(timing.next).getUTCDate()}</span>`:""}`;
+}
+function deadlineBadge(item,timing){return timing.past?'<span class="donecheck">Date passed</span>':chip(item.who)}
 function renderTop(){
-  const up=EVENTS.filter(e=>days(e[0])>=0);
-  const ns=document.getElementById("nextsign"), bd=document.getElementById("board");
+  const selected=Number(document.getElementById("contact-section").value);
+  const up=SCHEDULE.filter(e=>!eventPassed(e)&&(!e.section||!selected||e.section===selected)).slice().sort(sortEvents);
+  const ns=document.getElementById("nextsign"),bd=document.getElementById("board");
+  const signature=up.slice(0,4).map(e=>e.id+":"+days(e.date)).join("|");
+  if(ns.dataset.schedule===signature)return;ns.dataset.schedule=signature;
   if(!up.length){ns.innerHTML="";bd.hidden=true;return}
-  const [d0,n0,w0]=up[0], n=days(d0);
+  bd.hidden=false;
+  const event=up[0],d=event.date,item=[...TEAM,...YOU].find(s=>s.id===event.item),n=days(d);
   ns.innerHTML=`<div class="next"><span class="lbl">${I.clock.replace('width="24" height="24"','width="18" height="18"')}Next up</span>
-   <div class="t">${esc(n0)}</div>
-   <div class="row"><div class="big">${cd(n)}</div><div class="when">${wk(d0)} ${mon(d0)} ${D(d0).getDate()}</div></div>
-   <div class="chips">${chip(w0).replace('class="chip','class="chip')}</div></div>`;
-  bd.innerHTML=up.slice(1,4).map(e=>`<div class="dep"><span class="d">${mon(e[0])} ${D(e[0]).getDate()}</span><span class="n">${esc(e[1])}</span><span class="c">${cd(days(e[0]))}</span></div>`).join("");
+   <div class="t">${esc(eventLabel(event))}</div>
+   <div class="row"><div class="big">${cd(n)}</div><div class="when">${wk(d)} ${mon(d)} ${D(d).getUTCDate()}</div></div>
+   <div class="chips">${chip(event.who||item.who)}</div></div>`;
+  bd.innerHTML=up.slice(1,4).map(e=>`<div class="dep"><span class="d">${mon(e.date)} ${D(e.date).getUTCDate()}</span><span class="n">${esc(eventLabel(e))}</span><span class="c">${cd(days(e.date))}</span></div>`).join("");
+}
+function refreshDateDisplays(){
+  renderTop();
+  for(const list of [TEAM,YOU]){
+    let found=false;
+    for(const item of list){
+      const timing=itemTiming(item),tile=document.getElementById("b-"+item.id).closest(".tile");
+      const highlight=!found&&timing.upcoming;if(highlight)found=true;
+      tile.classList.toggle("past",timing.past);tile.classList.toggle("now",highlight);
+      tile.querySelector(".date").innerHTML=dateMarkup(item,timing);
+      tile.querySelector(".deadline-state").innerHTML=deadlineBadge(item,timing);
+    }
+  }
 }
 
 function renderList(list,elId){
   let found=false;
   document.getElementById(elId).innerHTML=list.map(s=>{
-    const n=days(s.date); let st="";
-    if(n<0 && (!s.big || s.id==="y1")) st="past"; else if(!found && n>=0){st="now";found=true}
-    const top=s.big||mon(s.date), mid=s.big?"":D(s.date).getDate(), low=s.small||(s.date2?"+ "+s.date2:"");
-    const dateHTML=s.big?`<span class="dd" style="font-size:1.7rem">${top}</span><span class="x">${esc(low)}</span>`:`<span class="m">${top}</span><span class="dd">${mid}</span>${low?`<span class="x">${esc(low)}</span>`:""}`;
+    const timing=itemTiming(s);let st="";
+    if(timing.past)st="past";else if(!found&&timing.upcoming){st="now";found=true}
+    const dateHTML=dateMarkup(s,timing);
     const facts=s.facts.length?`<div class="facts">${s.facts.map(f=>`<div class="fact">${I[f[0]]}<span>${esc(f[1])}</span></div>`).join("")}</div>`:"";
     const groups=s.groups.map((g,gi)=>`${g[0]?`<div class="grp">${esc(g[0])}</div>`:""}<ul class="checks">${g[1].map((t,i)=>{const k=`${s.id}-${gi}-${i}`;return `<li><label><input type="checkbox" data-k="${k}" data-s="${s.id}"${ticks[k]?" checked":""}><span>${esc(t)}</span></label></li>`}).join("")}</ul>`).join("");
     const traps=s.traps.length?`<div class="bar bad">${I.warn}Lose marks</div><ul class="traps">${s.traps.map(t=>`<li>${I.warn}<span>${esc(t)}</span></li>`).join("")}</ul>`:"";
@@ -533,7 +615,7 @@ function renderList(list,elId){
      <button class="head" aria-expanded="false" aria-controls="b-${s.id}">
       <span class="date">${dateHTML}</span>
       <span class="info"><span class="title">${esc(s.name)}</span>
-       <span class="badges">${st==="past"?`<span class="donecheck">${I.check.replace('width="24" height="24"','width="18" height="18"')}Passed</span>`:chip(s.who)}<span class="chip pct">${s.pct}</span><span class="prog" data-p="${s.id}"></span></span></span>
+       <span class="badges"><span class="deadline-state">${deadlineBadge(s,timing)}</span><span class="chip pct">${s.pct}</span><span class="prog" data-p="${s.id}"></span></span></span>
       <span class="arrow">${I.down}</span>
      </button>
      <div class="body" id="b-${s.id}" hidden>
@@ -566,7 +648,7 @@ document.addEventListener("click",e=>{
   if(t)document.querySelectorAll(".tab").forEach(x=>{const on=x===t;x.setAttribute("aria-selected",on);document.getElementById(x.getAttribute("aria-controls")).hidden=!on});
 });
 document.addEventListener("change",e=>{if(e.target.matches("input[data-k]")){const k=e.target.dataset.k;e.target.checked?ticks[k]=1:delete ticks[k];save();counts()}});
-document.getElementById("reset").addEventListener("click",()=>{if(!confirm("Clear all your ticks on this device?"))return;ticks={};save();document.querySelectorAll("input[data-k]").forEach(b=>b.checked=false);counts()});
+document.getElementById("reset").addEventListener("click",()=>{if(!confirm("Clear all checklist ticks on this device? Your completion records, notes and target dates will stay saved."))return;ticks={};save();document.querySelectorAll("input[data-k]").forEach(b=>b.checked=false);counts()});
 
 const STAFFING=[
  {"sections":[1,14,27],"ga":"Mymonah Meraj","location":"KHE321B","groups":[[1,"Nitya Malik"],[2,"Kaung Min Khant"],[3,"Antonio Souza"],[4,"Doga Kaptanoglu"]]},
@@ -613,30 +695,7 @@ setupContactLookup();
   const PROFILE_KEY="cen100-contact-choice-v1", FILTER_KEY="cen100-hide-completed-v1";
   const allItems=[...TEAM,...YOU];
   const byId=new Map(allItems.map(item=>[item.id,item]));
-  const CALENDAR_DATES=[
-    {id:"intro",item:"y1",date:"2026-09-16",title:"Personal Introduction due"},
-    {id:"entry",item:"y1",date:"2026-09-16",title:"Entry Survey due"},
-    {id:"syllabus",item:"y1",date:"2026-09-16",title:"Course Syllabus Quiz due"},
-    {id:"email",item:"y1",date:"2026-09-23",title:"Professional Email Assignment due"},
-    {id:"contract",item:"m1",date:"2026-09-23",title:"Team Contract + Task Outline due"},
-    {id:"outline",item:"m2",date:"2026-10-02",title:"Project Outline + User Research due",note:"Due by the end of the day. Check D2L for the exact submission time."},
-    {id:"matlab-1",item:"y2",date:"2026-10-07",title:"MATLAB Assignment 1 due"},
-    {id:"whmis",item:"y3",date:"2026-10-14",title:"WHMIS certification due"},
-    {id:"integrity",item:"y4",date:"2026-10-14",time:"15:00",title:"Academic Integrity Quiz due"},
-    {id:"failure",item:"m3",date:"2026-10-21",title:"Failure Analysis Labs: both parts due"},
-    {id:"reflection-1",item:"y5",date:"2026-10-28",title:"Personal Reflection 1 due",note:"Email directly to your assigned Project Manager; no D2L submission box."},
-    {id:"review",item:"m4",date:"2026-11-04",title:"Midterm Design Review",note:"In your assigned lab. Confirm your presentation time on D2L."},
-    {id:"notebook-1",item:"y6",date:"2026-11-04",time:"15:00",title:"Team design notebook PDF: checkpoint 1 due"},
-    {id:"matlab-2",item:"y2",date:"2026-11-04",title:"MATLAB Assignment 2 due"},
-    {id:"prototype",item:"m5",date:"2026-11-25",time:"15:00",title:"Low-Fidelity Prototype due"},
-    {id:"presentation-1",item:"m6",date:"2026-11-25",title:"First Final Presentation",note:"Confirm your assigned presentation time on D2L."},
-    {id:"presentation-2",item:"m6",date:"2026-12-02",title:"Final Presentation and Innovation Showcase",note:"Confirm your assigned presentation time on D2L."},
-    {id:"notebook-2",item:"y6",date:"2026-12-02",time:"15:00",title:"Team design notebook PDF: checkpoint 2 due"},
-    {id:"reflection-2",item:"y5",date:"2026-12-02",title:"Personal Reflection 2 due",note:"Email directly to your assigned Project Manager; no D2L submission box."},
-    {id:"exit",item:"y8",date:"2026-12-02",title:"Exit Survey due"},
-    {id:"peer",item:"m8",date:"2026-12-02",title:"Peer Evaluation due"},
-    {id:"report",item:"m7",date:"2026-12-02",time:"23:59",title:"Final Report due"}
-  ];
+  const CALENDAR_DATES=SCHEDULE.filter(event=>event.calendar!==false);
   const SOURCE_INFO={
     y1:["Course outline","Course outline, p. 9: assessment weights and individual September dates."],
     y2:["Outline + clarification","Course outline, pp. 9–10: weight, dates and pair work. Confirmed clarification from Sayed Nuhan: the unpaired student in an odd-sized class may work solo or join a group of 3."],
@@ -644,7 +703,7 @@ setupContactLookup();
     y4:["Outline + clarification","Course outline, p. 9: weight, Oct 14 date and mandatory completion. The 3 PM deadline and attempt limit: course-team clarification recorded in this guide."],
     y5:["Outline + clarification","Course outline, p. 9: weight and dates. Confirmed clarification from Sayed Nuhan: email your assigned Project Manager; there is no D2L submission box. Group 9 sends to Sayed Nuhan."],
     y6:["Outline + guide summary","Course outline, pp. 9–11: weight, checkpoint dates and shared notebook requirements. The PDF format and 3 PM deadline are recorded in the guide's Confirmed section."],
-    y7:["Outline + clarification","Course outline, pp. 9–10: participation weight and in-person attendance. The Wednesday 5:45–6 PM quiz window and one attempt: course-team clarification for this guide's tutorial."],
+    y7:["Outline + clarification","Course outline, pp. 9–10: participation weight and in-person attendance. The Wednesday 5:45–6 PM quiz window and one attempt are confirmed for Section 29 only. Check D2L for other sections."],
     y9:["Course outline","Course outline, pp. 9 and 12: weight, two-hour in-person format and Dec 9–20 exam period. The exact date is pending the Registrar's schedule."],
     m3:["Outline + guide summary","Course outline, pp. 9–11: weight, date, two-part failure analysis and team sizes. Detailed checklist: this guide's summary of assignment requirements; check the assignment instructions on D2L."],
     m6:["Outline + guide summary","Course outline, pp. 9 and 12: weight, presentation dates and Innovation Showcase. Detailed checklist: this guide's summary of assignment requirements; check the assignment instructions on D2L."],
@@ -669,7 +728,7 @@ setupContactLookup();
     $("course-context").textContent=label;
     document.title=(profile?label:"CEN100")+": Don't Lose Marks";
     $("profile-label").textContent=profile?`Section ${profile.section}${profile.group?` · Group ${profile.group}`:" · Choose your group"}`:"Choose your section & group";
-    updatePickerAction();
+    updatePickerAction();updateSectionContent(profile);
   }
   function rememberProfile(){
     const profile=validProfile({section:$("contact-section").value,group:$("contact-group").value});
@@ -701,7 +760,7 @@ setupContactLookup();
   function applyCompletedFilter(){
     let hiddenCount=0;
     for(const item of allItems){
-      const body=$("b-"+item.id),tile=body.closest(".tile"),boxes=[...body.querySelectorAll('input[type="checkbox"]')];
+      const body=$("b-"+item.id),tile=body.closest(".tile"),boxes=[...body.querySelectorAll("input[data-k]")];
       const hide=$("hide-completed").checked&&boxes.length>0&&boxes.every(box=>box.checked);
       tile.hidden=hide;if(hide)hiddenCount++;
     }
@@ -756,14 +815,6 @@ setupContactLookup();
   }
   function calendarDay(date){return date.replaceAll("-","")}
   function shiftDay(date,days){const value=new Date(date+"T12:00:00Z");value.setUTCDate(value.getUTCDate()+days);return value.toISOString().slice(0,10)}
-  function torontoToday(){const parts=new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));return `${p.year}-${p.month}-${p.day}`}
-  function torontoUTC(date,time){
-    const [year,month,day]=date.split("-").map(Number),[hour,minute]=time.split(":").map(Number);
-    const target=Date.UTC(year,month-1,day,hour,minute);let value=target;
-    const fmt=new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"});
-    for(let i=0;i<2;i++){const p=Object.fromEntries(fmt.formatToParts(new Date(value)).map(x=>[x.type,x.value]));value+=target-Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute,+p.second)}
-    return new Date(value).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
-  }
   const icsEscape=text=>String(text).replace(/\\/g,"\\\\").replace(/\r?\n/g,"\\n").replace(/;/g,"\\;").replace(/,/g,"\\,");
   function foldLine(text){let line="",count=0,out=[];const encoder=new TextEncoder();for(const char of text){const size=encoder.encode(char).length;if(count+size>75){out.push(line);line=" ";count=1}line+=char;count+=size}out.push(line);return out.join("\r\n")}
   function buildCalendar(events,reminderDays,stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"")){
@@ -791,7 +842,7 @@ setupContactLookup();
     for(const item of allItems.filter(item=>CALENDAR_DATES.some(event=>event.item===item.id))){const option=document.createElement("option");option.value=item.id;option.textContent=item.name;$("calendar-item").append(option)}
     $("calendar-download").addEventListener("click",()=>{
       const id=$("calendar-item").value,upcoming=$("calendar-upcoming").checked;
-      const events=CALENDAR_DATES.filter(event=>(id==="all"||event.item===id)&&(!upcoming||event.date>=torontoToday())).slice().sort((a,b)=>(a.date+(a.time||"00:00")).localeCompare(b.date+(b.time||"00:00")));
+      const events=CALENDAR_DATES.filter(event=>(id==="all"||event.item===id)&&(!upcoming||!eventPassed(event))).slice().sort(sortEvents);
       if(!events.length){$("calendar-status").textContent="No upcoming dates in this selection. Uncheck ‘Upcoming dates only’ to include past deadlines.";return}
       downloadFile(`cen100-${id==="all"?"deadlines":id}-2026.ics`,"text/calendar;charset=utf-8",buildCalendar(events,Number($("calendar-reminder").value)));
       $("calendar-status").textContent=`Calendar file ready with ${events.length} ${events.length===1?"entry":"entries"}. Open or save the download, then add it to your calendar. Import once to avoid duplicates.`;
@@ -807,40 +858,175 @@ setupContactLookup();
     }
   }
   function parseBackup(raw,validKeys){
-    if(typeof raw!=="string"||raw.length>250000)throw new Error("Choose a CEN100 checklist backup smaller than 250 KB.");
-    let data;try{data=JSON.parse(raw)}catch(e){throw new Error("This file is not valid JSON. Choose an exported CEN100 checklist backup.")}
-    if(!data||data.format!=="cen100-guide-backup"||data.version!==1||!data.ticks||typeof data.ticks!=="object"||Array.isArray(data.ticks))throw new Error("This is not a supported CEN100 checklist backup.");
+    if(typeof raw!=="string"||raw.length>250000)throw new Error("Choose a CEN100 backup smaller than 250 KB.");
+    let data;try{data=JSON.parse(raw)}catch(e){throw new Error("This file is not valid JSON. Choose an exported CEN100 backup.")}
+    if(!data||data.format!=="cen100-guide-backup"||![1,2].includes(data.version)||!data.ticks||typeof data.ticks!=="object"||Array.isArray(data.ticks))throw new Error("This is not a supported CEN100 backup.");
     const checked={},entries=Object.entries(data.ticks);let skipped=0;
     for(const [key,value] of entries){
       if(!validKeys.has(key)){skipped++;continue}
       if(value!==true&&value!==false&&value!==1&&value!==0)throw new Error("The backup contains invalid checklist values.");
       if(value===true||value===1)checked[key]=1;
     }
-    if(entries.length&&skipped===entries.length)throw new Error("This backup has no checklist items matching the current guide.");
-    return {checked,skipped};
+    const plan=data.version===2?cleanPlan(data.personal,true):cleanPlan({});
+    if(entries.length&&skipped===entries.length&&!Object.values(plan).some(v=>Object.keys(v).length))throw new Error("This backup has no items matching the current guide.");
+    return {checked,skipped,plan};
   }
   function setupBackups(){
     const boxes=[...document.querySelectorAll("input[data-k]")],validKeys=new Set(boxes.map(box=>box.dataset.k));
     $("backup-export").addEventListener("click",()=>{
       const checked=Object.fromEntries(boxes.filter(box=>box.checked).map(box=>[box.dataset.k,1]));
-      const data={format:"cen100-guide-backup",version:1,exportedAt:new Date().toISOString(),ticks:checked};
-      downloadFile(`cen100-checklist-${torontoToday()}.json`,"application/json",JSON.stringify(data,null,2)+"\n");
-      $("backup-status").textContent=`Backup ready with ${Object.keys(checked).length} checked ${Object.keys(checked).length===1?"item":"items"}. Save it to Files or send it to your other device.`;
+      const data={format:"cen100-guide-backup",version:2,exportedAt:new Date().toISOString(),ticks:checked,personal};
+      downloadFile(`cen100-progress-${torontoToday()}.json`,"application/json",JSON.stringify(data,null,2)+"\n");
+      $("backup-status").textContent="Backup ready. It includes your checklist ticks, completion records, private notes and personal target dates.";
     });
     $("backup-import").addEventListener("change",async e=>{
       const file=e.target.files?.[0];if(!file)return;
       try{
-        if(file.size>250000)throw new Error("Choose a CEN100 checklist backup smaller than 250 KB.");
-        const {checked,skipped}=parseBackup(await file.text(),validKeys);let added=0;
+        if(file.size>250000)throw Error("Choose a CEN100 backup smaller than 250 KB.");
+        const {checked,skipped,plan}=parseBackup(await file.text(),validKeys);let added=0,records=0,filled=0,kept=0;
         for(const box of boxes)if(checked[box.dataset.k]){if(!box.checked)added++;box.checked=true;ticks[box.dataset.k]=1}
-        save();counts();applyCompletedFilter();
-        $("backup-status").textContent=`Imported ${added} new checked ${added===1?"item":"items"}. Existing ticks kept.${skipped?` ${skipped} unrecognised items skipped.`:""}`;
+        for(const key of Object.keys(plan.completed))if(!personal.completed[key]){personal.completed[key]=1;records++}
+        for(const field of ["notes","targets"])for(const [id,value] of Object.entries(plan[field])){
+          if(!personal[field][id]){personal[field][id]=value;filled++}
+          else if(personal[field][id]!==value)kept++;
+        }
+        document.querySelectorAll("input[data-completion]").forEach(box=>box.checked=!!personal.completed[box.dataset.completion]);
+        for(const item of allItems){$("note-"+item.id).value=personal.notes[item.id]||"";$("target-"+item.id).value=personal.targets[item.id]||""}
+        save();writeSaved(PLAN_KEY,personal);counts();syncCompletionCounts();applyCompletedFilter();renderWork();
+        $("backup-status").textContent=`Imported ${added} new checklist ticks, ${records} completion records and ${filled} notes/target dates. Existing progress kept.${kept?` ${kept} conflicting notes/target dates kept as they were on this device.`:""}${skipped?` ${skipped} unrecognised checklist items skipped.`:""}`;
       }catch(error){$("backup-status").textContent=error.message}
       e.target.value="";
     });
   }
-  setupRememberedContacts();setupSources();setupCompletedFilter();setupSearch();setupCalendar();setupBackups();
+
+  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-26-planning";
+  function recordsFor(item){const dates=itemDeadlines(item.id);return dates.length?dates:[{id:"item:"+item.id,item:item.id,title:item.name}]}
+  const completionKeys=new Set(allItems.flatMap(item=>recordsFor(item).map(e=>e.id)));
+  function validDate(value){return typeof value==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value}
+  function cleanPlan(value,strict=false){
+    const out={completed:{},notes:{},targets:{}};
+    if(!value||typeof value!=="object"||Array.isArray(value)){if(strict)throw Error("Invalid personal planning data.");return out}
+    for(const field of ["completed","notes","targets"]){
+      const entries=value[field];
+      if(entries===undefined)continue;
+      if(!entries||typeof entries!=="object"||Array.isArray(entries)){if(strict)throw Error("Invalid personal planning data.");continue}
+      for(const [key,v] of Object.entries(entries)){
+        if(field==="completed"){
+          if(!completionKeys.has(key))continue;
+          if(v===1||v===true)out.completed[key]=1;
+          else if(v!==0&&v!==false&&strict)throw Error("Invalid completion record in backup.");
+        }else{
+          if(!byId.has(key))continue;
+          if(typeof v!=="string"||(field==="notes"?v.length>2000:v!==""&&!validDate(v))){if(strict)throw Error("Invalid note or target date in backup.");continue}
+          if(v)out[field][key]=v;
+        }
+      }
+    }
+    return out;
+  }
+  let personal=cleanPlan(readSaved(PLAN_KEY,{}));
+  const fullyRecorded=item=>recordsFor(item).every(e=>personal.completed[e.id]);
+  function completionText(event){
+    const name=event.title.replace(/ due$/,""),verb=event.id.startsWith("reflection-")?"Emailed":/^(intro|email|contract|outline|matlab-1|matlab-2|failure|notebook-1|notebook-2|report|peer|exit)$/.test(event.id)?"Submitted":"Completed";
+    return `${verb}: ${name}${event.date?` (${mon(event.date)} ${D(event.date).getUTCDate()}${event.time?`, ${clockLabel(event.time)} Toronto`:""})`:""}`;
+  }
+  function syncCompletionCounts(){
+    for(const item of allItems){const records=recordsFor(item),done=records.filter(e=>personal.completed[e.id]).length,node=$("completion-"+item.id);if(node)node.textContent=done?`${done}/${records.length} submission/completion records marked by you.`:"No submission/completion recorded yet."}
+  }
+  function openAssignment(id){
+    const item=byId.get(id);if(!item)return;
+    const tile=$("guide-item-"+id);
+    if(tile.hidden){$("hide-completed").checked=false;writeSaved(FILTER_KEY,false);applyCompletedFilter()}
+    $(TEAM.includes(item)?"t-team":"t-you").click();
+    const head=tile.querySelector(".head");if(head.getAttribute("aria-expanded")!=="true")head.click();
+    head.focus({preventScroll:true});tile.scrollIntoView({block:"start",behavior:"auto"});
+  }
+  function readAssignmentLink(){const match=location.hash.match(/^#assignment-([a-z]\d+)$/);if(match&&byId.has(match[1]))openAssignment(match[1])}
+  function setupPersonalTools(){
+    for(const item of allItems){
+      const body=$("b-"+item.id),extras=body.querySelector(".tile-extras"),share=document.createElement("button"),shareStatus=document.createElement("p"),fallback=document.createElement("input");
+      share.type="button";share.className="tool-btn";share.textContent="Copy assignment link";
+      shareStatus.className="tool-status";shareStatus.setAttribute("role","status");
+      fallback.type="text";fallback.className="share-fallback";fallback.readOnly=true;fallback.hidden=true;fallback.setAttribute("aria-label","Assignment link to copy");
+      share.addEventListener("click",async()=>{
+        const url=new URL(location.href);url.search="";url.hash="assignment-"+item.id;
+        try{if(!navigator.clipboard?.writeText)throw Error("Clipboard unavailable");await navigator.clipboard.writeText(url.href);fallback.hidden=true;shareStatus.textContent="Assignment link copied. Your progress and notes are not included."}
+        catch(e){fallback.value=url.href;fallback.hidden=false;fallback.focus();fallback.select();shareStatus.textContent="Select and copy this link. Your progress and notes are not included."}
+      });
+      extras.append(share);body.append(shareStatus,fallback);
+      const details=document.createElement("details"),summary=document.createElement("summary"),fieldset=document.createElement("fieldset"),legend=document.createElement("legend"),hint=document.createElement("p");
+      details.className="personal-tools";details.id="personal-"+item.id;summary.textContent="My plan & completion";legend.textContent="My submission / completion record";
+      hint.className="tool-note";hint.textContent="Mark these yourself after submitting or completing the work. Checklist ticks are separate. This guide does not submit work or verify D2L.";
+      fieldset.append(legend);
+      for(const event of recordsFor(item)){
+        const label=document.createElement("label"),input=document.createElement("input"),text=document.createElement("span");
+        label.className="tool-check";input.type="checkbox";input.dataset.completion=event.id;input.checked=!!personal.completed[event.id];text.textContent=completionText(event);label.append(input,text);fieldset.append(label);
+        input.addEventListener("change",()=>{input.checked?personal.completed[event.id]=1:delete personal.completed[event.id];writeSaved(PLAN_KEY,personal);syncCompletionCounts();renderWork()});
+      }
+      const progress=document.createElement("p");progress.id="completion-"+item.id;progress.className="completion-count";
+      const noteLabel=document.createElement("label"),note=document.createElement("textarea"),targetLabel=document.createElement("label"),target=document.createElement("input"),noteInfo=document.createElement("p");
+      note.id="note-"+item.id;noteLabel.htmlFor=note.id;noteLabel.textContent="My notes / responsibilities";note.maxLength=2000;note.rows=3;note.value=personal.notes[item.id]||"";
+      target.id="target-"+item.id;targetLabel.htmlFor=target.id;targetLabel.textContent="My target date (optional)";target.type="date";target.value=personal.targets[item.id]||"";
+      noteInfo.className="tool-note";noteInfo.textContent="Saved on this device and included in your exported backup. These notes are not shared with your team. Your target does not change the official deadline.";
+      note.addEventListener("input",()=>{note.value?personal.notes[item.id]=note.value:delete personal.notes[item.id];writeSaved(PLAN_KEY,personal)});
+      target.addEventListener("change",()=>{if(target.value&&!validDate(target.value))return;target.value?personal.targets[item.id]=target.value:delete personal.targets[item.id];writeSaved(PLAN_KEY,personal);renderWork()});
+      details.append(summary,hint,fieldset,progress,noteLabel,note,targetLabel,target,noteInfo);body.append(details);
+    }
+    syncCompletionCounts();window.addEventListener("hashchange",readAssignmentLink);
+  }
+  function workEntries(range,now=new Date()){
+    const today=torontoToday(now),entries=[];
+    for(const item of allItems){
+      if(fullyRecorded(item))continue;
+      const pending=recordsFor(item).filter(e=>!personal.completed[e.id]);
+      const within=date=>{const n=days(date,today);return n>=0&&n<7};
+      const target=personal.targets[item.id],dated=pending.filter(e=>e.date);
+      const visible=range==="week"?dated.filter(e=>!eventPassed(e,now)&&within(e.date)):dated;
+      if(range==="week"&&!visible.length&&!(target&&within(target)))continue;
+      const sortDate=[...visible.map(e=>e.date),...(target&&(range!=="week"||within(target))?[target]:[])].sort()[0]||"9999-12-31";
+      entries.push({item,pending,visible,target,sortDate});
+    }
+    return entries.sort((a,b)=>a.sortDate.localeCompare(b.sortDate)||a.item.name.localeCompare(b.item.name));
+  }
+  function renderWork(){
+    const entries=workEntries($("work-range").value),list=$("work-list");
+    const signature=JSON.stringify([$("work-range").value,entries.map(e=>[e.item.id,e.pending.map(x=>x.id),e.visible.map(x=>[x.id,eventPassed(x)]),e.target,[...$("b-"+e.item.id).querySelectorAll("input[data-k]")].filter(b=>b.checked).length])]);
+    if(list.dataset.workSignature===signature)return;list.dataset.workSignature=signature;list.replaceChildren();
+    $("work-status").textContent=entries.length?`${entries.length} ${entries.length===1?"item":"items"} with completion still unrecorded.`:$("work-range").value==="week"?"Nothing unrecorded in the next 7 days. Choose All unfinished to review other work.":"All items are marked submitted/completed in your records.";
+    for(const entry of entries){
+      const {item,pending,visible,target}=entry,li=document.createElement("li"),button=document.createElement("button"),dates=document.createElement("p"),progress=document.createElement("p");
+      button.type="button";button.className="tool-btn";button.textContent=item.name;button.addEventListener("click",()=>openAssignment(item.id));
+      dates.textContent=visible.length?visible.map(e=>`${eventPassed(e)?"Date passed: ":""}${mon(e.date)} ${D(e.date).getUTCDate()}${e.time?` at ${clockLabel(e.time)} Toronto`:""} — ${e.title}`).join("; "):item.id==="y7"?"During your assigned tutorial; confirm your section's schedule on D2L.":target?"No official deadline in this view.":"Official date pending. Check D2L.";
+      const boxes=[...$("b-"+item.id).querySelectorAll("input[data-k]")],remaining=boxes.filter(b=>!b.checked).length;
+      progress.textContent=`${remaining}/${boxes.length} checklist items still unchecked · ${pending.length} completion ${pending.length===1?"record":"records"} unmarked.`;
+      li.append(button,dates,progress);
+      if(target){const p=document.createElement("p");p.textContent="My target: "+target+" (personal plan)";li.append(p)}
+      list.append(li);
+    }
+  }
+  function updateSectionContent(profile){
+    const attendance=$("b-y7"),section=profile?.section;
+    attendance.querySelector(".what").textContent=section===29?"Section 29: a D2L quiz opens 5:45 to 6:00 PM in every Wednesday tutorial. One attempt, and you have to be in the room.":section?`Attend your assigned Section ${section} tutorial in person. Check D2L for your section's quiz day, time and attempt rules.`:"Attendance quizzes take place during your assigned tutorial. Select your section above. The confirmed Section 29 window is Wednesday, 5:45 to 6:00 PM; other sections should check D2L.";
+    attendance.querySelector(".fact span").textContent=section===29?"Section 29: Wednesday, 5:45 to 6:00 PM":"Check your assigned tutorial's quiz schedule on D2L";
+    const staff=STAFFING.find(s=>s.sections.includes(section)),pm=staff?.groups.find(g=>g[0]===profile?.group);
+    $("b-y5").querySelector(".what").textContent=pm?`Your own writing about the project, two pieces. Email each Personal Reflection directly to ${pm[1]}, your assigned Project Manager for Group ${pm[0]}. There is no D2L submission box.`:byId.get("y5").what;
+    refreshDateDisplays();
+  }
+  function setupWorkAndUpdates(){
+    $("work-range").addEventListener("change",renderWork);
+    document.addEventListener("change",e=>{if(e.target.matches("input[data-k]"))renderWork()});
+    $("reset").addEventListener("click",renderWork);
+    const badge=$("updates-badge"),history=$("guide-updates");badge.hidden=readSaved(SEEN_KEY,"")===GUIDE_VERSION;
+    history.addEventListener("toggle",()=>{if(history.open){badge.hidden=true;writeSaved(SEEN_KEY,GUIDE_VERSION)}});
+    const refresh=()=>{refreshDateDisplays();renderWork()};
+    document.addEventListener("visibilitychange",()=>{if(!document.hidden)refresh()});
+    window.addEventListener("focus",refresh);setInterval(()=>{if(!document.hidden)refresh()},60000);
+    renderWork();readAssignmentLink();
+  }
+
+  setupRememberedContacts();setupSources();setupCompletedFilter();setupSearch();setupCalendar();setupPersonalTools();setupBackups();setupWorkAndUpdates();
 })();
 </script>
 </body>
 </html>
+
