@@ -13,7 +13,7 @@ A student-created course companion for **CEN100: Introduction to Engineering**, 
 - Search across assignments, checklists, rules, clarifications, and contact names.
 - Calendar exports for one assignment or all confirmed deadlines, with optional reminders.
 - Checklist backup export and import for moving progress between browsers or devices.
-- A section/group contact lookup that remembers your selections on the current browser.
+- A section/group contact lookup that remembers your selections on the current browser and updates the label at the top of the page. Before selection, the label reads **CEN100 · Fall 2026**.
 - Source notes inside milestone cards, plus a last-updated date and **What's changed?** history.
 - Automatic light and dark appearance based on the device setting.
 - Separate **Confirmed** and **Still open** sections for course clarifications.
