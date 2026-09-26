@@ -1,6 +1,6 @@
 # CEN100 Guide: Don't Lose Marks
 
-A student-created course companion for **CEN100: Introduction to Engineering**, Fall 2026, at Toronto Metropolitan University. Prepared for **Section 29, Group 9**, the guide brings project milestones, individual tasks, and submission checklists into one mobile-friendly page. Its contact lookup covers all **39 sections and 52 Innovation Challenge groups** in the official staffing sheet.
+A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at Toronto Metropolitan University. Prepared for **Section 29, Group 9**, the guide brings project milestones, individual tasks, and submission checklists into one mobile-friendly page. Its contact lookup covers all **39 sections and 52 Innovation Challenge groups** in the official staffing sheet.
 
 **[Open the guide](https://jude27mad.github.io/cen100-guide/)**
 
