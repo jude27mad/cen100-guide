@@ -290,6 +290,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
       <details class="tool-section" id="guide-updates">
         <summary>What's changed?</summary>
         <ul class="update-list">
+          <li><b>Sep 26, 2026:</b> Your lab location now appears beside your section and group at the top of the guide and updates when you change sections.</li>
           <li><b>Sep 26, 2026:</b> Unified deadline tracking, kept repeated deadlines active, clarified date-passed labels, and scoped tutorial times to confirmed sections.</li>
           <li><b>Sep 26, 2026:</b> Added unfinished-work planning, separate submission/completion records, assignment links, private notes, personal target dates and an unread-update indicator. New backups include these records; older checklist backups still import.</li>
           <li><b>Sep 25, 2026:</b> Moved section/group selection to the top of the guide. Who to ask now shows the matching contact results, with a shortcut to change your selection.</li>
@@ -724,10 +725,11 @@ setupContactLookup();
     $("profile-action").textContent=$("profile-picker").open?"Hide":$("contact-section").value?"Change":"Choose";
   }
   function updateCourseContext(profile){
+    const staff=profile?STAFFING.find(s=>s.sections.includes(profile.section)):null;
     const label=profile?`CEN100 Section ${profile.section}${profile.group?`, Group ${profile.group}`:""}`:"CEN100 · Fall 2026";
     $("course-context").textContent=label;
     document.title=(profile?label:"CEN100")+": Don't Lose Marks";
-    $("profile-label").textContent=profile?`Section ${profile.section}${profile.group?` · Group ${profile.group}`:" · Choose your group"}`:"Choose your section & group";
+    $("profile-label").textContent=profile?`Section ${profile.section}${profile.group?` · Group ${profile.group}`:" · Choose your group"}${staff?` · Lab: ${staff.location}`:""}`:"Choose your section & group";
     updatePickerAction();updateSectionContent(profile);
   }
   function rememberProfile(){
@@ -899,7 +901,7 @@ setupContactLookup();
     });
   }
 
-  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-26-planning";
+  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-26-room";
   function recordsFor(item){const dates=itemDeadlines(item.id);return dates.length?dates:[{id:"item:"+item.id,item:item.id,title:item.name}]}
   const completionKeys=new Set(allItems.flatMap(item=>recordsFor(item).map(e=>e.id)));
   function validDate(value){return typeof value==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value}
