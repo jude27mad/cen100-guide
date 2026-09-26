@@ -150,6 +150,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 #contactlookup p span{color:var(--ink2);font-weight:600}
 .contact-note{margin-top:12px}
 @media(max-width:440px){#contactlookup{grid-template-columns:1fr}}
+.guide-tools,.guide-tools *,.tile-extras,.tile-extras *{box-sizing:border-box}
 .guide-tools{margin:0 0 12px;border:2px solid var(--line);border-radius:14px;background:var(--tile)}
 .guide-tools>summary{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;cursor:pointer;font-weight:800;list-style:none}
 .guide-tools>summary::-webkit-details-marker{display:none}
@@ -764,7 +765,7 @@ setupContactLookup();
       const checked=Object.fromEntries(boxes.filter(box=>box.checked).map(box=>[box.dataset.k,1]));
       const data={format:"cen100-guide-backup",version:1,exportedAt:new Date().toISOString(),ticks:checked};
       downloadFile(`cen100-checklist-${torontoToday()}.json`,"application/json",JSON.stringify(data,null,2)+"\n");
-      $("backup-status").textContent=`Backup ready with ${Object.keys(checked).length} checked items. Save it to Files or send it to your other device.`;
+      $("backup-status").textContent=`Backup ready with ${Object.keys(checked).length} checked ${Object.keys(checked).length===1?"item":"items"}. Save it to Files or send it to your other device.`;
     });
     $("backup-import").addEventListener("change",async e=>{
       const file=e.target.files?.[0];if(!file)return;
