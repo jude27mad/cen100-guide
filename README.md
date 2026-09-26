@@ -7,7 +7,7 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 ## What's included
 
 - **Team, Individual, and Rules tabs** with expandable assignment cards.
-- **Deadline tracking** shared by the upcoming-deadline banner, assignment date displays, work planner, and calendar exports. Repeated assignments retain their later deadlines after the first date passes.
+- **Deadline tracking** shared by the upcoming-deadline banner, assignment date displays, work planner, and calendar exports. Tap a banner deadline to open its assignment. The banner skips dates marked submitted/completed while retaining later unrecorded deadlines.
 - **Section and group selection** at the top of the page, covering all 39 sections and 52 Innovation Challenge groups in the staffing sheet.
 - **Who to ask** results showing the assigned GA, lab/location, and Project Manager.
 - **Checklists and separate completion records** for tracking preparation and recording submitted or completed work.
@@ -29,7 +29,7 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 
 Checklist ticks track preparation. A **Date passed** badge describes the calendar date; it does not indicate completion or a grade.
 
-Each card's **My plan & completion** section contains separate submission/completion records, a notes field, and an optional personal target date. Assignments with multiple deadlines have separate records for each occurrence. These records are entered manually; the guide does not submit assignments or verify submission on D2L.
+Each card's **My plan & completion** section contains separate submission/completion records, a notes field, and an optional personal target date. Assignments with multiple deadlines have separate records for each occurrence. Closed cards show partial progress such as **1 of 2 recorded**, or **Submitted**, **Emailed**, or **Completed** when all records are marked. These records are entered manually; the guide does not submit assignments or verify submission on D2L. Marking a record updates the upcoming-deadline banner immediately; clearing it restores the date if it is still upcoming. Checklist ticks alone do not remove banner deadlines.
 
 **What should I work on?** uses those completion records. Next 7 days includes upcoming unrecorded deadlines and personal targets from today through the following six days. All unfinished also includes past dates with no completion recorded and work with an unconfirmed date. Each result shows remaining checklist items and opens its assignment card.
 
@@ -78,3 +78,4 @@ This guide is an unofficial planning aid. Current official assignment instructio
 The site uses plain HTML, CSS, and JavaScript. No installation, package manager, build step, or backend is required. Archivo is loaded through Google Fonts, with system-font fallbacks.
 
 GitHub Pages serves the **main** branch from **/(root)** using **Deploy from a branch**. To preview locally, download `index.html` and open it in a browser.
+
