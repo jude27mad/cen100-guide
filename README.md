@@ -6,7 +6,7 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 
 ## What's included
 
-- **Team, Individual, and Rules tabs** with expandable assignment cards.
+- **Team, Individual, and Rules tabs** with expandable assignment cards. Team/sub-team work totals 42%; individual work totals 48%, with another 10% for MATLAB. The shared notebook is under Team and peer evaluation is under Individual.
 - **Deadline tracking** shared by the upcoming-deadline banner, assignment date displays, work planner, and calendar exports. Tap a banner deadline to open its assignment. The banner skips dates marked submitted/completed while retaining later unrecorded deadlines.
 - **Section and group selection** at the top of the page, covering all 39 sections and 52 Innovation Challenge groups in the staffing sheet.
 - **Who to ask** results showing the assigned GA, lab/location, and Project Manager.
@@ -14,16 +14,24 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 - **What should I work on?** with Next 7 days and All unfinished views.
 - **Private notes and personal target dates** inside each assignment card.
 - **Direct assignment links** that open the appropriate tab and expanded card.
-- **Search, checklist filtering, source notes, and update history**, including a New updates indicator for unread releases.
+- **Search, checklist filtering, and source notes** for finding and checking requirements.
+- **What’s changed** at the bottom of the page, with a New updates indicator for unread releases.
 - **Calendar exports and progress backups** for use outside the current browser.
-- **Automatic light/dark appearance** based on the device setting.
+- **Rose deadline highlights and automatic light/dark appearance** based on the device setting.
+- **Separate colour preview** for comparing eight accents against dark navy or light backgrounds without changing the main guide.
 
 ## Getting started
 
-1. Optionally choose a section and Innovation Challenge group below the main heading. Group choices are filtered by section, and selections save immediately. The selected section’s lab location appears beside the section and group at the top. Use **Done** to collapse the picker or **View contacts** to open Who to ask.
+1. Optionally choose a section and Innovation Challenge group below the main heading. Group choices are filtered by section, and selections save immediately. The page heading follows the selection, with a neutral course label before selection. The selected section’s lab location appears beside the section and group at the top. Use **Done** to collapse the picker or **View contacts** to open Who to ask.
 2. Select **Team**, **Individual**, or **Rules**. Open an assignment card to review its requirements, checklist, source notes, and tools.
-3. Open **Guide tools** for search, Hide fully checked items, the work planner, calendar exports, backups, and What's changed.
+3. Open **Guide tools** for search, Hide fully checked items, the work planner, calendar exports, and backups. Find **What’s changed** at the bottom of the page, just above the footer.
 4. Returning visits restore the saved section/group selection. Use **Change** at the top or **Change section/group** in Who to ask to edit it.
+
+## Colour preview
+
+Open the [colour preview](https://jude27mad.github.io/cen100-guide/colour-preview.html) to switch between dark navy and light backgrounds and compare Gold, Coral, Peach, Violet, Rose, Mint, Blue, and Silver accents on the guide’s existing layout. **Copy this look** shares the selected background and accent; reopening the link restores that combination. **Reset preview** returns to dark navy and the original gold accent.
+
+Colour choices affect only the preview. Its course progress and section/group choices are temporary and reset on reload; it does not read or change the main guide’s saved progress. The preview is a separate snapshot, so use the main guide for current course information. The main guide uses the selected rose accent and follows the device’s light/dark setting.
 
 ## Progress and personal planning
 
@@ -62,6 +70,10 @@ Progress, selections, notes, targets, and preferences are stored in browser loca
 
 The guide uses Fall 2026 CEN100 documents on D2L and confirmed course-team clarifications. Source notes distinguish course-outline information, assignment summaries, and confirmed clarifications. Resolved guidance appears under **Confirmed**; unanswered questions remain under **Still open**.
 
+Personal Reflections are emailed directly to the assigned Project Manager; there is no D2L submission box. MATLAB assignments are normally completed in pairs; when a class has an odd number of students, the unpaired student may work solo or join a group of three. FMEA “Environmental” remains under Still open, awaiting official clarification from the Head GA.
+
+WHMIS is due October 14, with at least 80% on all three quizzes and a generated certificate. The Academic Integrity Quiz is due October 14 at 3 PM and allows ten attempts.
+
 Tutorial timing is identified by section where confirmed. Other sections are directed to D2L rather than assigned an assumed schedule. Reflection instructions show the selected group's Project Manager when available.
 
 The staffing document supplies section/group mappings, names, and lab locations only. **GA and Project Manager email addresses are not published or stored in the page's source code.** For contact details, check D2L or the official Section GAs and PMs document.
@@ -74,6 +86,7 @@ This guide is an unofficial planning aid. Current official assignment instructio
 | --- | --- |
 | `index.html` | Complete page, including styles, JavaScript, course data, and contact mappings. |
 | `README.md` | Features, usage, data handling, and hosting documentation. |
+| `colour-preview.html` | Separate palette comparison page with shareable colour selections and temporary progress. |
 
 The site uses plain HTML, CSS, and JavaScript. No installation, package manager, build step, or backend is required. Archivo is loaded through Google Fonts, with system-font fallbacks.
 
