@@ -252,7 +252,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <section class="board" id="board" aria-label="After that"></section>
 
   <details class="guide-tools" id="guide-tools">
-    <summary><span>Guide tools</span><small>Updated Sep 26, 2026</small></summary>
+    <summary><span>Guide tools</span><small>Updated Sep 28, 2026</small></summary>
     <div class="tool-content">
       <label for="guide-search">Search the guide</label>
       <input id="guide-search" type="search" placeholder="Try FMEA, citations or notebook" autocomplete="off" aria-controls="guide-search-results" aria-describedby="search-status">
@@ -337,15 +337,22 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <details class="tool-section" id="guide-updates">
     <summary>What's changed? <span class="updates-badge" id="updates-badge" hidden>New updates</span></summary>
     <ul class="update-list">
+      <li><b>Sep 28, 2026:</b> Replaced yellow highlights with rose, keeping the existing layout and automatic light/dark appearance.</li>
+      <li><b>Sep 28, 2026:</b> Added a separate colour preview with eight accents, dark navy or light backgrounds, shareable colour selections and a reset option. Preview progress stays separate from the main guide.</li>
+      <li><b>Sep 28, 2026:</b> Moved What's changed and its unread-update badge to the bottom of the page, just above the footer.</li>
       <li><b>Sep 26, 2026:</b> Tap upcoming deadlines to open their assignment. Next up skips dates you have marked submitted/completed, and closed cards show your separate completion records.</li>
       <li><b>Sep 26, 2026:</b> Your lab location now appears beside your section and group at the top of the guide and updates when you change sections.</li>
       <li><b>Sep 26, 2026:</b> Unified deadline tracking, kept repeated deadlines active, clarified date-passed labels, and scoped tutorial times to confirmed sections.</li>
       <li><b>Sep 26, 2026:</b> Added unfinished-work planning, separate submission/completion records, assignment links, private notes, personal target dates and an unread-update indicator. New backups include these records; older checklist backups still import.</li>
+      <li><b>Sep 26, 2026:</b> Added creator and maintainer credit in the footer.</li>
+      <li><b>Sep 25, 2026:</b> Kept added guide controls within their existing card widths on smaller screens.</li>
       <li><b>Sep 25, 2026:</b> Moved section/group selection to the top of the guide. Who to ask now shows the matching contact results, with a shortcut to change your selection.</li>
       <li><b>Sep 25, 2026:</b> The page heading now follows your selected section and group, with a neutral course label before selection.</li>
       <li><b>Sep 25, 2026:</b> Added remembered section/group choices, calendar export, checklist backups, search, source notes and the option to hide fully checked items. Removed the large attendance warning from Rules.</li>
       <li><b>Sep 25, 2026:</b> Added the contact lookup for all 39 sections and 52 groups, showing names and lab locations.</li>
       <li><b>Sep 25, 2026:</b> Confirmed reflection submissions by email to the assigned PM and the MATLAB group-size exception. The FMEA Environmental clarification remains pending.</li>
+      <li><b>Sep 25, 2026:</b> Corrected the grade split to 42% team/sub-team work, 48% individual work and 10% MATLAB. Moved the shared notebook to Team and peer evaluation to Individual.</li>
+      <li><b>Sep 24, 2026:</b> Confirmed the Oct 14 WHMIS deadline and certificate requirements, plus the Oct 14, 3 PM Academic Integrity Quiz deadline and attempt limit.</li>
     </ul>
   </details>
 
@@ -915,7 +922,7 @@ setupContactLookup();
     });
   }
 
-  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-26-deadline-links";
+  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-28-rose-and-update-history";
   function recordsFor(item){const dates=itemDeadlines(item.id);return dates.length?dates:[{id:"item:"+item.id,item:item.id,title:item.name}]}
   const completionKeys=new Set(allItems.flatMap(item=>recordsFor(item).map(e=>e.id)));
   function validDate(value){return typeof value==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value}
