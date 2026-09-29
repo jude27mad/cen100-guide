@@ -6,7 +6,8 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 
 ## What's included
 
-- **Team, Individual, and Rules tabs** with expandable assignment cards. Team/sub-team work totals 42%; individual work totals 48%, with another 10% for MATLAB. The shared notebook is under Team and peer evaluation is under Individual.
+- **Team, Individual, and Rules tabs** with expandable assignment cards organized by working arrangement. The shared notebook is under Team and peer evaluation is under Individual.
+- **Complete course grading breakdown** under Guide tools, listing all 20 graded items individually and totalling 100%. Innovation Challenge milestones M1–M8 total 41%, including Peer Evaluation (M8, 3%). Team Design Notebooks (4%) and Personal Reflections (4%) are separate assessments. The Team tab contains M1–M7 (38%) plus notebooks (4%); the Individual tab contains individual work (48%) plus MATLAB (10%). These tab totals describe navigation, not the Innovation Challenge subtotal.
 - **Deadline tracking** shared by the upcoming-deadline banner, assignment date displays, work planner, and calendar exports. Tap a banner deadline to open its assignment. The banner skips dates marked submitted/completed while retaining later unrecorded deadlines.
 - **Section and group selection** at the top of the page, covering all 39 sections and 52 Innovation Challenge groups in the staffing sheet.
 - **Who to ask** results showing the assigned GA, lab/location, and Project Manager.
@@ -24,7 +25,7 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 
 1. Optionally choose a section and Innovation Challenge group below the main heading. Group choices are filtered by section, and selections save immediately. The page heading follows the selection, with a neutral course label before selection. The selected section’s lab location appears beside the section and group at the top. Use **Done** to collapse the picker or **View contacts** to open Who to ask.
 2. Select **Team**, **Individual**, or **Rules**. Open an assignment card to review its requirements, checklist, source notes, and tools.
-3. Open **Guide tools** for search, Hide fully checked items, the work planner, calendar exports, and backups. Find **What’s changed** at the bottom of the page, just above the footer.
+3. Open **Guide tools** for the complete course grading breakdown, search, Hide fully checked items, the work planner, calendar exports, and backups. Find **What’s changed** at the bottom of the page, just above the footer.
 4. Returning visits restore the saved section/group selection. Use **Change** at the top or **Change section/group** in Who to ask to edit it.
 
 ## Colour preview
