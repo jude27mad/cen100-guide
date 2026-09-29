@@ -189,6 +189,11 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 .tool-status{font-weight:650}
 .tool-section{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
 .tool-section>summary{cursor:pointer;font-weight:800;min-height:30px}
+.grade-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.95rem}
+.grade-table th,.grade-table td{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.grade-table th[scope="row"]{font-weight:600}
+.grade-table th:last-child,.grade-table td:last-child{text-align:right;white-space:nowrap}
+.grade-table tfoot th,.grade-table tfoot td{font-weight:850;border-bottom:0}
 .search-results{list-style:none;margin:10px 0;padding:0;display:grid;gap:6px}
 .search-results button{display:block;width:100%;text-align:left;overflow-wrap:anywhere}
 .search-results small{display:block;margin-top:3px;font-weight:550;color:var(--ink2)}
@@ -253,7 +258,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <section class="board" id="board" aria-label="After that"></section>
 
   <details class="guide-tools" id="guide-tools">
-    <summary><span>Guide tools</span><small>Updated Sep 28, 2026</small></summary>
+    <summary><span>Guide tools</span><small>Updated Sep 29, 2026</small></summary>
     <div class="tool-content">
       <label for="guide-search">Search the guide</label>
       <input id="guide-search" type="search" placeholder="Try FMEA, citations or notebook" autocomplete="off" aria-controls="guide-search-results" aria-describedby="search-status">
@@ -261,6 +266,39 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
       <ul class="search-results" id="guide-search-results" hidden></ul>
       <label class="tool-check"><input type="checkbox" id="hide-completed">Hide fully checked items</label>
       <p class="tool-status" id="filter-status" role="status"></p>
+
+      <details class="tool-section" id="course-grading">
+        <summary>Course grading: all 20 items (100%)</summary>
+        <p class="tool-note">The eight Innovation Challenge milestones (M1–M8) total <strong>41%</strong> of the course. The other assessments total <strong>59%</strong>, including the final exam. Each weight below is a share of the full course grade.</p>
+        <table class="grade-table" aria-label="CEN100 course grading allocation">
+          <thead><tr><th scope="col">Graded item</th><th scope="col">Weight</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Personal Introduction</th><td>1%</td></tr>
+            <tr><th scope="row">Survey Questionnaire (entry)</th><td>1%</td></tr>
+            <tr><th scope="row">Course Syllabus Quiz</th><td>2%</td></tr>
+            <tr><th scope="row">Professional Email Assignment</th><td>2%</td></tr>
+            <tr><th scope="row">Academic Integrity Quiz</th><td>2%</td></tr>
+            <tr><th scope="row">WHMIS Certification</th><td>2%</td></tr>
+            <tr><th scope="row">Exit Survey Questionnaire</th><td>2%</td></tr>
+            <tr><th scope="row">D2L Quizzes / Lab Participation</th><td>5%</td></tr>
+            <tr><th scope="row">Team Design Notebooks</th><td>4%</td></tr>
+            <tr><th scope="row">Personal Reflections</th><td>4%</td></tr>
+            <tr><th scope="row">MATLAB Assignments</th><td>10%</td></tr>
+            <tr><th scope="row">Team Contract + Task Outline (M1)</th><td>2%</td></tr>
+            <tr><th scope="row">Project Outline + User Research (M2)</th><td>4%</td></tr>
+            <tr><th scope="row">Failure Analysis Labs (M3)</th><td>6%</td></tr>
+            <tr><th scope="row">Midterm Design Review (M4)</th><td>8%</td></tr>
+            <tr><th scope="row">Low-Fidelity Prototype (M5)</th><td>4%</td></tr>
+            <tr><th scope="row">Final Project Presentations (M6)</th><td>6%</td></tr>
+            <tr><th scope="row">Final Report (M7)</th><td>8%</td></tr>
+            <tr><th scope="row">Peer Evaluation (M8)</th><td>3%</td></tr>
+            <tr><th scope="row">Final Exam</th><td>24%</td></tr>
+          </tbody>
+          <tfoot><tr><th scope="row">Course total</th><td>100%</td></tr></tfoot>
+        </table>
+        <p class="tool-note">Team Design Notebooks (4%) and Personal Reflections (4%) are separate from the 41% milestone subtotal. Peer Evaluation (M8, 3%) is included in that subtotal and appears under Individual because each student completes it separately.</p>
+        <p class="tool-note">Source: CEN100 Course Outline F26, p. 9, Course Assessment Evaluation.</p>
+      </details>
 
       <details class="tool-section" id="work-tools">
         <summary>What should I work on?</summary>
@@ -305,12 +343,12 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   </nav>
 
   <section class="panel" id="p-team" role="tabpanel" aria-labelledby="t-team">
-    <p class="lead">Team and sub-team work, including the shared notebook, makes up 42% of your grade. Tap a milestone to open it.</p>
+    <p class="lead">Innovation Challenge milestones M1–M8 total 41% of your grade. This tab contains M1–M7 (38%) and the separate team notebook (4%). Peer Evaluation (M8, 3%) is under Individual.</p>
     <ol class="tiles" id="teamlist"></ol>
   </section>
 
   <section class="panel" id="p-you" role="tabpanel" aria-labelledby="t-you" hidden>
-    <p class="lead">Individual work makes up 48% of your grade. MATLAB assignments are another 10%, normally completed in pairs. Together, the items below make up 58%.</p>
+    <p class="lead">Individual work makes up 48% of your grade, including Peer Evaluation (M8, 3%). MATLAB assignments are another 10%, normally completed in pairs. Together, the items below make up 58%.</p>
     <ol class="tiles" id="youlist"></ol>
   </section>
 
@@ -338,6 +376,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <details class="tool-section" id="guide-updates">
     <summary>What's changed? <span class="updates-badge" id="updates-badge" hidden>New updates</span></summary>
     <ul class="update-list">
+      <li><b>Sep 29, 2026:</b> Added all 20 graded items under Guide tools, totalling 100%. Clarified that Innovation Challenge milestones M1–M8 total 41%, including peer evaluation; notebook and reflection marks are separate.</li>
       <li><b>Sep 28, 2026:</b> Replaced yellow highlights with rose, keeping the existing layout and automatic light/dark appearance.</li>
       <li><b>Sep 28, 2026:</b> Added a separate colour preview with eight accents, dark navy or light backgrounds, shareable colour selections and a reset option. Preview progress stays separate from the main guide.</li>
       <li><b>Sep 28, 2026:</b> Moved What's changed and its unread-update badge to the bottom of the page, just above the footer.</li>
@@ -352,7 +391,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
       <li><b>Sep 25, 2026:</b> Added remembered section/group choices, calendar export, checklist backups, search, source notes and the option to hide fully checked items. Removed the large attendance warning from Rules.</li>
       <li><b>Sep 25, 2026:</b> Added the contact lookup for all 39 sections and 52 groups, showing names and lab locations.</li>
       <li><b>Sep 25, 2026:</b> Confirmed reflection submissions by email to the assigned PM and the MATLAB group-size exception. The FMEA Environmental clarification remains pending.</li>
-      <li><b>Sep 25, 2026:</b> Corrected the grade split to 42% team/sub-team work, 48% individual work and 10% MATLAB. Moved the shared notebook to Team and peer evaluation to Individual.</li>
+      <li><b>Sep 25, 2026:</b> Organized assignment cards by working arrangement, with the shared notebook under Team and peer evaluation under Individual.</li>
       <li><b>Sep 24, 2026:</b> Confirmed the Oct 14 WHMIS deadline and certificate requirements, plus the Oct 14, 3 PM Academic Integrity Quiz deadline and attempt limit.</li>
     </ul>
   </details>
@@ -456,7 +495,7 @@ const TEAM = [
 
 const YOU = [
  {id:"y1", date:"2026-09-23", big:"SEP", small:"Orientation", name:"September items", who:"you", pct:"6%",
-  what:"Personal introduction, entry survey, syllabus quiz and email assignment. All were due in September.",
+  what:"Personal Introduction (1%), entry survey (1%), Course Syllabus Quiz (2%) and Professional Email Assignment (2%): 6% in total. All were due in September.",
   facts:[["eye","Check D2L that each shows as submitted"]],
   groups:[["",["Personal introduction","Entry survey","Syllabus quiz","Email assignment"]]], traps:[]},
  {id:"y2", date:"2026-10-07", date2:"Nov 4", name:"MATLAB assignments", who:"pair", pct:"10%",
@@ -923,7 +962,7 @@ setupContactLookup();
     });
   }
 
-  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-28-rose-and-update-history";
+  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-29-course-grading";
   function recordsFor(item){const dates=itemDeadlines(item.id);return dates.length?dates:[{id:"item:"+item.id,item:item.id,title:item.name}]}
   const completionKeys=new Set(allItems.flatMap(item=>recordsFor(item).map(e=>e.id)));
   function validDate(value){return typeof value==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value}
