@@ -18,8 +18,9 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 - **Search, checklist filtering, and source notes** for finding and checking requirements.
 - **What’s changed** at the bottom of the page, with a New updates indicator for unread releases.
 - **Calendar exports and progress backups** for use outside the current browser.
-- **Rose deadline highlights and automatic light/dark appearance** based on the device setting.
+- **Rose deadline highlights and automatic light/dark appearance** based on the device setting. The Rules tab’s **Still open** icons keep their original yellow, independently of the rose accent.
 - **Separate colour preview** for comparing eight accents against dark navy or light backgrounds without changing the main guide.
+- **Private usage reporting** through Cloudflare Web Analytics, with a separate daily archive for saved all-time, monthly, and yearly totals.
 
 ## Getting started
 
@@ -67,6 +68,26 @@ Use **Guide tools → Move or back up my progress → Export my progress** to do
 
 Progress, selections, notes, targets, and preferences are stored in browser local storage. There are no accounts or automatic synchronization between browsers or devices. Clearing browser data may remove locally saved information.
 
+## Usage analytics and privacy
+
+Cloudflare Web Analytics was added to the main guide on **September 28, 2026**. Its beacon appears once, immediately before the closing `</body>` tag in `index.html`. The colour preview has no analytics beacon. Results are available to the maintainer through the private dashboard; there is no public visitor counter.
+
+Cloudflare measures page views, visits, and page performance, with breakdowns such as country, browser, device type, and referrer. It [states that its analytics does not use cookies, local storage, or fingerprinting to track individuals](https://blog.cloudflare.com/privacy-first-web-analytics/). The guide uses local storage separately to save your progress; it does not send your selected section/group, checklist ticks, completion records, notes, or target dates to analytics. The beacon still sends measurement requests to Cloudflare, so this is not a claim that no data leaves the browser.
+
+Visits are **not unique people**: repeat visits and the maintainer’s visits can count. Blockers and network failures can leave visits unrecorded, and sampling can make totals estimates. See Cloudflare’s [metric definitions](https://developers.cloudflare.com/web-analytics/data-metrics/high-level-metrics/), [reported dimensions](https://developers.cloudflare.com/web-analytics/data-metrics/dimensions/), and [collection limits](https://developers.cloudflare.com/web-analytics/faq/).
+
+### Long-term aggregate archive
+
+A separate private repository archives daily totals for the installed beacon and `jude27mad.github.io`, starting **September 28, 2026**. The first scheduled collection of a completed day succeeded on **September 29, 2026**.
+
+- Uses **America/Toronto** calendar days and excludes the current incomplete day.
+- Saves daily page views and visits, sampling information, and collection timestamps; it does not archive individual visitor records or students’ saved progress.
+- Provides saved all-time, monthly, and yearly totals, downloadable CSV/JSON files, and version history. All-time means the days successfully saved since installation; earlier traffic cannot be recovered.
+- Runs daily through GitHub Actions. Repeated runs replace a day’s totals rather than adding duplicates. Recent days are refreshed, and missing days are retried while available from Cloudflare. Failed or empty responses preserve saved totals, and unverified days remain visible as gaps.
+- Keeps the read-only API credentials in encrypted Actions secrets in the private repository. A separate daily health check alerts the maintainer to failed or stale collection and missing/unverified days.
+
+Saved history has no automatic expiry in the archive. Continued collection depends on the scheduled workflow, credentials, and services remaining available; Cloudflare’s own history window is separate from these saved files.
+
 ## Sources and contact privacy
 
 The guide uses Fall 2026 CEN100 documents on D2L and confirmed course-team clarifications. Source notes distinguish course-outline information, assignment summaries, and confirmed clarifications. Resolved guidance appears under **Confirmed**; unanswered questions remain under **Still open**.
@@ -89,7 +110,7 @@ This guide is an unofficial planning aid. Current official assignment instructio
 | `README.md` | Features, usage, data handling, and hosting documentation. |
 | `colour-preview.html` | Separate palette comparison page with shareable colour selections and temporary progress. |
 
-The site uses plain HTML, CSS, and JavaScript. No installation, package manager, build step, or backend is required. Archivo is loaded through Google Fonts, with system-font fallbacks.
+The guide uses plain HTML, CSS, and JavaScript. No installation, package manager, build step, or application backend is required to serve it. Archivo is loaded through Google Fonts, with system-font fallbacks. Usage measurement loads Cloudflare’s external beacon; the daily archive runs separately in the private repository and is not part of the public site’s build.
 
 GitHub Pages serves the **main** branch from **/(root)** using **Deploy from a branch**. To preview locally, download `index.html` and open it in a browser.
 

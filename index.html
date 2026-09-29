@@ -376,8 +376,12 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <details class="tool-section" id="guide-updates">
     <summary>What's changed? <span class="updates-badge" id="updates-badge" hidden>New updates</span></summary>
     <ul class="update-list">
+      <li><b>Sep 29, 2026:</b> Updated the README and change history to cover the latest grading, colour and analytics changes, including what is measured and what stays saved only in your browser.</li>
+      <li><b>Sep 29, 2026:</b> Verified the first scheduled daily usage archive. The maintainer can keep saved all-time, monthly and yearly totals from Sep 28, with downloadable backups and checks for missing data. These reports are private and contain no students’ saved course progress.</li>
       <li><b>Sep 29, 2026:</b> Added all 20 graded items under Guide tools, totalling 100%. Clarified that Innovation Challenge milestones M1–M8 total 41%, including peer evaluation; notebook and reflection marks are separate.</li>
-      <li><b>Sep 28, 2026:</b> Replaced yellow highlights with rose, keeping the existing layout and automatic light/dark appearance.</li>
+      <li><b>Sep 28, 2026:</b> Added Cloudflare Web Analytics for private usage and performance reporting. Page views and visits are not unique people. Cloudflare uses no analytics cookies or fingerprinting; your section/group, notes, targets, checklists and completion records are not sent to analytics.</li>
+      <li><b>Sep 28, 2026:</b> Restored the original yellow for Still open icons on the Rules tab, independently of the rose accent elsewhere.</li>
+      <li><b>Sep 28, 2026:</b> Applied the selected rose accent to deadlines and highlights, keeping the existing layout and automatic light/dark appearance.</li>
       <li><b>Sep 28, 2026:</b> Added a separate colour preview with eight accents, dark navy or light backgrounds, shareable colour selections and a reset option. Preview progress stays separate from the main guide.</li>
       <li><b>Sep 28, 2026:</b> Moved What's changed and its unread-update badge to the bottom of the page, just above the footer.</li>
       <li><b>Sep 26, 2026:</b> Tap upcoming deadlines to open their assignment. Next up skips dates you have marked submitted/completed, and closed cards show your separate completion records.</li>
@@ -962,7 +966,7 @@ setupContactLookup();
     });
   }
 
-  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-29-course-grading";
+  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-29-documentation-audit";
   function recordsFor(item){const dates=itemDeadlines(item.id);return dates.length?dates:[{id:"item:"+item.id,item:item.id,title:item.name}]}
   const completionKeys=new Set(allItems.flatMap(item=>recordsFor(item).map(e=>e.id)));
   function validDate(value){return typeof value==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value}
