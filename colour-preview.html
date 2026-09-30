@@ -363,17 +363,17 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 
   <nav class="tabs" role="tablist" aria-label="Sections">
     <button class="tab" role="tab" aria-selected="true" aria-controls="p-team" id="t-team"><span data-i="team"></span>Team</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="p-you" id="t-you"><span data-i="you"></span>Individual</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-you" id="t-you"><span data-i="you"></span><span>Individual + pairs</span></button>
     <button class="tab" role="tab" aria-selected="false" aria-controls="p-rules" id="t-rules"><span data-i="flag"></span>Rules</button>
   </nav>
 
   <section class="panel" id="p-team" role="tabpanel" aria-labelledby="t-team">
-    <p class="lead">Team and sub-team work, including the shared notebook, makes up 42% of your grade. Tap a milestone to open it.</p>
+    <p class="lead"><strong>42% full/sub-team work:</strong> shared project deliverables M1–M7 (38%) + team notebook (4%). Including MATLAB pair work (10%) brings all team/pair work to <strong>52%</strong>. The official 41% project category includes the individual Peer Evaluation (M8, 3%), found under Individual + pairs.</p>
     <ol class="tiles" id="teamlist"></ol>
   </section>
 
   <section class="panel" id="p-you" role="tabpanel" aria-labelledby="t-you" hidden>
-    <p class="lead">Individual work makes up 48% of your grade. MATLAB assignments are another 10%, normally completed in pairs. Together, the items below make up 58%.</p>
+    <p class="lead"><strong>48% individual work</strong>, including Peer Evaluation (M8, 3%), plus <strong>10% MATLAB assignments normally completed in pairs</strong>. This tab contains 58% of the course grade. Across both tabs, team/pair work totals 52% and individual work totals 48%.</p>
     <ol class="tiles" id="youlist"></ol>
   </section>
 
@@ -875,7 +875,7 @@ setupContactLookup();
     }
     entries.push({title:"Who to ask: section and group lookup",tab:"rules",target:"contactlookup",text:"Who to ask contacts section group GA Graduate Assistant Project Manager lab room location "+STAFFING.map(s=>[s.ga,s.location,...s.groups.map(g=>g[1])].join(" ")).join(" ")});
     $("contactlookup").classList.add("guide-jump");
-    const titles={team:"Team",you:"Individual",rules:"Rules"};
+    const titles={team:"Team",you:"Individual + pairs",rules:"Rules"};
     $("guide-search").addEventListener("input",()=>{
       const query=$("guide-search").value.trim(),matches=findMatches(entries,query),list=$("guide-search-results");
       list.replaceChildren();list.hidden=!query;

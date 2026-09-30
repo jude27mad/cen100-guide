@@ -258,7 +258,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <section class="board" id="board" aria-label="After that"></section>
 
   <details class="guide-tools" id="guide-tools">
-    <summary><span>Guide tools</span><small>Updated Sep 29, 2026</small></summary>
+    <summary><span>Guide tools</span><small>Updated Sep 30, 2026</small></summary>
     <div class="tool-content">
       <label for="guide-search">Search the guide</label>
       <input id="guide-search" type="search" placeholder="Try FMEA, citations or notebook" autocomplete="off" aria-controls="guide-search-results" aria-describedby="search-status">
@@ -269,7 +269,19 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 
       <details class="tool-section" id="course-grading">
         <summary>Course grading: all 20 items (100%)</summary>
-        <p class="tool-note">The eight Innovation Challenge milestones (M1–M8) total <strong>41%</strong> of the course. The other assessments total <strong>59%</strong>, including the final exam. Each weight below is a share of the full course grade.</p>
+        <p class="tool-note"><strong>52% of the course grade is for work normally completed with other students; 48% is individual work.</strong> The official Innovation Challenge Project category is 41%, including the individual Peer Evaluation. These describe different groupings of the same marks.</p>
+        <table class="grade-table" aria-label="Grading categories and working arrangements">
+          <thead><tr><th scope="col">What the percentage covers</th><th scope="col">Weight</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Official Innovation Challenge Project category: M1–M8, including individual Peer Evaluation (3%)</th><td>41%</td></tr>
+            <tr><th scope="row">Shared project deliverables: M1–M7 (41% − 3%)</th><td>38%</td></tr>
+            <tr><th scope="row">All full/sub-team work: M1–M7 + shared Team Design Notebook (38% + 4%)</th><td>42%</td></tr>
+            <tr><th scope="row">All team/pair work: full/sub-team work + MATLAB assignments (42% + 10%)</th><td>52%</td></tr>
+            <tr><th scope="row">Individual work: orientation/policy items (12%), participation (5%), reflections (4%), peer evaluation (3%), final exam (24%)</th><td>48%</td></tr>
+          </tbody>
+        </table>
+        <p class="tool-note">The first four rows overlap; do not add them together. The working-arrangement split is <strong>42% team/sub-team + 10% MATLAB pairs + 48% individual = 100%</strong>. MATLAB is normally paired; the confirmed odd-class-size exception allows the unpaired student to work solo or in a group of three. These percentages are grade weights, not estimates of time or workload.</p>
+        <p class="tool-note"><strong>All 20 graded items:</strong> each weight below is a share of the full course grade.</p>
         <table class="grade-table" aria-label="CEN100 course grading allocation">
           <thead><tr><th scope="col">Graded item</th><th scope="col">Weight</th></tr></thead>
           <tbody>
@@ -281,9 +293,9 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
             <tr><th scope="row">WHMIS Certification</th><td>2%</td></tr>
             <tr><th scope="row">Exit Survey Questionnaire</th><td>2%</td></tr>
             <tr><th scope="row">D2L Quizzes / Lab Participation</th><td>5%</td></tr>
-            <tr><th scope="row">Team Design Notebooks</th><td>4%</td></tr>
-            <tr><th scope="row">Personal Reflections</th><td>4%</td></tr>
-            <tr><th scope="row">MATLAB Assignments</th><td>10%</td></tr>
+            <tr><th scope="row">Team Design Notebooks (shared team)</th><td>4%</td></tr>
+            <tr><th scope="row">Personal Reflections (individual)</th><td>4%</td></tr>
+            <tr><th scope="row">MATLAB Assignments (normally pairs)</th><td>10%</td></tr>
             <tr><th scope="row">Team Contract + Task Outline (M1)</th><td>2%</td></tr>
             <tr><th scope="row">Project Outline + User Research (M2)</th><td>4%</td></tr>
             <tr><th scope="row">Failure Analysis Labs (M3)</th><td>6%</td></tr>
@@ -291,13 +303,13 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
             <tr><th scope="row">Low-Fidelity Prototype (M5)</th><td>4%</td></tr>
             <tr><th scope="row">Final Project Presentations (M6)</th><td>6%</td></tr>
             <tr><th scope="row">Final Report (M7)</th><td>8%</td></tr>
-            <tr><th scope="row">Peer Evaluation (M8)</th><td>3%</td></tr>
+            <tr><th scope="row">Peer Evaluation (M8, individual)</th><td>3%</td></tr>
             <tr><th scope="row">Final Exam</th><td>24%</td></tr>
           </tbody>
           <tfoot><tr><th scope="row">Course total</th><td>100%</td></tr></tfoot>
         </table>
-        <p class="tool-note">Team Design Notebooks (4%) and Personal Reflections (4%) are separate from the 41% milestone subtotal. Peer Evaluation (M8, 3%) is included in that subtotal and appears under Individual because each student completes it separately.</p>
-        <p class="tool-note">Source: CEN100 Course Outline F26, p. 9, Course Assessment Evaluation.</p>
+        <p class="tool-note">Team Design Notebooks (4%) and Personal Reflections (4%) sit outside the official 41% project category. The notebook contributes to team work; reflections and Peer Evaluation (M8, 3%) contribute to individual work. Completing work in a team does not remove the requirement to document individual contributions.</p>
+        <p class="tool-note">Source: CEN100 Course Outline F26, p. 9 (assessment weights) and pp. 10–11 (working arrangements and shared notebook). The subtotals above are calculated from those weights.</p>
       </details>
 
       <details class="tool-section" id="work-tools">
@@ -338,17 +350,17 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 
   <nav class="tabs" role="tablist" aria-label="Sections">
     <button class="tab" role="tab" aria-selected="true" aria-controls="p-team" id="t-team"><span data-i="team"></span>Team</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="p-you" id="t-you"><span data-i="you"></span>Individual</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-you" id="t-you"><span data-i="you"></span><span>Individual + pairs</span></button>
     <button class="tab" role="tab" aria-selected="false" aria-controls="p-rules" id="t-rules"><span data-i="flag"></span>Rules</button>
   </nav>
 
   <section class="panel" id="p-team" role="tabpanel" aria-labelledby="t-team">
-    <p class="lead">Innovation Challenge milestones M1–M8 total 41% of your grade. This tab contains M1–M7 (38%) and the separate team notebook (4%). Peer Evaluation (M8, 3%) is under Individual.</p>
+    <p class="lead"><strong>42% full/sub-team work:</strong> shared project deliverables M1–M7 (38%) + team notebook (4%). Including MATLAB pair work (10%) brings all team/pair work to <strong>52%</strong>. The official 41% project category includes the individual Peer Evaluation (M8, 3%), found under Individual + pairs.</p>
     <ol class="tiles" id="teamlist"></ol>
   </section>
 
   <section class="panel" id="p-you" role="tabpanel" aria-labelledby="t-you" hidden>
-    <p class="lead">Individual work makes up 48% of your grade, including Peer Evaluation (M8, 3%). MATLAB assignments are another 10%, normally completed in pairs. Together, the items below make up 58%.</p>
+    <p class="lead"><strong>48% individual work</strong>, including Peer Evaluation (M8, 3%), plus <strong>10% MATLAB assignments normally completed in pairs</strong>. This tab contains 58% of the course grade. Across both tabs, team/pair work totals 52% and individual work totals 48%.</p>
     <ol class="tiles" id="youlist"></ol>
   </section>
 
@@ -376,6 +388,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <details class="tool-section" id="guide-updates">
     <summary>What's changed? <span class="updates-badge" id="updates-badge" hidden>New updates</span></summary>
     <ul class="update-list">
+      <li><b>Sep 30, 2026:</b> Clarified grading by working arrangement: the official project category is 41%; shared project deliverables M1–M7 are 38%; adding the notebook gives 42% full/sub-team work; adding MATLAB gives 52% team/pair work, with 48% individual. Renamed the Individual tab to Individual + pairs in the guide and colour preview, and updated the README. All 20 assessment weights remain unchanged.</li>
       <li><b>Sep 29, 2026:</b> Updated the README and change history to cover the latest grading, colour and analytics changes, including what is measured and what stays saved only in your browser.</li>
       <li><b>Sep 29, 2026:</b> Verified the first scheduled daily usage archive. The maintainer can keep saved all-time, monthly and yearly totals from Sep 28, with downloadable backups and checks for missing data. These reports are private and contain no students’ saved course progress.</li>
       <li><b>Sep 29, 2026:</b> Added all 20 graded items under Guide tools, totalling 100%. Clarified that Innovation Challenge milestones M1–M8 total 41%, including peer evaluation; notebook and reflection marks are separate.</li>
@@ -860,7 +873,7 @@ setupContactLookup();
     }
     entries.push({title:"Who to ask: section and group lookup",tab:"rules",target:"contactlookup",text:"Who to ask contacts section group GA Graduate Assistant Project Manager lab room location "+STAFFING.map(s=>[s.ga,s.location,...s.groups.map(g=>g[1])].join(" ")).join(" ")});
     $("contactlookup").classList.add("guide-jump");
-    const titles={team:"Team",you:"Individual",rules:"Rules"};
+    const titles={team:"Team",you:"Individual + pairs",rules:"Rules"};
     $("guide-search").addEventListener("input",()=>{
       const query=$("guide-search").value.trim(),matches=findMatches(entries,query),list=$("guide-search-results");
       list.replaceChildren();list.hidden=!query;
@@ -966,7 +979,7 @@ setupContactLookup();
     });
   }
 
-  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-29-documentation-audit";
+  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-30-grading-arrangements";
   function recordsFor(item){const dates=itemDeadlines(item.id);return dates.length?dates:[{id:"item:"+item.id,item:item.id,title:item.name}]}
   const completionKeys=new Set(allItems.flatMap(item=>recordsFor(item).map(e=>e.id)));
   function validDate(value){return typeof value==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value}

@@ -6,8 +6,8 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 
 ## What's included
 
-- **Team, Individual, and Rules tabs** with expandable assignment cards organized by working arrangement. The shared notebook is under Team and peer evaluation is under Individual.
-- **Complete course grading breakdown** under Guide tools, listing all 20 graded items individually and totalling 100%. Innovation Challenge milestones M1–M8 total 41%, including Peer Evaluation (M8, 3%). Team Design Notebooks (4%) and Personal Reflections (4%) are separate assessments. The Team tab contains M1–M7 (38%) plus notebooks (4%); the Individual tab contains individual work (48%) plus MATLAB (10%). These tab totals describe navigation, not the Innovation Challenge subtotal.
+- **Team, Individual + pairs, and Rules tabs** with expandable assignment cards. Team contains full/sub-team work (42%); Individual + pairs contains individual work (48%) and MATLAB pair work (10%). The shared notebook is under Team, and peer evaluation is under Individual + pairs.
+- **Complete course grading breakdown** under Guide tools, listing all 20 graded items and totalling 100%, with a separate explanation of the official 41% Innovation Challenge Project category and the 52% of course marks for work normally completed in teams or pairs. See the grading table below.
 - **Deadline tracking** shared by the upcoming-deadline banner, assignment date displays, work planner, and calendar exports. Tap a banner deadline to open its assignment. The banner skips dates marked submitted/completed while retaining later unrecorded deadlines.
 - **Section and group selection** at the top of the page, covering all 39 sections and 52 Innovation Challenge groups in the staffing sheet.
 - **Who to ask** results showing the assigned GA, lab/location, and Project Manager.
@@ -22,10 +22,30 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 - **Separate colour preview** for comparing eight accents against dark navy or light backgrounds without changing the main guide.
 - **Private usage reporting** through Cloudflare Web Analytics, with a separate daily archive for saved all-time, monthly, and yearly totals.
 
+## Grading: course category and working arrangements
+
+Based on the **CEN100 Course Outline F26**, page 9 for assessment weights and pages 10–11 for working arrangements and the shared notebook:
+
+| Grouping | Included assessments | Course grade |
+| --- | --- | ---: |
+| Official Innovation Challenge Project category | M1–M8, including the individual Peer Evaluation (3%) | **41%** |
+| Shared project deliverables | M1–M7: 2% + 4% + 6% + 8% + 4% + 6% + 8% | **38%** |
+| All full/sub-team work | M1–M7 (38%) + shared Team Design Notebook (4%) | **42%** |
+| All team/pair work | Full/sub-team work (42%) + MATLAB assignments (10%) | **52%** |
+| Individual work | Orientation/policy items (12%) + participation (5%) + reflections (4%) + peer evaluation (3%) + final exam (24%) | **48%** |
+
+The first four rows overlap; they are not separate amounts to add together. The working-arrangement split is **42% full/sub-team + 10% MATLAB pairs + 48% individual = 100%**. These are calculated grade-weight subtotals, not percentages of time or workload.
+
+Peer Evaluation is individual even though it belongs to the official project category. The notebook is shared even though it sits outside that category. Personal Reflections are individual and also outside the project category. Shared work still requires documented individual contributions.
+
+MATLAB is normally completed in pairs. The confirmed exception for an odd-sized class allows the unpaired student to work solo or join a group of three; 52% describes the normal team/pair arrangement.
+
+The **Team** tab contains 42%. **Individual + pairs** contains the remaining 58%: 48% individual and 10% MATLAB. These navigation totals do not change any assessment weight or redefine the official project category. The September 30 clarification updates these labels, the grading explanation, and the change history while retaining all 20 assessment weights.
+
 ## Getting started
 
 1. Optionally choose a section and Innovation Challenge group below the main heading. Group choices are filtered by section, and selections save immediately. The page heading follows the selection, with a neutral course label before selection. The selected section’s lab location appears beside the section and group at the top. Use **Done** to collapse the picker or **View contacts** to open Who to ask.
-2. Select **Team**, **Individual**, or **Rules**. Open an assignment card to review its requirements, checklist, source notes, and tools.
+2. Select **Team**, **Individual + pairs**, or **Rules**. Open an assignment card to review its requirements, checklist, source notes, and tools.
 3. Open **Guide tools** for the complete course grading breakdown, search, Hide fully checked items, the work planner, calendar exports, and backups. Find **What’s changed** at the bottom of the page, just above the footer.
 4. Returning visits restore the saved section/group selection. Use **Change** at the top or **Change section/group** in Who to ask to edit it.
 
