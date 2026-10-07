@@ -12,7 +12,7 @@ One Fall 2026 course companion with a shared course switcher and light/dark appe
 
 1. Choose **CEN100**, **MTH140**, or **MTH141** in the course bar. Each course remembers its own section and progress.
 2. Select your section at the top. CEN100 also asks for your Innovation Challenge group; the math guides use the section's lab timetable.
-3. Open an assignment or assessment to review dates, coverage, preparation, notes, and completion records. Math guides also have a **Topic map** for skills and recommended practice.
+3. Scan the short requirement or coverage preview on each card. Tap **View requirements** or an upcoming deadline to open its assignment or assessment, including dates, coverage, preparation, notes, and completion records. Math guides also have a **Topic map** for skills and recommended practice.
 4. Use **Guide tools** for search, unfinished work, calendars, and backups. **What's changed?** sits immediately above the footer on every course page. Opening it clears that course's unread-update badge.
 5. Use **Auto theme**, **Dark theme**, or **Light theme** in the shared header. This appearance choice applies across all three courses.
 
@@ -20,16 +20,19 @@ One Fall 2026 course companion with a shared course switcher and light/dark appe
 
 | Area | Update |
 | --- | --- |
+| Card previews and opening cues | Added short requirement previews to CEN100 cards and coverage previews to both math guides. Upcoming deadlines have opening arrows; the next deadline has a View requirements cue. |
+| Visual polish | Kept the existing layout, with clearer text hierarchy, softer borders and badges, consistent spacing, and gentle card-opening transitions that respect reduced motion. |
 | Three-course navigation | Added MTH140 and MTH141 alongside the original CEN100 URL, with separate saved sections and progress and a shared appearance setting. |
 | Math assessment guides | Added all 68 math section mappings, quiz weeks, published midterm dates, grading weights, announced coverage, assessment rules, and source notes. |
 | Study and planning | Added 16 topic blocks, 77 recommended-practice rows, skill checks, preparation lists, completion records, private notes, personal study targets, direct assessment links, search, calendars, and course-specific backups. |
 | Visual design | Added cyan curve/tangent graphics for Calculus I and violet vector-transformation graphics for Linear Algebra. Math pages use assessment dashboards and grading bars. |
 | Date and source checks | Clearly labelled timetable-derived quiz dates, unresolved Thanksgiving arrangements, unannounced coverage and finals, conflicting MTH140 quiz-drop wording, and the MTH141 textbook-edition mismatch. |
 | Documentation and release notes | Reorganized this README for all three courses, expanded the CEN100 release entry, and added What's changed with unread badges to both math pages. |
-| Verification | Checked desktop and phone layouts, enlarged text, course and section switching, saved progress, backups, calendars, and existing CEN100 records and assignment links. |
+| Verification | Checked desktop and phone layouts, enlarged text, keyboard opening, reduced motion, course and section switching, saved progress, backups, calendars, and existing CEN100 records and assignment links. |
 
 ## Math guides
 
+- **Coverage previews** on closed assessment cards, plus **View requirements** and arrows on upcoming assessments, make it easier to scan and open the right details.
 - **Next assessment** and an assessment-weight strip replace the team/individual split. Each math guide has **Assessments**, **Topic map**, and **Rules & help** views.
 - **Section-aware quiz dates:** official quiz weeks combine with the selected lab timetable. These calculated days are labelled as timetable-derived; quiz start times are not invented. Monday MTH140 sections see a confirmation warning for Thanksgiving week.
 - **Announced coverage:** MTH141 Quiz 1, Quiz 2 and October 16 midterm, plus MTH140 Quiz 1. Unprovided future scopes and final dates are marked pending.
@@ -72,6 +75,7 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 
 - **Team, Individual + pairs, and Rules tabs** with expandable assignment cards. Team contains full/sub-team work (42%); Individual + pairs contains individual work (48%) and MATLAB pair work (10%). The shared notebook is under Team, and peer evaluation is under Individual + pairs.
 - **Complete course grading breakdown** under Guide tools, listing all 20 graded items and totalling 100%, with a separate explanation of the official 41% Innovation Challenge Project category and the 52% of course marks for work normally completed in teams or pairs. See the grading table below.
+- **Requirement previews** on closed assignment cards and visible opening cues on upcoming deadlines.
 - **Deadline tracking** shared by the upcoming-deadline banner, assignment date displays, work planner, and calendar exports. Tap a banner deadline to open its assignment. The banner skips dates marked submitted/completed while retaining later unrecorded deadlines.
 - **Section and group selection** at the top of the page, covering all 39 sections and 52 Innovation Challenge groups in the staffing sheet.
 - **Who to ask** results showing the assigned GA, lab/location, and Project Manager.
@@ -207,6 +211,6 @@ GitHub Pages serves the **main** branch from **/(root)** using **Deploy from a b
 
 ### Maintaining course information
 
-Update CEN100 in `index.html` and math course information in `assets/course-data.mjs`. Verify new dates and coverage against official course documents or announcements, retain source notes, and keep unresolved details labelled pending. For math source changes, update `docs/math-source-audit.md`.
+Update CEN100 in `index.html` and math course information in `assets/course-data.mjs`. Verify new dates and coverage against official course documents or announcements, retain source notes, and keep unresolved details labelled pending. Keep CEN100’s short `preview` text consistent with the full requirements; math previews render from each assessment’s `scope`. For math source changes, update `docs/math-source-audit.md`.
 
 Update the relevant course's **What's changed?** entry and release version when publishing a release so returning visitors see the unread badge. CEN100's version lives in `index.html`; the math version lives in `assets/math-guide.mjs`. Run `node --test tests/schedule.test.mjs` for math date/data changes, preview affected pages over HTTP, and check the GitHub Pages deployment after publishing to `main`.
