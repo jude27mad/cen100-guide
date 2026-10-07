@@ -5,6 +5,7 @@ const courseId=document.body.dataset.course,course=COURSES[courseId],$=id=>docum
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
 const storageKey=courseId+'-progress-v1',sectionKey=courseId+'-section-v1';
+const GUIDE_VERSION='2026-10-07-guide-release-notes',seenKey=courseId+'-last-seen-update-v1';
 let section=Number(read(sectionKey,0));if(!course.labs.some(x=>x.section===section))section=0;
 const knownChecks=new Set(course.assessments.flatMap(a=>prep(a).map((_,i)=>a.id+'-'+i)));
 const knownTopics=new Set(course.topics.flatMap(t=>t.skills.map((_,i)=>t.id+'-'+i)));
@@ -99,6 +100,9 @@ $('quiz-policy').textContent=course.quizPolicy;
 document.querySelectorAll('.grade-bar span').forEach((el,i)=>el.style.flex=course.weights[i]);
 for(const lab of course.labs){const option=document.createElement('option');option.value=lab.section;option.textContent=`Section ${lab.section} (${String(lab.section).padStart(2,'0')}1 / ${String(lab.section).padStart(2,'0')}2)`;$('section-select').append(option);}
 drawFigure();renderRules();renderSection();renderAssessments();renderTopics();renderNext();showTab(read(courseId+'-view-v1','assessments'),false);routeHash();
+const releaseNotes=$('guide-updates'),updateBadge=$('updates-badge');
+updateBadge.hidden=read(seenKey,'')===GUIDE_VERSION;
+releaseNotes.addEventListener('toggle',()=>{if(releaseNotes.open){updateBadge.hidden=true;try{localStorage.setItem(seenKey,JSON.stringify(GUIDE_VERSION))}catch{}}});
 $('section-select').addEventListener('change',()=>{section=Number($('section-select').value);try{localStorage.setItem(sectionKey,JSON.stringify(section))}catch{}renderSection();renderNext();});
 document.addEventListener('click',e=>{const tab=e.target.closest('[data-view]');if(tab)showTab(tab.dataset.view);const open=e.target.closest('[data-open-assessment]');if(open){const id='assessment-'+open.dataset.openAssessment;history.replaceState(null,'','#'+id);openItem(id);}const copy=e.target.closest('[data-share]');if(copy)share(copy.dataset.share,copy);});
 document.addEventListener('change',e=>{const el=e.target;for(const [attr,key] of [['check','checks'],['topic','topics'],['completed','completed']])if(el.dataset[attr]){if(el.checked)progress[key][el.dataset[attr]]=true;else delete progress[key][el.dataset[attr]];save();if(key==='topics')updateTopicCounts();else if(key==='completed')renderNext();else updateAssessmentCounts();}if(el.dataset.target){if(el.value&&validDate(el.value))progress.targets[el.dataset.target]=el.value;else delete progress.targets[el.dataset.target];save();renderWork();}});

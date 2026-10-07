@@ -8,6 +8,26 @@ One Fall 2026 course companion with a shared course switcher and light/dark appe
 | MTH140: Calculus I | [MTH140](https://jude27mad.github.io/cen100-guide/mth140/) | All 34 sections, instructors, TAs and lab rooms |
 | MTH141: Linear Algebra | [MTH141](https://jude27mad.github.io/cen100-guide/mth141/) | All 34 sections, instructors, Academic Assistants and lab rooms |
 
+## Getting started
+
+1. Choose **CEN100**, **MTH140**, or **MTH141** in the course bar. Each course remembers its own section and progress.
+2. Select your section at the top. CEN100 also asks for your Innovation Challenge group; the math guides use the section's lab timetable.
+3. Open an assignment or assessment to review dates, coverage, preparation, notes, and completion records. Math guides also have a **Topic map** for skills and recommended practice.
+4. Use **Guide tools** for search, unfinished work, calendars, and backups. **What's changed?** sits immediately above the footer on every course page. Opening it clears that course's unread-update badge.
+5. Use **Auto theme**, **Dark theme**, or **Light theme** in the shared header. This appearance choice applies across all three courses.
+
+## What's changed — October 7, 2026
+
+| Area | Update |
+| --- | --- |
+| Three-course navigation | Added MTH140 and MTH141 alongside the original CEN100 URL, with separate saved sections and progress and a shared appearance setting. |
+| Math assessment guides | Added all 68 math section mappings, quiz weeks, published midterm dates, grading weights, announced coverage, assessment rules, and source notes. |
+| Study and planning | Added 16 topic blocks, 77 recommended-practice rows, skill checks, preparation lists, completion records, private notes, personal study targets, direct assessment links, search, calendars, and course-specific backups. |
+| Visual design | Added cyan curve/tangent graphics for Calculus I and violet vector-transformation graphics for Linear Algebra. Math pages use assessment dashboards and grading bars. |
+| Date and source checks | Clearly labelled timetable-derived quiz dates, unresolved Thanksgiving arrangements, unannounced coverage and finals, conflicting MTH140 quiz-drop wording, and the MTH141 textbook-edition mismatch. |
+| Documentation and release notes | Reorganized this README for all three courses, expanded the CEN100 release entry, and added What's changed with unread badges to both math pages. |
+| Verification | Checked desktop and phone layouts, enlarged text, course and section switching, saved progress, backups, calendars, and existing CEN100 records and assignment links. |
+
 ## Math guides
 
 - **Next assessment** and an assessment-weight strip replace the team/individual split. Each math guide has **Assessments**, **Topic map**, and **Rules & help** views.
@@ -19,6 +39,22 @@ One Fall 2026 course companion with a shared course switcher and light/dark appe
 - **Search, unfinished-work planning, backups and restore** follow the same approach as CEN100. Math backups are course-specific and include topic checks; conflicting existing notes and targets survive import.
 - **Independent saved sections and progress** across all three courses; one shared appearance setting. Existing CEN100 local data and direct assignment links continue to work.
 - **Distinct mathematics visuals:** a curve and tangent for Calculus I, vector transformation geometry for Linear Algebra, with cyan and violet course accents.
+- **What's changed** above each math footer, with an unread-update indicator saved independently for each course.
+
+### Math grading
+
+| Course | Lab quizzes | Midterm | Final |
+| --- | --- | --- | --- |
+| MTH140 | 15%; four quizzes, lowest dropped | 40%; October 23, 6:30–8:30 PM | 45%; December, exact schedule pending |
+| MTH141 | 20%; five quizzes, lowest dropped | 35%; October 16, 6:30–8:30 PM | 45%; December, exact schedule pending |
+
+All times are Toronto time. Each course requires at least 50% overall to pass. Quiz dates depend on the selected lab section; the guide distinguishes announced weeks from timetable-derived days.
+
+### Using the math guides
+
+**Assessments** contains quiz, midterm, and final cards. Preparation checks do not mark an assessment completed; use **My plan & completion** for your own completion record, notes, and study target. **Topic map** follows the outline order and provides skill-review prompts and official exercise references. **Rules & help** contains assessment policies, selected-section contacts, free textbook links, pending details, and source checks.
+
+Math calendars include the published midterm by default. Including section lab dates is optional and produces tentative all-day quiz entries. Math progress backups include topic checks and only import into the matching course. Section choices, theme, and unread-update preferences are not included in a progress backup.
 
 Dates and requirements were reviewed October 7, 2026 against official supplied course files and announcements. See [the math source audit](docs/math-source-audit.md) for sources, conflicts, derived dates and maintenance instructions.
 
@@ -26,13 +62,13 @@ The public site summarizes course requirements and lists exercise references. It
 
 No build step is required. For local preview, serve the repository over HTTP, for example `python3 -m http.server 8765`. Run `node --test tests/schedule.test.mjs` to verify the math deadline and calendar logic. `assets/course-data.mjs` is the authoritative math dataset; both pages render from it.
 
-## Existing CEN100 guide
+## CEN100 guide
 
 A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at Toronto Metropolitan University. The guide brings deadlines, assignment requirements, checklists, course clarifications, and section/group contacts into one responsive page.
 
 **[Open the guide](https://jude27mad.github.io/cen100-guide/)**
 
-## What's included
+### What's included
 
 - **Team, Individual + pairs, and Rules tabs** with expandable assignment cards. Team contains full/sub-team work (42%); Individual + pairs contains individual work (48%) and MATLAB pair work (10%). The shared notebook is under Team, and peer evaluation is under Individual + pairs.
 - **Complete course grading breakdown** under Guide tools, listing all 20 graded items and totalling 100%, with a separate explanation of the official 41% Innovation Challenge Project category and the 52% of course marks for work normally completed in teams or pairs. See the grading table below.
@@ -46,11 +82,11 @@ A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at To
 - **Search, checklist filtering, and source notes** for finding and checking requirements.
 - **What’s changed** at the bottom of the page, with a New updates indicator for unread releases.
 - **Calendar exports and progress backups** for use outside the current browser.
-- **Rose deadline highlights and automatic light/dark appearance** based on the device setting. The Rules tab’s **Still open** icons keep their original yellow, independently of the rose accent.
+- **Rose deadline highlights and shared Auto/Dark/Light appearance**. Auto follows the device setting. The Rules tab’s **Still open** icons keep their original yellow, independently of the rose accent.
 - **Separate colour preview** for comparing eight accents against dark navy or light backgrounds without changing the main guide.
 - **Private usage reporting** through Cloudflare Web Analytics, with a separate daily archive for saved all-time, monthly, and yearly totals.
 
-## Grading: course category and working arrangements
+### Grading: course category and working arrangements
 
 Based on the **CEN100 Course Outline F26**, page 9 for assessment weights and pages 10–11 for working arrangements and the shared notebook:
 
@@ -70,20 +106,20 @@ MATLAB is normally completed in pairs. The confirmed exception for an odd-sized 
 
 The **Team** tab contains 42%. **Individual + pairs** contains the remaining 58%: 48% individual and 10% MATLAB. These navigation totals do not change any assessment weight or redefine the official project category. The September 30 clarification updates these labels, the grading explanation, and the change history while retaining all 20 assessment weights.
 
-## Getting started
+### Using CEN100
 
 1. Optionally choose a section and Innovation Challenge group below the main heading. Group choices are filtered by section, and selections save immediately. The page heading follows the selection, with a neutral course label before selection. The selected section’s lab location appears beside the section and group at the top. Use **Done** to collapse the picker or **View contacts** to open Who to ask.
 2. Select **Team**, **Individual + pairs**, or **Rules**. Open an assignment card to review its requirements, checklist, source notes, and tools.
 3. Open **Guide tools** for the complete course grading breakdown, search, Hide fully checked items, the work planner, calendar exports, and backups. Find **What’s changed** at the bottom of the page, just above the footer.
 4. Returning visits restore the saved section/group selection. Use **Change** at the top or **Change section/group** in Who to ask to edit it.
 
-## Colour preview
+### Colour preview
 
 Open the [colour preview](https://jude27mad.github.io/cen100-guide/colour-preview.html) to switch between dark navy and light backgrounds and compare Gold, Coral, Peach, Violet, Rose, Mint, Blue, and Silver accents on the guide’s existing layout. **Copy this look** shares the selected background and accent; reopening the link restores that combination. **Reset preview** returns to dark navy and the original gold accent.
 
-Colour choices affect only the preview. Its course progress and section/group choices are temporary and reset on reload; it does not read or change the main guide’s saved progress. The preview is a separate snapshot, so use the main guide for current course information. The main guide uses the selected rose accent and follows the device’s light/dark setting.
+Colour choices affect only the preview. Its course progress and section/group choices are temporary and reset on reload; it does not read or change the main guide’s saved progress. The preview is a separate snapshot, so use the main guide for current course information. The main guide uses the selected rose accent and the shared Auto/Dark/Light appearance control.
 
-## Progress and personal planning
+### Progress and personal planning
 
 Checklist ticks track preparation. A **Date passed** badge describes the calendar date; it does not indicate completion or a grade.
 
@@ -93,11 +129,11 @@ Each card's **My plan & completion** section contains separate submission/comple
 
 Personal target dates do not change official deadlines. Notes are saved on the current device and are not shared with a team. **Clear my ticks** clears checklist ticks only; completion records, notes, and target dates remain saved.
 
-## Sharing an assignment
+### Sharing an assignment
 
 Choose **Copy assignment link** inside a card. The link opens that assignment's tab and expands its card. Links do not contain saved section/group choices, checklist progress, completion records, notes, or personal target dates. If clipboard access is unavailable, the guide displays a link to copy manually.
 
-## Calendar exports
+### Calendar exports
 
 Use **Add to calendar** inside a card or **Guide tools → Add deadlines to my calendar**. Select one assignment or all confirmed deadlines, choose whether to include only upcoming dates, and select a reminder of one day, two days, or none.
 
@@ -105,7 +141,7 @@ Download the `.ics` file and open it in Apple Calendar or import it into Google 
 
 Calendar exports exclude approximate dates, section-specific lab activity reminders, and the unscheduled final exam. Imported calendars do not update automatically. Check D2L for changes and review the calendar application's alert settings.
 
-## Backups and local storage
+### Backups and local storage
 
 Use **Guide tools → Move or back up my progress → Export my progress** to download a `.json` backup. Import it through the same panel on another device.
 
@@ -116,9 +152,23 @@ Use **Guide tools → Move or back up my progress → Export my progress** to do
 
 Progress, selections, notes, targets, and preferences are stored in browser local storage. There are no accounts or automatic synchronization between browsers or devices. Clearing browser data may remove locally saved information.
 
+### Sources and contact privacy
+
+The guide uses Fall 2026 CEN100 documents on D2L and confirmed course-team clarifications. Source notes distinguish course-outline information, assignment summaries, and confirmed clarifications. Resolved guidance appears under **Confirmed**; unanswered questions remain under **Still open**.
+
+Personal Reflections are emailed directly to the assigned Project Manager; there is no D2L submission box. MATLAB assignments are normally completed in pairs; when a class has an odd number of students, the unpaired student may work solo or join a group of three. FMEA “Environmental” remains under Still open, awaiting official clarification from the Head GA.
+
+WHMIS is due October 14, with at least 80% on all three quizzes and a generated certificate. The Academic Integrity Quiz is due October 14 at 3 PM and allows ten attempts.
+
+Tutorial timing is identified by section where confirmed. Other sections are directed to D2L rather than assigned an assumed schedule. Reflection instructions show the selected group's Project Manager when available.
+
+The staffing document supplies section/group mappings, names, and lab locations only. **GA and Project Manager email addresses are not published or stored in the page's source code.** For contact details, check D2L or the official Section GAs and PMs document.
+
+This guide is an unofficial planning aid. Current official assignment instructions and course-team announcements remain the authority for requirements, submission methods, and deadlines.
+
 ## Usage analytics and privacy
 
-Cloudflare Web Analytics was added to the main guide on **September 28, 2026**. Its beacon appears once, immediately before the closing `</body>` tag in `index.html`. The colour preview has no analytics beacon. Results are available to the maintainer through the private dashboard; there is no public visitor counter.
+Cloudflare Web Analytics was added to CEN100 on **September 28, 2026** and to both math guides on **October 7, 2026**. Each live course page loads the existing beacon once, immediately before its closing `</body>` tag. The colour preview has no analytics beacon. Results are available to the maintainer through the private dashboard; there is no public visitor counter.
 
 Cloudflare measures page views, visits, and page performance, with breakdowns such as country, browser, device type, and referrer. It [states that its analytics does not use cookies, local storage, or fingerprinting to track individuals](https://blog.cloudflare.com/privacy-first-web-analytics/). The guide uses local storage separately to save your progress; it does not send your selected section/group, checklist ticks, completion records, notes, or target dates to analytics. The beacon still sends measurement requests to Cloudflare, so this is not a claim that no data leaves the browser.
 
@@ -136,28 +186,27 @@ A separate private repository archives daily totals for the installed beacon and
 
 Saved history has no automatic expiry in the archive. Continued collection depends on the scheduled workflow, credentials, and services remaining available; Cloudflare’s own history window is separate from these saved files.
 
-## Sources and contact privacy
-
-The guide uses Fall 2026 CEN100 documents on D2L and confirmed course-team clarifications. Source notes distinguish course-outline information, assignment summaries, and confirmed clarifications. Resolved guidance appears under **Confirmed**; unanswered questions remain under **Still open**.
-
-Personal Reflections are emailed directly to the assigned Project Manager; there is no D2L submission box. MATLAB assignments are normally completed in pairs; when a class has an odd number of students, the unpaired student may work solo or join a group of three. FMEA “Environmental” remains under Still open, awaiting official clarification from the Head GA.
-
-WHMIS is due October 14, with at least 80% on all three quizzes and a generated certificate. The Academic Integrity Quiz is due October 14 at 3 PM and allows ten attempts.
-
-Tutorial timing is identified by section where confirmed. Other sections are directed to D2L rather than assigned an assumed schedule. Reflection instructions show the selected group's Project Manager when available.
-
-The staffing document supplies section/group mappings, names, and lab locations only. **GA and Project Manager email addresses are not published or stored in the page's source code.** For contact details, check D2L or the official Section GAs and PMs document.
-
-This guide is an unofficial planning aid. Current official assignment instructions and course-team announcements remain the authority for requirements, submission methods, and deadlines.
-
 ## Files and hosting
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Complete page, including styles, JavaScript, course data, and contact mappings. |
-| `README.md` | Features, usage, data handling, and hosting documentation. |
+| `index.html` | CEN100 content, styles, JavaScript, course data, contact mappings, and full release history. |
+| `mth140/index.html`, `mth141/index.html` | Math page structures and course-specific release notes. |
+| `assets/hub.js`, `assets/hub.css` | Shared course navigation, saved-section labels, and appearance control. |
+| `assets/course-data.mjs` | Math assessments, section timetables, instructors, topics, practice references, and sources. |
+| `assets/schedule.mjs` | Math date resolution, Toronto time handling, upcoming assessments, and calendar exports. |
+| `assets/math-guide.mjs`, `assets/math.css` | Math rendering, progress, guide tools, unread-update handling, and responsive design. |
+| `docs/math-source-audit.md` | Math source audit, conflicts, unknowns, and date derivation rules. |
+| `tests/schedule.test.mjs` | Section, deadline, timezone, calendar, and source-data checks. |
+| `README.md` | Three-course features, release notes, usage, data handling, and maintenance documentation. |
 | `colour-preview.html` | Separate palette comparison page with shareable colour selections and temporary progress. |
 
 The guide uses plain HTML, CSS, and JavaScript. No installation, package manager, build step, or application backend is required to serve it. Archivo is loaded through Google Fonts, with system-font fallbacks. Usage measurement loads Cloudflare’s external beacon; the daily archive runs separately in the private repository and is not part of the public site’s build.
 
 GitHub Pages serves the **main** branch from **/(root)** using **Deploy from a branch**. To preview all three courses locally, clone or download this repository and serve it over HTTP.
+
+### Maintaining course information
+
+Update CEN100 in `index.html` and math course information in `assets/course-data.mjs`. Verify new dates and coverage against official course documents or announcements, retain source notes, and keep unresolved details labelled pending. For math source changes, update `docs/math-source-audit.md`.
+
+Update the relevant course's **What's changed?** entry and release version when publishing a release so returning visitors see the unread badge. CEN100's version lives in `index.html`; the math version lives in `assets/math-guide.mjs`. Run `node --test tests/schedule.test.mjs` for math date/data changes, preview affected pages over HTTP, and check the GitHub Pages deployment after publishing to `main`.

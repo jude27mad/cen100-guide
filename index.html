@@ -390,7 +390,17 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <details class="tool-section" id="guide-updates">
     <summary>What's changed? <span class="updates-badge" id="updates-badge" hidden>New updates</span></summary>
     <ul class="update-list">
-      <li><b>Oct 7, 2026:</b> Added MTH140 and MTH141 guides with course switching, independent saved sections, assessment dates, topic maps, recommended practice, and course rules. The shared appearance control applies across all three guides. Existing CEN100 progress and assignment links are retained.</li>
+      <li><b>Oct 7, 2026 — Three-course guide:</b> Added <a href="mth140/">MTH140: Calculus I</a> and <a href="mth141/">MTH141: Linear Algebra</a> alongside CEN100.
+        <ul>
+          <li>Switch courses in the shared header. Each course remembers its own section and progress; Auto, Dark and Light appearance is shared.</li>
+          <li>Both math guides cover all 34 sections, with assigned lab times, rooms and staff. Assessment dashboards and grading bars replace the team/individual split.</li>
+          <li>Added published quiz weeks and midterm dates, announced coverage, preparation checklists, completion records, notes, study targets, direct links, search, calendars and course-specific backups.</li>
+          <li>Added 16 math topic blocks and 77 recommended-practice rows, with skill-review checks, textbook links and course rules. Calculus uses cyan curve/tangent graphics; Linear Algebra uses violet vector graphics.</li>
+          <li>Quiz days derived from lab timetables are labelled. Thanksgiving arrangements, unannounced coverage and final dates remain pending; source conflicts and textbook-edition differences are explained.</li>
+          <li>Expanded the README for all three courses and added What's changed with unread-update badges above both math footers. Checked phone, desktop and enlarged-text layouts, saved progress, backups and calendar exports.</li>
+        </ul>
+        Existing CEN100 records, section/group choices and assignment links remain available.
+      </li>
       <li><b>Sep 30, 2026:</b> Clarified grading by working arrangement: the official project category is 41%; shared project deliverables M1–M7 are 38%; adding the notebook gives 42% full/sub-team work; adding MATLAB gives 52% team/pair work, with 48% individual. Renamed the Individual tab to Individual + pairs in the guide and colour preview, and updated the README. All 20 assessment weights remain unchanged.</li>
       <li><b>Sep 29, 2026:</b> Updated the README and change history to cover the latest grading, colour and analytics changes, including what is measured and what stays saved only in your browser.</li>
       <li><b>Sep 29, 2026:</b> Verified the first scheduled daily usage archive. The maintainer can keep saved all-time, monthly and yearly totals from Sep 28, with downloadable backups and checks for missing data. These reports are private and contain no students’ saved course progress.</li>
@@ -982,7 +992,7 @@ setupContactLookup();
     });
   }
 
-  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-10-07-three-course-guides";
+  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-10-07-guide-release-notes";
   function recordsFor(item){const dates=itemDeadlines(item.id);return dates.length?dates:[{id:"item:"+item.id,item:item.id,title:item.name}]}
   const completionKeys=new Set(allItems.flatMap(item=>recordsFor(item).map(e=>e.id)));
   function validDate(value){return typeof value==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value}
@@ -1134,4 +1144,3 @@ setupContactLookup();
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4eb3097847fc4f4fae74d36bf0f1b421"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
-
