@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CEN100: Don't Lose Marks</title>
+<meta name="description" content="TMU Fall 2026 course guides: CEN100 assignment deadlines, requirements and contacts, plus MTH140 and MTH141 assessment and section guides.">
+<link rel="stylesheet" href="assets/hub.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
@@ -226,7 +228,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 .updates-badge[hidden],.share-fallback[hidden]{display:none}
 </style>
 </head>
-<body>
+<body data-course="cen100">
 <div class="wrap">
   <header>
     <p class="team" id="course-context">CEN100 · Fall 2026</p>
@@ -388,6 +390,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
   <details class="tool-section" id="guide-updates">
     <summary>What's changed? <span class="updates-badge" id="updates-badge" hidden>New updates</span></summary>
     <ul class="update-list">
+      <li><b>Oct 7, 2026:</b> Added MTH140 and MTH141 guides with course switching, independent saved sections, assessment dates, topic maps, recommended practice, and course rules. The shared appearance control applies across all three guides. Existing CEN100 progress and assignment links are retained.</li>
       <li><b>Sep 30, 2026:</b> Clarified grading by working arrangement: the official project category is 41%; shared project deliverables M1–M7 are 38%; adding the notebook gives 42% full/sub-team work; adding MATLAB gives 52% team/pair work, with 48% individual. Renamed the Individual tab to Individual + pairs in the guide and colour preview, and updated the README. All 20 assessment weights remain unchanged.</li>
       <li><b>Sep 29, 2026:</b> Updated the README and change history to cover the latest grading, colour and analytics changes, including what is measured and what stays saved only in your browser.</li>
       <li><b>Sep 29, 2026:</b> Verified the first scheduled daily usage archive. The maintainer can keep saved all-time, monthly and yearly totals from Sep 28, with downloadable backups and checks for missing data. These reports are private and contain no students’ saved course progress.</li>
@@ -979,7 +982,7 @@ setupContactLookup();
     });
   }
 
-  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-09-30-grading-arrangements";
+  const PLAN_KEY="cen100-personal-plan-v1", SEEN_KEY="cen100-last-seen-update-v1", GUIDE_VERSION="2026-10-07-three-course-guides";
   function recordsFor(item){const dates=itemDeadlines(item.id);return dates.length?dates:[{id:"item:"+item.id,item:item.id,title:item.name}]}
   const completionKeys=new Set(allItems.flatMap(item=>recordsFor(item).map(e=>e.id)));
   function validDate(value){return typeof value==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&!Number.isNaN(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value}
@@ -1127,8 +1130,8 @@ setupContactLookup();
   setupRememberedContacts();setupSources();setupCompletedFilter();setupSearch();setupCalendar();setupPersonalTools();setupBackups();setupWorkAndUpdates();
 })();
 </script>
+<script src="assets/hub.js"></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4eb3097847fc4f4fae74d36bf0f1b421"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
-
 

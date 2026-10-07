@@ -1,4 +1,32 @@
-# CEN100 Guide: Don't Lose Marks
+# TMU Course Guides: CEN100, MTH140 and MTH141
+
+One Fall 2026 course companion with a shared course switcher and light/dark appearance. CEN100 keeps its complete assignment guide at the original URL. The two math guides focus on assessments, announced coverage, topic progression, recommended practice, and section-specific labs.
+
+| Course | Open guide | Section support |
+| --- | --- | --- |
+| CEN100: Introduction to Engineering | [CEN100](https://jude27mad.github.io/cen100-guide/) | All 39 sections and 52 Innovation Challenge groups |
+| MTH140: Calculus I | [MTH140](https://jude27mad.github.io/cen100-guide/mth140/) | All 34 sections, instructors, TAs and lab rooms |
+| MTH141: Linear Algebra | [MTH141](https://jude27mad.github.io/cen100-guide/mth141/) | All 34 sections, instructors, Academic Assistants and lab rooms |
+
+## Math guides
+
+- **Next assessment** and an assessment-weight strip replace the team/individual split. Each math guide has **Assessments**, **Topic map**, and **Rules & help** views.
+- **Section-aware quiz dates:** official quiz weeks combine with the selected lab timetable. These calculated days are labelled as timetable-derived; quiz start times are not invented. Monday MTH140 sections see a confirmation warning for Thanksgiving week.
+- **Announced coverage:** MTH141 Quiz 1, Quiz 2 and October 16 midterm, plus MTH140 Quiz 1. Unprovided future scopes and final dates are marked pending.
+- **Eight topic blocks per course**, in outline order, with self-reported skill-review checks and all 77 recommended-practice rows across the two math courses. The MTH141 textbook-edition mismatch is visible beside the free textbook links.
+- **Preparation and completion** are separate. Each assessment has a preparation checklist, completion record, private notes, a personal study target, and a shareable link.
+- **Calendar export** includes published midterm times and optionally tentative all-day lab dates. It excludes unknown finals and unresolved Thanksgiving dates. Calendar imports do not update automatically.
+- **Search, unfinished-work planning, backups and restore** follow the same approach as CEN100. Math backups are course-specific and include topic checks; conflicting existing notes and targets survive import.
+- **Independent saved sections and progress** across all three courses; one shared appearance setting. Existing CEN100 local data and direct assignment links continue to work.
+- **Distinct mathematics visuals:** a curve and tangent for Calculus I, vector transformation geometry for Linear Algebra, with cyan and violet course accents.
+
+Dates and requirements were reviewed October 7, 2026 against official supplied course files and announcements. See [the math source audit](docs/math-source-audit.md) for sources, conflicts, derived dates and maintenance instructions.
+
+The public site summarizes course requirements and lists exercise references. It does not publish uploaded PDFs, announcement screenshots, sample exams or restricted solutions. Contact details stay on D2L.
+
+No build step is required. For local preview, serve the repository over HTTP, for example `python3 -m http.server 8765`. Run `node --test tests/schedule.test.mjs` to verify the math deadline and calendar logic. `assets/course-data.mjs` is the authoritative math dataset; both pages render from it.
+
+## Existing CEN100 guide
 
 A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at Toronto Metropolitan University. The guide brings deadlines, assignment requirements, checklists, course clarifications, and section/group contacts into one responsive page.
 
@@ -132,5 +160,4 @@ This guide is an unofficial planning aid. Current official assignment instructio
 
 The guide uses plain HTML, CSS, and JavaScript. No installation, package manager, build step, or application backend is required to serve it. Archivo is loaded through Google Fonts, with system-font fallbacks. Usage measurement loads Cloudflare’s external beacon; the daily archive runs separately in the private repository and is not part of the public site’s build.
 
-GitHub Pages serves the **main** branch from **/(root)** using **Deploy from a branch**. To preview locally, download `index.html` and open it in a browser.
-
+GitHub Pages serves the **main** branch from **/(root)** using **Deploy from a branch**. To preview all three courses locally, clone or download this repository and serve it over HTTP.
