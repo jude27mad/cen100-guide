@@ -13,8 +13,12 @@ One Fall 2026 course companion with a shared course switcher and light/dark appe
 1. Choose **CEN100**, **MTH140**, or **MTH141** in the course bar. Each course remembers its own section and progress.
 2. Select your section at the top. CEN100 also asks for your Innovation Challenge group; the math guides use the section's lab timetable.
 3. Scan the short requirement or coverage preview on each card. Tap **View requirements** or an upcoming deadline to open its assignment or assessment, including dates, coverage, preparation, notes, and completion records. Math guides also have a **Topic map** for skills and recommended practice.
-4. Use **Guide tools** for search, unfinished work, calendars, and backups. **What's changed?** sits immediately above the footer on every course page. Opening it clears that course's unread-update badge.
+4. Search above the tabs, or tap **This week's work**, **Contacts**, or **D2L**. Use **Mark done** on the next deadline to save that one completion record; **Undo** restores it. **Guide tools** below the cards contains grading, calendars, and backups. **What's changed?** sits immediately above the footer on every course page. Opening it clears that course's unread-update badge.
 5. Use **Auto theme**, **Dark theme**, or **Light theme** in the shared header. This appearance choice applies across all three courses.
+
+## What's changed — October 9, 2026
+
+Visible search, one-tap weekly work and contacts, and **Mark done** with **Undo** reduce menu opening across all three courses. Math search results open the correct assessment or topic tab. Guide tools sit below the cards, math grading is collapsed inside them, and CEN100 tab introductions are shorter. Saved progress keys and course dates are unchanged.
 
 ## What's changed — October 7, 2026
 

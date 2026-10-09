@@ -17,3 +17,17 @@ body[data-course="cen100"] .hub-shell{max-width:640px;padding-inline:14px}
 .course-saved{font-size:.75rem;font-weight:550;color:var(--hub-muted);min-height:1rem}
 .hub-shell :focus-visible{outline:3px solid var(--hub-focus);outline-offset:3px}
 @media(max-width:460px){.hub-shell{padding:16px 14px 0}.course-link{padding:11px 10px}.course-name{font-size:.8125rem}.hub-brand{font-size:.9rem}.hub-theme{padding:8px;font-size:.8125rem}}
+
+.quick-find,.quick-find *,.quick-confirm,.quick-confirm *{box-sizing:border-box}
+.quick-find{margin:18px 0 12px}
+.quick-find>label:not(.tool-check):not(.inline-check){display:block;font-size:.9375rem;font-weight:650;margin:0 0 7px}
+.quick-find input[type="search"]{display:block;width:100%;min-width:0;min-height:48px;padding:11px 13px;border:1px solid var(--hub-line);border-radius:10px;background:var(--hub-panel);color:var(--hub-ink);font:inherit;font-size:1rem}
+.quick-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.quick-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 12px;border:1px solid var(--hub-line);border-radius:8px;background:var(--hub-panel);color:var(--hub-ink);font:inherit;font-size:.875rem;font-weight:600;text-decoration:none;cursor:pointer}
+.quick-confirm{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid var(--hub-line);border-radius:10px;background:var(--hub-panel);margin:12px 0}
+.quick-confirm[hidden]{display:none!important}.quick-confirm p{margin:0;font-size:.875rem;line-height:1.45}.quick-confirm button{flex:0 0 auto}
+.quick-find .search-status{font-size:.875rem;color:var(--hub-muted);margin:10px 0}.quick-find .search-status:empty{display:none}
+.quick-find .search-results{list-style:none;display:grid;gap:6px;margin:10px 0;padding:0}.quick-find .search-results[hidden]{display:none}
+.quick-find .search-results button{display:block;width:100%;text-align:left;overflow-wrap:anywhere}.quick-find .search-results small{display:block;margin-top:3px;font-size:.8125rem;color:var(--hub-muted);font-weight:450}
+@media(hover:hover){.quick-link:hover{border-color:var(--hub-ink)}}
+@media print{.quick-find,.quick-confirm{display:none!important}}
