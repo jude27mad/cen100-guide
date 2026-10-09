@@ -918,7 +918,7 @@ setupContactLookup();
   const normalise=text=>String(text).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
   function findMatches(entries,query){const words=normalise(query).trim().split(/\s+/).filter(Boolean);return words.length?entries.filter(entry=>words.every(word=>normalise(entry.text).includes(word))):[]}
   function setupSearch(){
-    const entries=allItems.map(item=>({title:item.name,tab:TEAM.includes(item)?"team":"you",target:"guide-item-"+item.id,item:item.id,text:[item.name,item.what,JSON.stringify(item.facts),JSON.stringify(item.groups),JSON.stringify(item.traps),...sourceFor(item)].join(" ")}));
+    const entries=allItems.map(item=>({title:item.name,tab:TEAM.includes(item)?"team":"you",target:"guide-item-"+item.id,item:item.id,text:[item.name,item.preview,item.what,JSON.stringify(item.facts),JSON.stringify(item.groups),JSON.stringify(item.traps),...sourceFor(item)].join(" ")}));
     for(const [listId,rows,offset] of [["rules",RULES,2],["confirmed",CONFIRMED,0],["open",OPEN,0]]){
       [...$(listId).children].forEach((node,index)=>{
         node.id=`guide-${listId}-${index}`;node.classList.add("guide-jump");
