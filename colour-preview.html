@@ -906,7 +906,7 @@ setupContactLookup();
       lines.push("BEGIN:VEVENT",`UID:cen100-f26-${event.id}-jude27mad-github-io`,`DTSTAMP:${stamp}`,`SUMMARY:${icsEscape("CEN100: "+event.title)}`);
       if(event.time)lines.push(`DTSTART:${torontoUTC(event.date,event.time)}`);
       else lines.push(`DTSTART;VALUE=DATE:${calendarDay(event.date)}`,`DTEND;VALUE=DATE:${calendarDay(shiftDay(event.date,1))}`);
-      lines.push(`DESCRIPTION:${icsEscape(description)}`,"URL:https://jude27mad.github.io/cen100-guide/","TRANSP:TRANSPARENT");
+      lines.push(`DESCRIPTION:${icsEscape(description)}`,"URL:https://jude27mad.github.io/tmu-course-guides/","TRANSP:TRANSPARENT");
       if(reminderDays>0){
         lines.push("BEGIN:VALARM","ACTION:DISPLAY",`DESCRIPTION:${icsEscape("CEN100: "+event.title)}`);
         lines.push(event.time?`TRIGGER:-P${reminderDays}D`:`TRIGGER;VALUE=DATE-TIME:${torontoUTC(shiftDay(event.date,-reminderDays),"09:00")}`);
