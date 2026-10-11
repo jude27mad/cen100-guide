@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CEN100: Don't Lose Marks</title>
+<title>CEN100 | TMU Course Guides</title>
 <meta name="description" content="TMU Fall 2026 course guides: CEN100 assignment deadlines, requirements and contacts, plus MTH140 and MTH141 assessment and section guides.">
 <link rel="stylesheet" href="assets/hub.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -247,7 +247,7 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 <div class="wrap">
   <header>
     <p class="team" id="course-context">CEN100 · Fall 2026</p>
-    <h1>Don't lose marks</h1>
+    <h1>Course overview</h1>
   </header>
 
   <details class="profile-picker" id="profile-picker" open>
@@ -860,7 +860,7 @@ setupContactLookup();
     const staff=profile?STAFFING.find(s=>s.sections.includes(profile.section)):null;
     const label=profile?`CEN100 Section ${profile.section}${profile.group?`, Group ${profile.group}`:""}`:"CEN100 · Fall 2026";
     $("course-context").textContent=label;
-    document.title=(profile?label:"CEN100")+": Don't Lose Marks";
+    document.title=(profile?label:"CEN100")+" | TMU Course Guides";
     $("profile-label").textContent=profile?`Section ${profile.section}${profile.group?` · Group ${profile.group}`:" · Choose your group"}${staff?` · Lab: ${staff.location}`:""}`:"Choose your section & group";
     updatePickerAction();updateSectionContent(profile);
   }
