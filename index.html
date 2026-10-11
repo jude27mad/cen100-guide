@@ -47,6 +47,36 @@ header{padding:22px 2px 16px}
 .team{font-weight:600;font-size:1rem;margin:0 0 4px;color:var(--ink2)}
 h1{margin:0;font-weight:900;font-variation-settings:"wdth" 68;font-size:min(3.6rem,12vw);line-height:.92;text-transform:uppercase}
 
+/* Circuit header: pulses follow the student's next unfinished deadline */
+.circuit-head{position:relative;isolation:isolate;
+  --trace:color-mix(in srgb,var(--ink2) 26%,transparent);--hot:#E0569A;--pulse:var(--team);--pulse-op:.55;--dur:9s}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .circuit-head{--hot:var(--sign)}}
+:root[data-theme="dark"] .circuit-head{--hot:var(--sign)}
+.circuit-head[data-urgency="soon"]{--pulse:var(--hot);--pulse-op:.7;--dur:7.5s}
+.circuit-head[data-urgency="close"]{--pulse:var(--hot);--pulse-op:.95;--dur:6s}
+.circuit{position:absolute;inset:0 -14px 0 0;width:calc(100% + 14px);height:100%;z-index:-1;pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 30%,#000 75%);mask-image:linear-gradient(90deg,transparent 30%,#000 75%)}
+.circuit path{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.circuit .traces path{stroke:var(--trace);stroke-width:1.5}
+.circuit .pulses path{stroke:var(--pulse);stroke-width:2.5;opacity:var(--pulse-op);stroke-dasharray:7 200;stroke-dashoffset:7}
+.circuit .pads circle{fill:var(--bg);stroke:var(--trace);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.circuit-head[data-urgency="close"] .pads circle{stroke:var(--hot)}
+.circuit-head>p,.circuit-head>h1{position:relative}
+.head-next{display:inline-flex;align-items:center;gap:8px;margin:12px 0 0;padding:4px 10px 4px 8px;border-radius:999px;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);font-weight:650;font-size:.875rem;color:var(--ink2)}
+.head-next::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--team)}
+.circuit-head:not([data-urgency="calm"]) .head-next::before{background:var(--hot)}
+.head-next[hidden]{display:none}
+@media (prefers-reduced-motion:no-preference){
+  .circuit .pulses path{animation:pulse-run var(--dur) linear infinite;animation-delay:calc(var(--d) * var(--dur));transition:stroke .6s,opacity .6s}
+  .circuit-head.paused .pulses path{animation-play-state:paused}
+  @keyframes pulse-run{from{stroke-dashoffset:7}to{stroke-dashoffset:-100}}
+}
+@media (prefers-reduced-motion:reduce){
+  .circuit .pulses{display:none}
+  .circuit-head:not([data-urgency="calm"]) .pads circle{stroke:var(--hot)}
+}
+
 /* NEXT sign */
 .next{background:var(--sign);color:#101B28;border-radius:16px;padding:20px;box-shadow:0 2px 0 rgba(0,0,0,.1)}
 .next .lbl{display:inline-flex;align-items:center;gap:6px;background:#101B28;color:var(--sign);font-weight:700;font-size:.875rem;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:.04em}
@@ -245,9 +275,31 @@ footer{margin-top:34px;display:flex;justify-content:space-between;gap:12px;flex-
 </head>
 <body data-course="cen100">
 <div class="wrap">
-  <header>
+  <header class="circuit-head" id="circuit-head" data-urgency="calm">
+    <svg class="circuit" viewBox="0 0 400 150" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
+      <g class="traces">
+        <path d="M400 22H318L300 40H214L198 56H150"/>
+        <path d="M400 64H352L336 80H262L246 96H120"/>
+        <path d="M400 108H330L312 126H226"/>
+        <path d="M372 0V30L358 44V86"/>
+        <path d="M286 150V128L270 112H196"/>
+      </g>
+      <g class="pulses">
+        <path pathLength="100" style="--d:0" d="M400 22H318L300 40H214L198 56H150"/>
+        <path pathLength="100" style="--d:-.55" d="M400 64H352L336 80H262L246 96H120"/>
+        <path pathLength="100" style="--d:-.2" d="M400 108H330L312 126H226"/>
+        <path pathLength="100" style="--d:-.8" d="M372 0V30L358 44V86"/>
+        <path pathLength="100" style="--d:-.35" d="M286 150V128L270 112H196"/>
+      </g>
+      <g class="pads">
+        <circle cx="150" cy="56" r="3.5"/><circle cx="120" cy="96" r="3.5"/>
+        <circle cx="226" cy="126" r="3.5"/><circle cx="358" cy="86" r="3.5"/>
+        <circle cx="196" cy="112" r="3.5"/>
+      </g>
+    </svg>
     <p class="team" id="course-context">CEN100 · Fall 2026</p>
     <h1>Course overview</h1>
+    <p class="head-next" id="head-next" hidden></p>
   </header>
 
   <details class="profile-picker" id="profile-picker" open>
@@ -705,9 +757,24 @@ function upcomingSchedule(completed={},selected=0,now=new Date()){
     return true;
   }).slice().sort(sortEvents);
 }
+function headUrgency(n){return n<=2?"close":n<=6?"soon":"calm"}
+function updateCircuitHead(up){
+  const head=document.getElementById("circuit-head"),label=document.getElementById("head-next");
+  if(!head||!label)return;
+  if(!up.length){head.dataset.urgency="calm";label.textContent="No upcoming deadlines";label.hidden=false;return}
+  const n=Math.max(0,days(up[0].date));
+  head.dataset.urgency=headUrgency(n);
+  label.textContent=`Next deadline · ${cd(n)}`;label.hidden=false;
+}
+(function pauseCircuitOffscreen(){
+  const head=document.getElementById("circuit-head");
+  if(!head||!("IntersectionObserver" in window))return;
+  new IntersectionObserver(([entry])=>head.classList.toggle("paused",!entry.isIntersecting)).observe(head);
+})();
 function renderTop(completed={}){
   const selected=Number(document.getElementById("contact-section").value);
   const up=upcomingSchedule(completed,selected);
+  updateCircuitHead(up);
   const ns=document.getElementById("nextsign"),bd=document.getElementById("board");
   const signature=up.slice(0,4).map(e=>e.id+":"+days(e.date)).join("|");
   if(ns.dataset.schedule===signature)return;ns.dataset.schedule=signature;
