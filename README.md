@@ -1,12 +1,12 @@
 # TMU Course Guides: CEN100, MTH140 and MTH141
 
-One Fall 2026 course companion with a shared course switcher and light/dark appearance. CEN100 keeps its complete assignment guide at the original URL. The two math guides focus on assessments, announced coverage, topic progression, recommended practice, and section-specific labs.
+One Fall 2026 course companion with a shared course switcher and light/dark appearance. CEN100 keeps its complete assignment guide at the site root. The two math guides focus on assessments, announced coverage, topic progression, recommended practice, and section-specific labs.
 
 | Course | Open guide | Section support |
 | --- | --- | --- |
-| CEN100: Introduction to Engineering | [CEN100](https://jude27mad.github.io/cen100-guide/) | All 39 sections and 52 Innovation Challenge groups |
-| MTH140: Calculus I | [MTH140](https://jude27mad.github.io/cen100-guide/mth140/) | All 34 sections, instructors, TAs and lab rooms |
-| MTH141: Linear Algebra | [MTH141](https://jude27mad.github.io/cen100-guide/mth141/) | All 34 sections, instructors, Academic Assistants and lab rooms |
+| CEN100: Introduction to Engineering | [CEN100](https://jude27mad.github.io/tmu-course-guides/) | All 39 sections and 52 Innovation Challenge groups |
+| MTH140: Calculus I | [MTH140](https://jude27mad.github.io/tmu-course-guides/mth140/) | All 34 sections, instructors, TAs and lab rooms |
+| MTH141: Linear Algebra | [MTH141](https://jude27mad.github.io/tmu-course-guides/mth141/) | All 34 sections, instructors, Academic Assistants and lab rooms |
 
 ## Getting started
 
@@ -73,7 +73,7 @@ No build step is required. For local preview, serve the repository over HTTP, fo
 
 A course companion for **CEN100: Introduction to Engineering**, Fall 2026, at Toronto Metropolitan University. The guide brings deadlines, assignment requirements, checklists, course clarifications, and section/group contacts into one responsive page.
 
-**[Open the guide](https://jude27mad.github.io/cen100-guide/)**
+**[Open the guide](https://jude27mad.github.io/tmu-course-guides/)**
 
 ### What's included
 
@@ -123,7 +123,7 @@ The **Team** tab contains 42%. **Individual + pairs** contains the remaining 58%
 
 ### Colour preview
 
-Open the [colour preview](https://jude27mad.github.io/cen100-guide/colour-preview.html) to switch between dark navy and light backgrounds and compare Gold, Coral, Peach, Violet, Rose, Mint, Blue, and Silver accents on the guide’s existing layout. **Copy this look** shares the selected background and accent; reopening the link restores that combination. **Reset preview** returns to dark navy and the original gold accent.
+Open the [colour preview](https://jude27mad.github.io/tmu-course-guides/colour-preview.html) to switch between dark navy and light backgrounds and compare Gold, Coral, Peach, Violet, Rose, Mint, Blue, and Silver accents on the guide’s existing layout. **Copy this look** shares the selected background and accent; reopening the link restores that combination. **Reset preview** returns to dark navy and the original gold accent.
 
 Colour choices affect only the preview. Its course progress and section/group choices are temporary and reset on reload; it does not read or change the main guide’s saved progress. The preview is a separate snapshot, so use the main guide for current course information. The main guide uses the selected rose accent and the shared Auto/Dark/Light appearance control.
 
